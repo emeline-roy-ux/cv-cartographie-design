@@ -1,0 +1,44 @@
+{
+  "nodes": [
+    {
+      "id": "axe1",
+      "type": "axe",
+      "label": "Analyse didactique de l’activité enseignante",
+      "keywords": ["didactique", "interactions", "TACD"],
+      "yearStart": 2018,
+      "yearEnd": 2026,
+      "url": null
+    },
+    {
+      "id": "pub_curj_2024",
+      "type": "publication",
+      "label": "The disciplinary matrix of applied arts and artistic cultures",
+      "year": 2024,
+      "keywords": ["curriculum", "disciplinary matrix"],
+      "url": "https://doi.org/10.1002/curj.251"
+    },
+    {
+      "id": "ens_meef",
+      "type": "teaching",
+      "label": "Master MEEF Design & métiers d’art — formation aux concours",
+      "yearStart": 2020,
+      "yearEnd": 2026,
+      "keywords": ["problématisation", "mémoire", "CAPET/CAPLP"],
+      "url": null
+    },
+    {
+      "id": "resp_gis",
+      "type": "responsibility",
+      "label": "GIS Arts & Éducation — direction adjointe / animation éditoriale",
+      "yearStart": 2025,
+      "yearEnd": 2026,
+      "keywords": ["réseau", "édition", "médiation scientifique"],
+      "url": "https://gisartseduc.hypotheses.org/"
+    }
+  ],
+  "links": [
+    { "source": "axe1", "target": "pub_curj_2024", "relation": "soutient" },
+    { "source": "axe1", "target": "ens_meef", "relation": "alimente" },
+    { "source": "ens_meef", "target": "resp_gis", "relation": "connecte" }
+  ]
+}
