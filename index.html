@@ -2,61 +2,160 @@
 <html lang="fr">
 <head>
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Cartographie de parcours — Design & Recherche</title>
 
 <style>
-body {
-  font-family: system-ui, sans-serif;
-  margin: 60px;
-  background: #f5f5f5;
-  color: #222;
-}
-
-h1 { font-size: 28px; }
-p { max-width: 800px; line-height: 1.6; }
-
-.note {
-  background: white;
-  padding: 30px;
-  border-radius: 8px;
-  box-shadow: 0 0 0 1px #ddd;
-}
-
-.footer {
-  margin-top: 40px;
-  font-size: 14px;
-  color: #666;
-}
+  body { font-family: system-ui, sans-serif; margin: 40px; background: #f5f5f5; color: #222; }
+  h1 { font-size: 26px; margin: 0 0 12px 0; }
+  p { max-width: 900px; line-height: 1.6; margin: 0 0 12px 0; }
+  .grid { display: grid; grid-template-columns: 1.6fr 1fr; gap: 18px; align-items: start; }
+  .card { background: #fff; padding: 18px; border-radius: 10px; box-shadow: 0 0 0 1px #ddd; }
+  #viz { width: 100%; height: 560px; border-radius: 10px; overflow: hidden; background: #fff; box-shadow: 0 0 0 1px #ddd; }
+  .meta { font-size: 13px; color: #666; }
+  .tag { display:inline-block; padding: 2px 8px; border: 1px solid #ddd; border-radius: 999px; margin: 4px 6px 0 0; font-size: 12px; color:#444; }
+  a { color: inherit; }
+  button { border:1px solid #ddd; background:#fff; padding:8px 10px; border-radius:10px; cursor:pointer; }
+  button:hover { background:#fafafa; }
 </style>
 </head>
 
 <body>
 
-<div class="note">
-
-<h1>Dispositif cartographique — Parcours scientifique en design</h1>
-
-<p>
-Ce site constitue un dispositif expérimental de recherche-création.
-Il propose une cartographie interactive d’un parcours d’enseignement et de recherche en design,
-didactique du design et éducation artistique.
-</p>
-
-<p>
-Le document académique de référence demeure le PDF complet du dossier.
-Cette interface numérique en propose une exploration formelle, systémique et relationnelle.
-</p>
-
-<p>
-Prochaine étape : activation de la carte de navigation des travaux,
-publications, responsabilités et dispositifs.
-</p>
-
+<div class="card" style="margin-bottom:18px;">
+  <h1>Dispositif cartographique — Parcours scientifique en design</h1>
+  <p>
+    Ce site constitue un dispositif expérimental de recherche-création : il propose une cartographie
+    relationnelle (axes / productions / enseignements / responsabilités) et met en visibilité une maîtrise
+    formelle, systémique et numérique. Le PDF académique demeure le document de référence.
+  </p>
+  <p class="meta">
+    Interaction : déplacer les nœuds · survol = résumé · clic = ouvrir une ressource (si disponible)
+  </p>
 </div>
 
-<div class="footer">
-Version expérimentale — cartographie CV scientifique
+<div class="grid">
+  <div id="viz"></div>
+
+  <div class="card">
+    <div style="display:flex; gap:10px; align-items:center; justify-content:space-between;">
+      <strong>Fiche</strong>
+      <button id="resetBtn" type="button">Réinitialiser</button>
+    </div>
+    <p class="meta" id="hint">Survolez un nœud pour afficher ses métadonnées.</p>
+    <div id="panel"></div>
+  </div>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+<script>
+(async function() {
+  const data = await fetch("data.json").then(r => r.json());
+
+  const width = document.getElementById("viz").clientWidth;
+  const height = document.getElementById("viz").clientHeight;
+
+  const svg = d3.select("#viz").append("svg")
+    .attr("width", width)
+    .attr("height", height);
+
+  const g = svg.append("g");
+
+  // zoom/pan
+  svg.call(d3.zoom().scaleExtent([0.6, 2.5]).on("zoom", (event) => {
+    g.attr("transform", event.transform);
+  }));
+
+  const link = g.append("g")
+    .selectAll("line")
+    .data(data.links)
+    .join("line")
+    .attr("stroke", "#cfcfcf")
+    .attr("stroke-width", 1.2);
+
+  const node = g.append("g")
+    .selectAll("circle")
+    .data(data.nodes)
+    .join("circle")
+    .attr("r", d => d.type === "axe" ? 16 : 10)
+    .attr("stroke", "#666")
+    .attr("stroke-width", 1)
+    .attr("fill", "#fff")
+    .style("cursor", "pointer");
+
+  const label = g.append("g")
+    .selectAll("text")
+    .data(data.nodes)
+    .join("text")
+    .text(d => d.label)
+    .attr("font-size", 12)
+    .attr("dx", 14)
+    .attr("dy", 4)
+    .attr("fill", "#222");
+
+  const sim = d3.forceSimulation(data.nodes)
+    .force("link", d3.forceLink(data.links).id(d => d.id).distance(90))
+    .force("charge", d3.forceManyBody().strength(-280))
+    .force("center", d3.forceCenter(width/2, height/2))
+    .force("collide", d3.forceCollide().radius(d => (d.type === "axe" ? 24 : 16)));
+
+  sim.on("tick", () => {
+    link
+      .attr("x1", d => d.source.x).attr("y1", d => d.source.y)
+      .attr("x2", d => d.target.x).attr("y2", d => d.target.y);
+
+    node
+      .attr("cx", d => d.x).attr("cy", d => d.y);
+
+    label
+      .attr("x", d => d.x).attr("y", d => d.y);
+  });
+
+  // panel
+  const panel = document.getElementById("panel");
+  const hint = document.getElementById("hint");
+
+  function renderPanel(d) {
+    hint.textContent = "";
+    const keywords = (d.keywords || []).map(k => `<span class="tag">${k}</span>`).join("");
+    const years = (d.year !== undefined)
+      ? `Année : ${d.year}`
+      : (d.yearStart ? `Période : ${d.yearStart} — ${d.yearEnd || "…"}` : "");
+
+    panel.innerHTML = `
+      <p><strong>${d.label}</strong></p>
+      <p class="meta">${d.type}${years ? " · " + years : ""}</p>
+      <div>${keywords}</div>
+      ${d.url ? `<p style="margin-top:12px;"><a href="${d.url}" target="_blank" rel="noopener">Ouvrir la ressource</a></p>` : ""}
+    `;
+  }
+
+  function resetPanel() {
+    hint.textContent = "Survolez un nœud pour afficher ses métadonnées.";
+    panel.innerHTML = "";
+  }
+
+  node
+    .on("mouseover", (event, d) => renderPanel(d))
+    .on("click", (event, d) => { if (d.url) window.open(d.url, "_blank"); });
+
+  document.getElementById("resetBtn").addEventListener("click", resetPanel);
+  resetPanel();
+
+  // drag
+  node.call(d3.drag()
+    .on("start", (event, d) => {
+      if (!event.active) sim.alphaTarget(0.25).restart();
+      d.fx = d.x; d.fy = d.y;
+    })
+    .on("drag", (event, d) => { d.fx = event.x; d.fy = event.y; })
+    .on("end", (event, d) => {
+      if (!event.active) sim.alphaTarget(0);
+      d.fx = null; d.fy = null;
+    })
+  );
+})();
+</script>
 
 </body>
 </html>
