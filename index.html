@@ -203,34 +203,18 @@
 
 <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
 <script>
-(async function(){
-
-  const raw = await fetch("data.json").then(r => r.json());
-
-  // index nodes
-  const byId = new Map(raw.nodes.map(n => [n.id, {...n}]));
-
-  // build children arrays from "parent"
-  for (const n of byId.values()) n.children = [];
-  let root = null;
-  for (const n of byId.values()) {
-    if (!n.parent) root = n;
-    else {
-      const p = byId.get(n.parent);
-      if (p) p.children.push(n);
-    }
-  }
-  if (!root) throw new Error("Aucun nœud racine (sans parent) trouvé dans data.json.");
+(async function () {
+  const data = await fetch("data.json").then(r => r.json());
 
   const vizEl = document.getElementById("viz");
   const panelEl = document.getElementById("panel");
-  const hintEl = document.getElementById("hint");
+  const hintEl  = document.getElementById("hint");
   const resetBtnEl = document.getElementById("resetBtn");
 
+  // --- dimensions (plein écran)
   function measure(){
     return { W: vizEl.clientWidth, H: vizEl.clientHeight };
   }
-
   let { W, H } = measure();
 
   const svg = d3.select(vizEl).append("svg")
@@ -239,140 +223,105 @@
 
   const g = svg.append("g");
 
-  // zoom/pan (carte en fond)
+  // zoom/pan
   svg.call(
     d3.zoom()
-      .scaleExtent([0.6, 2.8])
+      .scaleExtent([0.6, 3])
       .on("zoom", (event) => g.attr("transform", event.transform))
   );
 
-  // radial layout
-  function radiusFor(){
-    return Math.min(W, H) * 0.42;
-  }
-  let radius = radiusFor();
+  // --- build links from parent (arbre => graphe)
+  const nodes = data.nodes.map(d => ({...d}));
+  const byId = new Map(nodes.map(n => [n.id, n]));
 
-  // collapse helper
-  function collapse(d){
-    if (d.children) {
-      d._children = d.children;
-      d._children.forEach(collapse);
-      d.children = null;
-    }
-  }
+  const links = nodes
+    .filter(n => n.parent)
+    .map(n => ({ source: n.parent, target: n.id, relation: "parent" }));
 
-  // hierarchy
-  const hroot = d3.hierarchy(root);
-  hroot.children?.forEach(collapse);
+  // --- neighbors for progressive reveal (clic = déployer)
+  const neighbors = {};
+  links.forEach(l => {
+    neighbors[l.source] ??= new Set();
+    neighbors[l.target] ??= new Set();
+    neighbors[l.source].add(l.target);
+    neighbors[l.target].add(l.source);
+  });
 
-  let tree = d3.tree()
-    .size([2 * Math.PI, radius])
-    .separation((a,b) => (a.parent === b.parent ? 1 : 1.3));
+  // --- visibility : on montre seulement root + enfants directs au départ
+  const root = nodes.find(n => !n.parent) || nodes[0];
+  const firstLevel = nodes.filter(n => n.parent === root.id).map(n => n.id);
+  let visible = new Set([root.id, ...firstLevel]);
 
-  function polarToCartesian(angle, r){
-    const x = r * Math.cos(angle - Math.PI/2);
-    const y = r * Math.sin(angle - Math.PI/2);
-    return [x, y];
-  }
+  function isVisible(id){ return visible.has(id); }
 
-  function nodeRadius(d){
-    const t = d.data.type || "";
-    if (t === "root") return 12;
-    if (t === "branch") return 9;
-    return 6;
-  }
-
-  // ---- styling for "background map"
+  // --- styling "background map"
   const LINK_STROKE = "rgba(255,255,255,.14)";
   const NODE_STROKE = "rgba(255,255,255,.55)";
-  const NODE_FILL_BRANCH = "rgba(0,0,0,.10)";
-  const NODE_FILL_LEAF = "rgba(0,0,0,.06)";
-  const LABEL_FILL = "rgba(255,255,255,.62)";
+  const NODE_FILL   = "rgba(0,0,0,.08)";
+  const LABEL_FILL  = "rgba(255,255,255,.62)";
 
-  function update(source){
-    tree(hroot);
+  // --- draw
+  const linkSel = g.append("g")
+    .selectAll("line")
+    .data(links)
+    .join("line")
+    .attr("stroke", LINK_STROKE)
+    .attr("stroke-width", 1.1);
 
-    const nodes = hroot.descendants();
-    const links = hroot.links();
+  const nodeSel = g.append("g")
+    .selectAll("circle")
+    .data(nodes)
+    .join("circle")
+    .attr("r", d => d.type === "root" ? 12 : (d.type === "branch" ? 9 : 6))
+    .attr("fill", NODE_FILL)
+    .attr("stroke", NODE_STROKE)
+    .attr("stroke-width", 1.2)
+    .style("cursor", "pointer");
 
-    for (const d of nodes) {
-      const [x,y] = polarToCartesian(d.x, d.y);
-      d.cx = x + W/2;
-      d.cy = y + H/2;
-    }
+  const labelSel = g.append("g")
+    .selectAll("text")
+    .data(nodes)
+    .join("text")
+    .text(d => d.label)
+    .attr("font-size", 11)
+    .attr("dx", 10)
+    .attr("dy", 4)
+    .attr("fill", LABEL_FILL)
+    .attr("opacity", 0.55);
 
-    // LINKS
-    const linkSel = g.selectAll("path.link")
-      .data(links, d => d.target.data.id);
+  // --- simulation
+  const sim = d3.forceSimulation(nodes)
+    .force("link", d3.forceLink(links).id(d => d.id).distance(d => {
+      // hiérarchie légère : plus long du root vers branches
+      const s = (d.source.id || d.source);
+      const t = (d.target.id || d.target);
+      if (s === root.id || t === root.id) return 160;
+      return 70;
+    }).strength(0.12))
+    .force("charge", d3.forceManyBody().strength(-180))
+    .force("center", d3.forceCenter(W/2, H/2))
+    .force("collide", d3.forceCollide().radius(d => (d.type === "root" ? 26 : 16)).iterations(2));
 
-    linkSel.enter()
-      .append("path")
-      .attr("class", "link")
-      .attr("fill", "none")
-      .attr("stroke", LINK_STROKE)
-      .attr("stroke-width", 1.15)
-      .attr("d", d => {
-        const s = {x: source.cx ?? (W/2), y: source.cy ?? (H/2)};
-        const t = s;
-        return `M${s.x},${s.y}C${s.x},${s.y} ${t.x},${t.y} ${t.x},${t.y}`;
-      })
-      .merge(linkSel)
-      .transition()
-      .duration(350)
-      .attr("d", d => {
-        const s = {x: d.source.cx, y: d.source.cy};
-        const t = {x: d.target.cx, y: d.target.cy};
-        const mx = (s.x + t.x)/2;
-        return `M${s.x},${s.y}C${mx},${s.y} ${mx},${t.y} ${t.x},${t.y}`;
-      });
+  sim.on("tick", () => {
+    linkSel
+      .attr("x1", d => d.source.x).attr("y1", d => d.source.y)
+      .attr("x2", d => d.target.x).attr("y2", d => d.target.y);
 
-    linkSel.exit().remove();
+    nodeSel
+      .attr("cx", d => d.x).attr("cy", d => d.y);
 
-    // NODES (group)
-    const nodeSel = g.selectAll("g.node")
-      .data(nodes, d => d.data.id);
+    labelSel
+      .attr("x", d => d.x).attr("y", d => d.y);
+  });
 
-    const nodeEnter = nodeSel.enter()
-      .append("g")
-      .attr("class", "node")
-      .attr("transform", `translate(${source.cx ?? W/2},${source.cy ?? H/2})`)
-      .style("cursor","pointer");
-
-    nodeEnter.append("circle")
-      .attr("r", d => nodeRadius(d))
-      .attr("fill", d => d.data.type === "branch" ? NODE_FILL_BRANCH : NODE_FILL_LEAF)
-      .attr("stroke", NODE_STROKE)
-      .attr("stroke-width", 1.2);
-
-    nodeEnter.append("text")
-      .attr("font-size", 11)
-      .attr("dy", 4)
-      .attr("x", d => (d.x > Math.PI ? -12 : 12))
-      .attr("text-anchor", d => (d.x > Math.PI ? "end" : "start"))
-      .text(d => d.data.label)
-      .attr("fill", LABEL_FILL)
-      .attr("opacity", 0.55);
-
-    nodeEnter
-      .on("mouseover", (event, d) => renderPanel(d.data))
-      .on("click", (event, d) => {
-        if (d.children) { d._children = d.children; d.children = null; }
-        else { d.children = d._children; d._children = null; }
-        update(d);
-      })
-      .on("dblclick", (event, d) => {
-        const ev = d.data.evidence;
-        if (ev) window.open(ev, "_blank");
-      });
-
-    nodeEnter.merge(nodeSel)
-      .transition()
-      .duration(350)
-      .attr("transform", d => `translate(${d.cx},${d.cy})`);
-
-    nodeSel.exit().remove();
+  // --- visibility filter
+  function updateVisibility(){
+    nodeSel.attr("display", d => isVisible(d.id) ? null : "none");
+    labelSel.attr("display", d => isVisible(d.id) ? null : "none");
+    linkSel.attr("display", d => (isVisible(d.source.id) && isVisible(d.target.id)) ? null : "none");
   }
 
+  // --- panel
   function renderPanel(d){
     hintEl.textContent = "";
     const tags = (d.keywords || []).map(k => `<span class="tag">${k}</span>`).join("");
@@ -381,41 +330,69 @@
       : (d.yearStart ? `Période : ${d.yearStart} — ${d.yearEnd || "…"}` : "");
 
     panelEl.innerHTML = `
-      <p style="margin:10px 0 6px 0; font-family: Space Grotesk, Inter, system-ui, sans-serif; letter-spacing:-.01em;">
-        <strong>${d.label}</strong>
-      </p>
+      <p style="margin:10px 0 6px 0;"><strong>${d.label}</strong></p>
       <p class="meta" style="margin:0 0 6px 0;">${d.type || ""}${years ? " · " + years : ""}</p>
       <div>${tags}</div>
-      ${d.evidence ? `<p style="margin-top:10px;"><a href="${d.evidence}" target="_blank" rel="noopener" style="color:var(--ink); text-decoration:none; border-bottom:1px solid rgba(255,255,255,.28);">Preuve / ancrage</a></p>` : ""}
+      ${d.evidence ? `<p style="margin-top:10px;"><a href="${d.evidence}" target="_blank" rel="noopener">Preuve / ancrage</a></p>` : ""}
     `;
   }
 
-  function reset(){
-    const rebuilt = d3.hierarchy(root);
-    rebuilt.children?.forEach(collapse);
-    hroot.data = rebuilt.data;
-    hroot.children = rebuilt.children;
-    hroot._children = rebuilt._children;
-    panelEl.innerHTML = "";
+  function resetPanel(){
     hintEl.textContent = "Survolez un nœud pour afficher ses métadonnées.";
-    update({cx: W/2, cy: H/2});
+    panelEl.innerHTML = "";
   }
 
-  resetBtnEl.addEventListener("click", reset);
+  function resetAll(){
+    visible = new Set([root.id, ...firstLevel]);
+    updateVisibility();
+    resetPanel();
+    sim.alpha(0.7).restart();
+  }
 
-  // initial draw
-  update({cx: W/2, cy: H/2});
+  resetBtnEl.addEventListener("click", resetAll);
 
-  // responsive resize (simple, sans dépendance)
+  // --- interactions
+  nodeSel
+    .on("mouseover", (event, d) => renderPanel(d))
+    .on("click", (event, d) => {
+      // déployer : nœud + voisins directs
+      visible.add(d.id);
+      (neighbors[d.id] || []).forEach(id => visible.add(id));
+      updateVisibility();
+    })
+    .on("dblclick", (event, d) => {
+      if (d.evidence) window.open(d.evidence, "_blank");
+    });
+
+  // drag (reconfigurer)
+  nodeSel.call(d3.drag()
+    .on("start", (event, d) => {
+      if (!event.active) sim.alphaTarget(0.25).restart();
+      d.fx = d.x; d.fy = d.y;
+    })
+    .on("drag", (event, d) => {
+      d.fx = event.x; d.fy = event.y;
+    })
+    .on("end", (event, d) => {
+      if (!event.active) sim.alphaTarget(0);
+      d.fx = null; d.fy = null;
+    })
+  );
+
+  // init
+  updateVisibility();
+  resetPanel();
+
+  // responsive
   window.addEventListener("resize", () => {
     ({ W, H } = measure());
-    radius = radiusFor();
-    tree = d3.tree().size([2 * Math.PI, radius]).separation((a,b) => (a.parent === b.parent ? 1 : 1.3));
     svg.attr("width", W).attr("height", H);
-    update({cx: W/2, cy: H/2});
+    sim.force("center", d3.forceCenter(W/2, H/2));
+    sim.alpha(0.6).restart();
   });
 
 })();
 </script>
+
 </body>
 </html>
