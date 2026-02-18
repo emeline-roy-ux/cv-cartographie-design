@@ -264,14 +264,24 @@ body::after{
   resetBtnEl.addEventListener("click", resetAll);
 
   // --- interactions
-  nodeSel
-    .on("mouseover", (event, d) => renderPanel(d))
-    .on("click", (event, d) => {
-      // déployer : nœud + voisins directs
-      visible.add(d.id);
-      (neighbors[d.id] || []).forEach(id => visible.add(id));
-      updateVisibility();
-    })
+  nodeSel.on("click", (event, d) => {
+  const neigh = neighbors[d.id] ? Array.from(neighbors[d.id]) : [];
+  const allVisible = neigh.every(id => visible.has(id));
+
+  if (allVisible) {
+    neigh.forEach(id => {
+      if (id !== root.id && !firstLevel.includes(id)) {
+        visible.delete(id);
+      }
+    });
+  } else {
+    visible.add(d.id);
+    neigh.forEach(id => visible.add(id));
+  }
+
+  updateVisibility();
+});
+
     .on("dblclick", (event, d) => {
       if (d.evidence) window.open(d.evidence, "_blank");
     });
