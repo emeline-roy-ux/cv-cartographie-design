@@ -318,6 +318,12 @@ svg.call(zoom);
     const years = (d.year !== undefined)
       ? `Année : ${d.year}`
       : (d.yearStart ? `Période : ${d.yearStart} — ${d.yearEnd || "…"}` : "");
+    const bibliography = (d.bibliography || []).map(item => {
+      const source = item.url
+        ? `<a href="${item.url}" target="_blank" rel="noopener" style="color:var(--ink); text-decoration:none; border-bottom:1px solid rgba(255,255,255,.28);">Lien</a>`
+        : "";
+      return `<li style="margin-bottom:8px; line-height:1.45;">${item.text}${source ? ` ${source}` : ""}</li>`;
+    }).join("");
 
     panelEl.innerHTML = `
       <p style="margin:10px 0 6px 0; font-family: Space Grotesk, Inter Tight, system-ui, sans-serif; letter-spacing:-.01em;">
@@ -325,6 +331,7 @@ svg.call(zoom);
       </p>
       <p class="meta" style="margin:0 0 6px 0;">${d.type || ""}${years ? " · " + years : ""}</p>
       <div>${tags}</div>
+      ${bibliography ? `<ol style="margin:12px 0 0 18px; padding:0;">${bibliography}</ol>` : ""}
       ${d.evidence ? `<p style="margin-top:10px;"><a href="${d.evidence}" target="_blank" rel="noopener" style="color:var(--ink); text-decoration:none; border-bottom:1px solid rgba(255,255,255,.28);">Preuve / ancrage</a></p>` : ""}
     `;
   }
