@@ -17,6 +17,13 @@
   a { color: inherit; }
   button { border:1px solid #ddd; background:#fff; padding:8px 10px; border-radius:10px; cursor:pointer; }
   button:hover { background:#fafafa; }
+
+  /* Mobile : on passe en colonne */
+  @media (max-width: 900px) {
+    body { margin: 18px; }
+    .grid { grid-template-columns: 1fr; }
+    #viz { height: 520px; }
+  }
 </style>
 </head>
 
@@ -28,20 +35,19 @@
     Ce site constitue un dispositif expérimental de recherche-création : il propose une cartographie
     relationnelle (axes / productions / enseignements / responsabilités) et met en visibilité une maîtrise
     formelle, systémique et numérique. Le PDF académique demeure le document de référence.
- </p>
-<p class="meta">
-  Interaction : déplacer les nœuds · survol = résumé · clic = ouvrir une ressource (si disponible)
-</p>
+  </p>
 
-<p class="meta">
-  <a href="methodologie.html">Méthodologie du dispositif</a>
-  ·
-  <a href="https://www.linkedin.com/in/emeline-roy-141a7728/" target="_blank" rel="noopener">LinkedIn</a>
-  · Dossier académique complet : disponible sur demande
-</p>
+  <p class="meta">
+    Interaction : déplacer les nœuds · survol = résumé · clic = déployer une branche (et ouvrir une ressource si disponible)
+  </p>
 
+  <p class="meta">
+    <a href="methodologie.html">Méthodologie du dispositif</a>
+    ·
+    <a href="https://www.linkedin.com/in/emeline-roy-141a7728/" target="_blank" rel="noopener">LinkedIn</a>
+    · Dossier académique complet : disponible sur demande
+  </p>
 </div>
-
 
 <div class="grid">
   <div id="viz"></div>
@@ -51,7 +57,7 @@
       <strong>Fiche</strong>
       <button id="resetBtn" type="button">Réinitialiser</button>
     </div>
-    <p class="meta" id="hint">Survolez un nœud pour afficher ses métadonnées.</p>
+    <p class="meta" id="hint">Survolez un nœud pour afficher ses métadonnées. Cliquez pour déployer sa branche.</p>
     <div id="panel"></div>
   </div>
 </div>
@@ -61,8 +67,9 @@
 (async function() {
   const data = await fetch("data.json").then(r => r.json());
 
-  const width = document.getElementById("viz").clientWidth;
-  const height = document.getElementById("viz").clientHeight;
+  const vizEl = document.getElementById("viz");
+  const width = vizEl.clientWidth;
+  const height = vizEl.clientHeight;
 
   const svg = d3.select("#viz").append("svg")
     .attr("width", width)
@@ -71,9 +78,31 @@
   const g = svg.append("g");
 
   // zoom/pan
-  svg.call(d3.zoom().scaleExtent([0.6, 2.5]).on("zoom", (event) => {
-    g.attr("transform", event.transform);
-  }));
+  svg.call(
+    d3.zoom()
+      .scaleExtent([0.6, 2.5])
+      .on("zoom", (event) => g.attr("transform", event.transform))
+  );
+
+  // --- Déploiement progressif (focus + context) -----------------------------
+
+  // Index des voisins à partir des liens (source/target sont des ids dans le JSON)
+  const neighbors = {};
+  data.links.forEach(l => {
+    neighbors[l.source] ??= new Set();
+    neighbors[l.target] ??= new Set();
+    neighbors[l.source].add(l.target);
+    neighbors[l.target].add(l.source);
+  });
+
+  // Vue macro : nœuds structurants affichés au départ
+  // (adapter la liste si vous voulez un autre "niveau 0")
+  const macroTypes = new Set(["profil", "axe", "institution", "reseau", "position"]);
+  let visible = new Set(
+    data.nodes.filter(n => macroTypes.has(n.type)).map(n => n.id)
+  );
+
+  // --------------------------------------------------------------------------
 
   const link = g.append("g")
     .selectAll("line")
@@ -86,7 +115,7 @@
     .selectAll("circle")
     .data(data.nodes)
     .join("circle")
-    .attr("r", d => d.type === "axe" ? 16 : 10)
+    .attr("r", d => d.type === "axe" ? 16 : (d.type === "profil" ? 14 : 10))
     .attr("stroke", "#666")
     .attr("stroke-width", 1)
     .attr("fill", "#fff")
@@ -103,7 +132,7 @@
     .attr("fill", "#222");
 
   const sim = d3.forceSimulation(data.nodes)
-    .force("link", d3.forceLink(data.links).id(d => d.id).distance(90))
+    .force("link", d3.forceLink(data.links).id(d => d.id).distance(95))
     .force("charge", d3.forceManyBody().strength(-280))
     .force("center", d3.forceCenter(width/2, height/2))
     .force("collide", d3.forceCollide().radius(d => (d.type === "axe" ? 24 : 16)));
@@ -120,6 +149,17 @@
       .attr("x", d => d.x).attr("y", d => d.y);
   });
 
+  function updateVisibility() {
+    node.attr("display", d => visible.has(d.id) ? null : "none");
+    label.attr("display", d => visible.has(d.id) ? null : "none");
+    link.attr("display", d => {
+      // une fois la simulation lancée, d.source/d.target deviennent des objets -> on récupère l'id
+      const sid = d.source.id || d.source;
+      const tid = d.target.id || d.target;
+      return (visible.has(sid) && visible.has(tid)) ? null : "none";
+    });
+  }
+
   // panel
   const panel = document.getElementById("panel");
   const hint = document.getElementById("hint");
@@ -135,21 +175,34 @@
       <p><strong>${d.label}</strong></p>
       <p class="meta">${d.type}${years ? " · " + years : ""}</p>
       <div>${keywords}</div>
-      ${d.url ? `<p style="margin-top:12px;"><a href="${d.url}" target="_blank" rel="noopener">Ouvrir la ressource</a></p>` : ""}
+      ${d.evidence ? `<p style="margin-top:12px;"><a href="${d.evidence}" target="_blank" rel="noopener">Preuve / ancrage</a></p>` : ""}
+      ${(!d.evidence && d.url) ? `<p style="margin-top:12px;"><a href="${d.url}" target="_blank" rel="noopener">Ouvrir la ressource</a></p>` : ""}
     `;
   }
 
   function resetPanel() {
-    hint.textContent = "Survolez un nœud pour afficher ses métadonnées.";
+    visible = new Set(
+      data.nodes.filter(n => macroTypes.has(n.type)).map(n => n.id)
+    );
+    updateVisibility();
+    hint.textContent = "Survolez un nœud pour afficher ses métadonnées. Cliquez pour déployer sa branche.";
     panel.innerHTML = "";
   }
 
   node
     .on("mouseover", (event, d) => renderPanel(d))
-    .on("click", (event, d) => { if (d.url) window.open(d.url, "_blank"); });
+    .on("click", (event, d) => {
+      // déploiement progressif : on ajoute le nœud + ses voisins directs
+      visible.add(d.id);
+      (neighbors[d.id] || []).forEach(id => visible.add(id));
+      updateVisibility();
+
+      // option : si une preuve existe, on l'ouvre (sinon, ne rien faire)
+      if (d.evidence) window.open(d.evidence, "_blank");
+      else if (d.url) window.open(d.url, "_blank");
+    });
 
   document.getElementById("resetBtn").addEventListener("click", resetPanel);
-  resetPanel();
 
   // drag
   node.call(d3.drag()
@@ -163,6 +216,9 @@
       d.fx = null; d.fy = null;
     })
   );
+
+  // Affichage initial : vue macro
+  resetPanel();
 })();
 </script>
 
