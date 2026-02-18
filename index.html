@@ -3,101 +3,189 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Emeline ROY</title>
+<title>Emeline ROY — CV cartographique</title>
+
+<!-- Typographies gratuites, UI modernes -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 
 <style>
-
-/* tout votre graphisme ici */
-
-html,body{
-  margin:0;
-  height:100%;
-  font-family: Inter, system-ui, sans-serif;
-  color:white;
-  background:#000;
-}
-
-/* fond macro CMJN */
-body::before{
-  background: url("assets/cmyk.jpg") center/cover no-repeat;
-}
-
-
-/* voile sombre pour lisibilité */
-body::after{
-  content:"";
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.55);
-  z-index:-1;
-}
-
-/* overlay UI */
-.ui{
-  position:fixed;
-  inset:0;
-  padding:28px;
-  display:grid;
-  grid-template-columns: 1fr 340px;
-  gap:24px;
-  pointer-events:none;
-}
-
-.ui a, .ui button{
-  pointer-events:auto;
-}
-
-/* 👉 PAS DE CADRES */
-.panel{
-  background:transparent;
-  border:none;
-  box-shadow:none;
-  backdrop-filter:none;
-}
-
-.tag{
-  display:inline-block;
-  padding:3px 10px;
-  border:1px solid rgba(255,255,255,.35);
-  border-radius:999px;
-  font-size:12px;
-  opacity:.85;
-}
-
-#viz{
-  position:fixed;
-  inset:0;
-}
-
-@media(max-width:900px){
-  .ui{
-    grid-template-columns:1fr;
-    grid-template-rows:auto auto;
+  :root{
+    --ink: rgba(255,255,255,.92);
+    --muted: rgba(255,255,255,.70);
+    --stroke: rgba(255,255,255,.18);
+    --shadowText:
+      0 2px 14px rgba(0,0,0,.55),
+      0 1px 2px rgba(0,0,0,.55);
   }
-}
 
+  html, body { height: 100%; }
+  body{
+    margin:0;
+    font-family: "Inter Tight", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    color: var(--ink);
+    background:#05060a;
+    overflow:hidden;
+  }
+
+  /* ✅ IMPORTANT : content + position + z-index (sinon rien n’apparaît) */
+  body::before{
+    content:"";
+    position: fixed;
+    inset: 0;
+    z-index: -3;
+    background:
+      radial-gradient(1200px 700px at 20% 20%, rgba(255,0,140,.22), transparent 55%),
+      radial-gradient(900px 650px at 70% 25%, rgba(0,170,255,.18), transparent 55%),
+      radial-gradient(900px 650px at 80% 75%, rgba(255,255,0,.12), transparent 60%),
+      url("assets/cmyk.jpg");
+    background-size: cover;
+    background-position: center;
+    filter: saturate(1.15) contrast(1.05);
+    opacity: .62;
+  }
+
+  body::after{
+    content:"";
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    background: linear-gradient(180deg, rgba(5,6,10,.72), rgba(5,6,10,.52));
+  }
+
+  /* Carte plein écran derrière */
+  #viz{
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+  }
+
+  /* UI par-dessus (sans cadres) */
+  .ui{
+    position: fixed;
+    inset: 0;
+    padding: 24px;
+    display: grid;
+    grid-template-columns: 1fr 360px;
+    gap: 24px;
+    align-items: start;
+
+    /* ✅ laisse passer les clics vers la carte */
+    pointer-events: none;
+  }
+  .ui a, .ui button{ pointer-events: auto; }
+
+  .panel{
+    background: transparent;
+    border: none;
+    box-shadow: none;
+  }
+
+  h1{
+    font-family: "Space Grotesk", "Inter Tight", system-ui, sans-serif;
+    font-size: 34px;
+    line-height: 1.05;
+    margin: 0 0 10px 0;
+    letter-spacing: -0.03em;
+    text-shadow: var(--shadowText);
+  }
+
+  .meta{
+    font-size: 13px;
+    line-height: 1.6;
+    margin: 8px 0 0 0;
+    color: var(--muted);
+    letter-spacing: -0.006em;
+    text-shadow: var(--shadowText);
+  }
+
+  .links{
+    display:flex;
+    gap:10px;
+    flex-wrap: wrap;
+    align-items: baseline;
+    margin-top: 10px;
+  }
+
+  .links a{
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255,255,255,.28);
+  }
+  .links a:hover{ border-bottom-color: rgba(255,255,255,.7); }
+
+  .toprow{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap: 12px;
+    margin-bottom: 10px;
+  }
+
+  .toprow strong{
+    font-family: "Space Grotesk", "Inter Tight", system-ui, sans-serif;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    text-shadow: var(--shadowText);
+  }
+
+  button{
+    font: inherit;
+    color: var(--ink);
+    background: rgba(255,255,255,.06);
+    border: 1px solid rgba(255,255,255,.18);
+    border-radius: 12px;
+    padding: 8px 10px;
+    cursor: pointer;
+  }
+  button:hover{ background: rgba(255,255,255,.10); }
+
+  .tag{
+    display:inline-block;
+    padding: 3px 10px;
+    border: 1px solid rgba(255,255,255,.24);
+    border-radius: 999px;
+    margin: 6px 6px 0 0;
+    font-size: 12px;
+    color: rgba(255,255,255,.74);
+    text-shadow: var(--shadowText);
+  }
+
+  /* petite contrainte de lecture de la fiche */
+  #panel{
+    max-width: 360px;
+  }
+
+  @media (max-width: 980px){
+    .ui{
+      grid-template-columns: 1fr;
+      grid-template-rows: auto auto;
+      padding: 16px;
+      gap: 14px;
+      overflow: auto; /* le texte peut scroller, la carte reste derrière */
+    }
+    h1{ font-size: 28px; }
+    #panel{ max-width: none; }
+  }
 </style>
 </head>
 
-
 <body>
 
-<!-- Carte (arrière-plan) -->
 <div id="viz"></div>
 
-<!-- Surcouche UI -->
 <div class="ui">
   <section class="panel">
     <header>
       <h1>Emeline ROY</h1>
-      <p class="meta">
-        Dossier PDF complet : disponible sur demande.
-      </p>
+      <p class="meta">Dossier PDF complet : disponible sur demande.</p>
       <p class="meta links">
         <a href="methodologie.html">Méthodologie</a>
         <span class="meta">·</span>
         <a href="https://www.linkedin.com/in/emeline-roy-141a7728/" target="_blank" rel="noopener">LinkedIn</a>
       </p>
+      <p class="meta">Interaction : glisser = reconfigurer · survol = fiche · clic = déployer/replier · double-clic = ouvrir preuve</p>
     </header>
   </section>
 
@@ -106,10 +194,8 @@ body::after{
       <strong>Fiche</strong>
       <button id="resetBtn" type="button">Réinitialiser</button>
     </div>
-    <div class="panel-body">
-      <p class="meta" id="hint">Survolez un nœud pour afficher ses métadonnées.</p>
-      <div id="panel"></div>
-    </div>
+    <p class="meta" id="hint">Survolez un nœud pour afficher ses métadonnées.</p>
+    <div id="panel"></div>
   </aside>
 </div>
 
@@ -123,11 +209,13 @@ body::after{
   const hintEl  = document.getElementById("hint");
   const resetBtnEl = document.getElementById("resetBtn");
 
-  // --- dimensions (plein écran)
   function measure(){
     return { W: vizEl.clientWidth, H: vizEl.clientHeight };
   }
   let { W, H } = measure();
+
+  // reset svg if hot reloaded / duplicated
+  d3.select(vizEl).selectAll("*").remove();
 
   const svg = d3.select(vizEl).append("svg")
     .attr("width", W)
@@ -135,22 +223,17 @@ body::after{
 
   const g = svg.append("g");
 
-  // zoom/pan
   svg.call(
     d3.zoom()
       .scaleExtent([0.6, 3])
       .on("zoom", (event) => g.attr("transform", event.transform))
   );
 
-  // --- build links from parent (arbre => graphe)
+  // build nodes/links (parent -> link)
   const nodes = data.nodes.map(d => ({...d}));
-  const byId = new Map(nodes.map(n => [n.id, n]));
+  const links = nodes.filter(n => n.parent).map(n => ({ source: n.parent, target: n.id }));
 
-  const links = nodes
-    .filter(n => n.parent)
-    .map(n => ({ source: n.parent, target: n.id, relation: "parent" }));
-
-  // --- neighbors for progressive reveal (clic = déployer)
+  // neighbors for toggle
   const neighbors = {};
   links.forEach(l => {
     neighbors[l.source] ??= new Set();
@@ -159,20 +242,16 @@ body::after{
     neighbors[l.target].add(l.source);
   });
 
-  // --- visibility : on montre seulement root + enfants directs au départ
+  // visibility : root + first level
   const root = nodes.find(n => !n.parent) || nodes[0];
   const firstLevel = nodes.filter(n => n.parent === root.id).map(n => n.id);
   let visible = new Set([root.id, ...firstLevel]);
 
-  function isVisible(id){ return visible.has(id); }
-
-  // --- styling "background map"
   const LINK_STROKE = "rgba(255,255,255,.14)";
   const NODE_STROKE = "rgba(255,255,255,.55)";
   const NODE_FILL   = "rgba(0,0,0,.08)";
   const LABEL_FILL  = "rgba(255,255,255,.62)";
 
-  // --- draw
   const linkSel = g.append("g")
     .selectAll("line")
     .data(links)
@@ -201,10 +280,8 @@ body::after{
     .attr("fill", LABEL_FILL)
     .attr("opacity", 0.55);
 
-  // --- simulation
   const sim = d3.forceSimulation(nodes)
     .force("link", d3.forceLink(links).id(d => d.id).distance(d => {
-      // hiérarchie légère : plus long du root vers branches
       const s = (d.source.id || d.source);
       const t = (d.target.id || d.target);
       if (s === root.id || t === root.id) return 160;
@@ -226,14 +303,14 @@ body::after{
       .attr("x", d => d.x).attr("y", d => d.y);
   });
 
-  // --- visibility filter
+  function isVisible(id){ return visible.has(id); }
+
   function updateVisibility(){
     nodeSel.attr("display", d => isVisible(d.id) ? null : "none");
     labelSel.attr("display", d => isVisible(d.id) ? null : "none");
     linkSel.attr("display", d => (isVisible(d.source.id) && isVisible(d.target.id)) ? null : "none");
   }
 
-  // --- panel
   function renderPanel(d){
     hintEl.textContent = "";
     const tags = (d.keywords || []).map(k => `<span class="tag">${k}</span>`).join("");
@@ -242,10 +319,12 @@ body::after{
       : (d.yearStart ? `Période : ${d.yearStart} — ${d.yearEnd || "…"}` : "");
 
     panelEl.innerHTML = `
-      <p style="margin:10px 0 6px 0;"><strong>${d.label}</strong></p>
+      <p style="margin:10px 0 6px 0; font-family: Space Grotesk, Inter Tight, system-ui, sans-serif; letter-spacing:-.01em;">
+        <strong>${d.label}</strong>
+      </p>
       <p class="meta" style="margin:0 0 6px 0;">${d.type || ""}${years ? " · " + years : ""}</p>
       <div>${tags}</div>
-      ${d.evidence ? `<p style="margin-top:10px;"><a href="${d.evidence}" target="_blank" rel="noopener">Preuve / ancrage</a></p>` : ""}
+      ${d.evidence ? `<p style="margin-top:10px;"><a href="${d.evidence}" target="_blank" rel="noopener" style="color:var(--ink); text-decoration:none; border-bottom:1px solid rgba(255,255,255,.28);">Preuve / ancrage</a></p>` : ""}
     `;
   }
 
@@ -260,33 +339,30 @@ body::after{
     resetPanel();
     sim.alpha(0.7).restart();
   }
-
   resetBtnEl.addEventListener("click", resetAll);
 
-  // --- interactions
-  nodeSel.on("click", (event, d) => {
-  const neigh = neighbors[d.id] ? Array.from(neighbors[d.id]) : [];
-  const allVisible = neigh.every(id => visible.has(id));
+  // interactions (IMPORTANT: chain .on calls correctly)
+  nodeSel
+    .on("mouseover", (event, d) => renderPanel(d))
+    .on("click", (event, d) => {
+      const neigh = neighbors[d.id] ? Array.from(neighbors[d.id]) : [];
+      const allVisible = neigh.every(id => visible.has(id));
 
-  if (allVisible) {
-    neigh.forEach(id => {
-      if (id !== root.id && !firstLevel.includes(id)) {
-        visible.delete(id);
+      if (allVisible) {
+        neigh.forEach(id => {
+          if (id !== root.id && !firstLevel.includes(id)) visible.delete(id);
+        });
+      } else {
+        visible.add(d.id);
+        neigh.forEach(id => visible.add(id));
       }
-    });
-  } else {
-    visible.add(d.id);
-    neigh.forEach(id => visible.add(id));
-  }
-
-  updateVisibility();
-});
-
+      updateVisibility();
+    })
     .on("dblclick", (event, d) => {
       if (d.evidence) window.open(d.evidence, "_blank");
     });
 
-  // drag (reconfigurer)
+  // drag
   nodeSel.call(d3.drag()
     .on("start", (event, d) => {
       if (!event.active) sim.alphaTarget(0.25).restart();
@@ -301,11 +377,9 @@ body::after{
     })
   );
 
-  // init
   updateVisibility();
   resetPanel();
 
-  // responsive
   window.addEventListener("resize", () => {
     ({ W, H } = measure());
     svg.attr("width", W).attr("height", H);
