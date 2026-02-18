@@ -312,22 +312,19 @@ svg.call(zoom);
     linkSel.attr("display", d => (isVisible(d.source.id) && isVisible(d.target.id)) ? null : "none");
   }
 
-  function renderPanel(d){
-    hintEl.textContent = "";
-    const tags = (d.keywords || []).map(k => `<span class="tag">${k}</span>`).join("");
-    const years = (d.year !== undefined)
-      ? `Année : ${d.year}`
-      : (d.yearStart ? `Période : ${d.yearStart} — ${d.yearEnd || "…"}` : "");
+  {
+  "id": "pub_curj_2024",
+  "type": "leaf",
+  "label": "ACL — Curriculum Journal (2024) — disciplinary matrix…",
+  "parent": "acl_18",
+  "year": 2024,
+  "keywords": ["curriculum", "matrice disciplinaire"],
+  "summary": "Article ACL (18e). Propose une lecture outillée de la matrice disciplinaire en design/éducation.",
+  "details": ["DOI indexé", "Cadre : curriculum studies", "Méthode : analyse outillée"],
+  "image": "assets/visuels/curj_2024.jpg",
+  "evidence": "https://doi.org/10.1002/curj.251"
+}
 
-    panelEl.innerHTML = `
-      <p style="margin:10px 0 6px 0; font-family: Space Grotesk, Inter Tight, system-ui, sans-serif; letter-spacing:-.01em;">
-        <strong>${d.label}</strong>
-      </p>
-      <p class="meta" style="margin:0 0 6px 0;">${d.type || ""}${years ? " · " + years : ""}</p>
-      <div>${tags}</div>
-      ${d.evidence ? `<p style="margin-top:10px;"><a href="${d.evidence}" target="_blank" rel="noopener" style="color:var(--ink); text-decoration:none; border-bottom:1px solid rgba(255,255,255,.28);">Preuve / ancrage</a></p>` : ""}
-    `;
-  }
 
   function resetPanel(){
     hintEl.textContent = "Survolez un nœud pour afficher ses métadonnées.";
