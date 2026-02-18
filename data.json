@@ -1,14 +1,18 @@
 {
   "nodes": [
     {
-      "id": "profil",
+      "id": "cv",
       "type": "root",
-      "label": "Profil",
+      "label": "CV — territoire de recherche",
       "yearStart": 2015,
       "yearEnd": 2026,
       "keywords": ["design", "sciences de l’éducation", "numérique"],
       "evidence": null
     },
+
+    { "id": "profil", "type": "branch", "label": "Profil", "parent": "cv" },
+    { "id": "recherche", "type": "branch", "label": "Recherche", "parent": "cv" },
+    { "id": "enseignement", "type": "branch", "label": "Enseignements", "parent": "cv" },
 
     { "id": "statut", "type": "branch", "label": "Statut", "parent": "profil" },
     { "id": "labos", "type": "branch", "label": "Laboratoires & rattachements", "parent": "profil" },
@@ -52,8 +56,6 @@
       "keywords": ["UPR", "PROJEKT"],
       "evidence": "https://projekt.unimes.fr/"
     },
-
-    { "id": "recherche", "type": "branch", "label": "Recherche", "parent": "profil" },
 
     { "id": "axes", "type": "branch", "label": "Axes / programmes", "parent": "recherche" },
     { "id": "publications", "type": "branch", "label": "Publications", "parent": "recherche" },
@@ -104,11 +106,31 @@
       "keywords": ["réseau", "édition", "animation"],
       "evidence": "https://gisartseduc.hypotheses.org/"
     },
-    { "id": "jurys", "type": "leaf", "label": "Jurys / expertises (sélection)", "parent": "vie_scientifique", "keywords": ["jury", "expertise"], "evidence": null },
-    { "id": "orga", "type": "leaf", "label": "Organisation de journées / séminaires (sélection)", "parent": "vie_scientifique", "keywords": ["journée d’étude", "séminaire"], "evidence": null },
-    { "id": "encadrement", "type": "leaf", "label": "Encadrements (M2 / doctorat selon dossiers)", "parent": "vie_scientifique", "keywords": ["encadrement"], "evidence": null },
+    {
+      "id": "jurys",
+      "type": "leaf",
+      "label": "Jurys / expertises (sélection)",
+      "parent": "vie_scientifique",
+      "keywords": ["jury", "expertise"],
+      "evidence": null
+    },
+    {
+      "id": "orga",
+      "type": "leaf",
+      "label": "Organisation de journées / séminaires (sélection)",
+      "parent": "vie_scientifique",
+      "keywords": ["journée d’étude", "séminaire"],
+      "evidence": null
+    },
+    {
+      "id": "encadrement",
+      "type": "leaf",
+      "label": "Encadrements (M2 / doctorat selon dossiers)",
+      "parent": "vie_scientifique",
+      "keywords": ["encadrement"],
+      "evidence": null
+    },
 
-    { "id": "enseignement", "type": "branch", "label": "Enseignements", "parent": "profil" },
     { "id": "ens_sc_edu", "type": "branch", "label": "Sciences de l’éducation", "parent": "enseignement" },
     { "id": "ens_design", "type": "branch", "label": "Design", "parent": "enseignement" },
 
