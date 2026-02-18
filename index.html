@@ -215,7 +215,8 @@ body::after{
 
   const svg = d3.select(vizEl).append("svg")
     .attr("width", W)
-    .attr("height", H);
+    .attr("height", H)
+    .style("touch-action", "none");
 
   const g = svg.append("g");
 
