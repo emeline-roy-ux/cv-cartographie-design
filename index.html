@@ -174,14 +174,14 @@ body::after{
 <div class="ui">
   <section class="panel">
     <header>
-      <h1>Emeline ROY</h1>
+      <h1 style="margin-left: 6px;">Emeline ROY</h1>
       <p class="meta">Dossier PDF complet : disponible sur demande.</p>
       <p class="meta links">
         <a href="methodologie.html">Méthodologie</a>
         <span class="meta">·</span>
         <a href="https://www.linkedin.com/in/emeline-roy-141a7728/" target="_blank" rel="noopener">LinkedIn</a>
       </p>
-      <p class="meta">Interaction : glisser = reconfigurer · survol = fiche · clic = déployer/replier · double-clic = ouvrir preuve</p>
+      <p class="meta">Interaction : survol = fiche · clic = déployer/replier · double-clic = ouvrir preuve</p>
     </header>
   </section>
 
@@ -371,21 +371,6 @@ svg.call(zoom);
       event.stopPropagation();
       if (d.evidence) window.open(d.evidence, "_blank");
     });
-
-  // drag
-  nodeSel.call(d3.drag()
-    .on("start", (event, d) => {
-      if (!event.active) sim.alphaTarget(0.25).restart();
-      d.fx = d.x; d.fy = d.y;
-    })
-    .on("drag", (event, d) => {
-      d.fx = event.x; d.fy = event.y;
-    })
-    .on("end", (event, d) => {
-      if (!event.active) sim.alphaTarget(0);
-      d.fx = null; d.fy = null;
-    })
-  );
 
   updateVisibility();
   resetPanel();

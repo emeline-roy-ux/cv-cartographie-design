@@ -104,12 +104,6 @@
       "evidence": "https://projekt.unimes.fr/"
     },
     {
-      "id": "axes",
-      "type": "branch",
-      "label": "Axes / programmes",
-      "parent": "recherche"
-    },
-    {
       "id": "publications",
       "type": "branch",
       "label": "Publications",
@@ -120,33 +114,6 @@
       "type": "branch",
       "label": "Vie scientifique",
       "parent": "recherche"
-    },
-    {
-      "id": "axe_didactique",
-      "type": "leaf",
-      "label": "Axe — Activité enseignante & didactique du design",
-      "parent": "axes",
-      "yearStart": 2018,
-      "yearEnd": 2026,
-      "keywords": [
-        "TACD",
-        "didactique",
-        "activité"
-      ],
-      "evidence": null
-    },
-    {
-      "id": "axe_creativite",
-      "type": "leaf",
-      "label": "Axe — Créativité, références, curriculum",
-      "parent": "axes",
-      "yearStart": 2018,
-      "yearEnd": 2026,
-      "keywords": [
-        "créativité",
-        "curriculum"
-      ],
-      "evidence": null
     },
     {
       "id": "acl_70",
@@ -323,32 +290,6 @@
       "yearEnd": 2026,
       "keywords": [
         "doctorat"
-      ],
-      "evidence": null
-    },
-    {
-      "id": "licence",
-      "type": "leaf",
-      "label": "Bac+1–3 — méthodes du projet / culture design",
-      "parent": "ens_design",
-      "yearStart": 2020,
-      "yearEnd": 2026,
-      "keywords": [
-        "méthodes",
-        "projet"
-      ],
-      "evidence": null
-    },
-    {
-      "id": "dsaa",
-      "type": "leaf",
-      "label": "Bac+4–5 — DSAA / Master-DSAA (selon dispositifs)",
-      "parent": "ens_design",
-      "yearStart": 2020,
-      "yearEnd": 2026,
-      "keywords": [
-        "DSAA",
-        "recherche"
       ],
       "evidence": null
     }
