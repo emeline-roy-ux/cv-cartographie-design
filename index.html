@@ -3,32 +3,21 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Cartographie de parcours — Design & Recherche</title>
+<title>CV cartographique — Design & Recherche</title>
 
 <style>
 body { font-family: system-ui, sans-serif; margin: 40px; background:#f5f5f5; color:#222; }
-h1 { font-size: 26px; margin: 0 0 12px 0; }
-p { max-width: 900px; line-height: 1.6; }
 .grid { display:grid; grid-template-columns:1.6fr 1fr; gap:18px; }
 .card { background:#fff; padding:18px; border-radius:10px; box-shadow:0 0 0 1px #ddd; }
-
-#viz {
-  width:100%;
-  height:560px;
-  background:#fff;
-  border-radius:10px;
-  box-shadow:0 0 0 1px #ddd;
-  position: relative;
-}
-
+#viz { width:100%; height:560px; background:#fff; border-radius:10px; box-shadow:0 0 0 1px #ddd; }
 .meta { font-size:13px; color:#666; }
-.tag { display:inline-block; padding:2px 8px; border:1px solid #ddd; border-radius:999px; margin:4px 6px 0 0; font-size:12px; }
+.tag { display:inline-block; padding:2px 8px; border:1px solid #ddd; border-radius:999px; margin:4px; font-size:12px; }
 button { border:1px solid #ddd; background:#fff; padding:8px 10px; border-radius:10px; cursor:pointer; }
 
 @media (max-width:900px){
-  body { margin:18px; }
-  .grid { grid-template-columns:1fr; }
-  #viz { height:520px; }
+ body { margin:18px; }
+ .grid { grid-template-columns:1fr; }
+ #viz { height:520px; }
 }
 </style>
 </head>
@@ -36,16 +25,10 @@ button { border:1px solid #ddd; background:#fff; padding:8px 10px; border-radius
 <body>
 
 <div class="card" style="margin-bottom:18px;">
-<h1>Dispositif cartographique — Parcours scientifique en design</h1>
-<p>
-Prototype de CV cartographique comme dispositif de recherche-création.
-Visualisation relationnelle des territoires : profil, publications, recherche, enseignements.
-Le dossier académique complet (PDF) constitue la référence et est disponible sur demande.
-</p>
-
+<strong>CV cartographique — dispositif de recherche-création</strong>
 <p class="meta">
-<a href="methodologie.html">Méthodologie du dispositif</a> ·
-<a href="https://www.linkedin.com/in/emeline-roy-141a7728/" target="_blank">LinkedIn</a>
+Prototype contrôlé : profil · publications · recherche · enseignements  
+PDF académique complet : disponible sur demande
 </p>
 </div>
 
@@ -55,7 +38,7 @@ Le dossier académique complet (PDF) constitue la référence et est disponible 
 <div class="card">
 <strong>Fiche</strong>
 <button id="resetBtn">Réinitialiser</button>
-<p class="meta" id="hint">Survol = résumé · clic = déployer la branche</p>
+<p class="meta" id="hint">Survol = résumé · clic = déployer</p>
 <div id="panel"></div>
 </div>
 </div>
@@ -66,160 +49,146 @@ Le dossier académique complet (PDF) constitue la référence et est disponible 
 
 const data = await fetch("data.json").then(r=>r.json());
 
-const viz = document.getElementById("viz");
-const width = viz.clientWidth;
-const height = viz.clientHeight;
+const W = viz.clientWidth;
+const H = viz.clientHeight;
 
 const svg = d3.select("#viz").append("svg")
-  .attr("width", width)
-  .attr("height", height);
+.attr("width",W).attr("height",H);
 
 const g = svg.append("g");
 
-svg.call(
-  d3.zoom()
-    .scaleExtent([0.6, 2.5])
-    .on("zoom", e => g.attr("transform", e.transform))
-);
+svg.call(d3.zoom().scaleExtent([0.6,2.5]).on("zoom",e=>g.attr("transform",e.transform)));
 
-// ---------- fond de zones (quadrants légers)
 
-const zonesBg = [
-  {x:0, y:0, w:.5, h:.5},
-  {x:.5, y:0, w:.5, h:.5},
-  {x:0, y:.5, w:.5, h:.5},
-  {x:.5, y:.5, w:.5, h:.5}
+// ---------- fonds de zones
+
+const zones = [
+{label:"PROFIL", x:0, y:0},
+{label:"PUBLICATIONS", x:.5, y:0},
+{label:"RECHERCHE", x:0, y:.5},
+{label:"ENSEIGNEMENTS", x:.5, y:.5}
 ];
 
-svg.append("g")
-  .selectAll("rect")
-  .data(zonesBg)
-  .join("rect")
-  .attr("x", d=>d.x*width)
-  .attr("y", d=>d.y*height)
-  .attr("width", d=>d.w*width)
-  .attr("height", d=>d.h*height)
-  .attr("fill", "#fafafa");
+svg.selectAll(".zbg")
+.data(zones)
+.join("rect")
+.attr("x",d=>d.x*W)
+.attr("y",d=>d.y*H)
+.attr("width",W/2)
+.attr("height",H/2)
+.attr("fill","#fafafa");
 
-// ---------- voisins (déploiement)
+svg.selectAll(".zlabel")
+.data(zones)
+.join("text")
+.attr("x",d=>d.x*W+20)
+.attr("y",d=>d.y*H+26)
+.text(d=>d.label)
+.attr("font-size",12)
+.attr("fill","#999");
+
+
+// ---------- voisins
 
 const neighbors = {};
 data.links.forEach(l=>{
-  neighbors[l.source] ??= new Set();
-  neighbors[l.target] ??= new Set();
-  neighbors[l.source].add(l.target);
-  neighbors[l.target].add(l.source);
+ neighbors[l.source] ??= new Set();
+ neighbors[l.target] ??= new Set();
+ neighbors[l.source].add(l.target);
+ neighbors[l.target].add(l.source);
 });
 
-// hubs visibles au départ + macro
 const macroTypes = new Set(["profil","axe","institution","reseau","position","hub"]);
 let visible = new Set(data.nodes.filter(n=>macroTypes.has(n.type)).map(n=>n.id));
 
-// ---------- liens
+
+// ---------- graph
 
 const link = g.selectAll("line")
-  .data(data.links)
-  .join("line")
-  .attr("stroke","#d0d0d0")
-  .attr("stroke-width",1.2);
-
-// ---------- noeuds
+.data(data.links)
+.join("line")
+.attr("stroke","#ddd");
 
 const node = g.selectAll("circle")
-  .data(data.nodes)
-  .join("circle")
-  .attr("r", d => d.type==="hub" ? 18 : (d.type==="axe" ? 14 : 10))
-  .attr("fill","#ffffff")
-  .attr("stroke","#555")
-  .attr("stroke-width",1.2)
-  .style("cursor","pointer");
+.data(data.nodes)
+.join("circle")
+.attr("r",d=> d.type==="hub"?18:(d.type==="axe"?14:10))
+.attr("fill",d=> d.type==="hub"?"#f0f0f0":"#fff")
+.attr("stroke","#555");
 
-// ---------- labels
+const label = g.selectAll("text.node")
+.data(data.nodes)
+.join("text")
+.attr("class","node")
+.text(d=>d.label)
+.attr("font-size",12)
+.attr("dx",14)
+.attr("dy",4);
 
-const label = g.selectAll("text")
-  .data(data.nodes)
-  .join("text")
-  .text(d=>d.label)
-  .attr("font-size",12)
-  .attr("dx",14)
-  .attr("dy",4);
 
-// ---------- forces par zones (quadrants nets)
+// ---------- forces zones
 
-const zoneX = { profil:.25, publications:.75, recherche:.25, enseignement:.75 };
-const zoneY = { profil:.25, publications:.25, recherche:.75, enseignement:.75 };
+const zx={profil:.25,publications:.75,recherche:.25,enseignement:.75};
+const zy={profil:.25,publications:.25,recherche:.75,enseignement:.75};
 
 const sim = d3.forceSimulation(data.nodes)
-  .force("link", d3.forceLink(data.links).id(d=>d.id).distance(55).strength(0.08))
-  .force("charge", d3.forceManyBody().strength(-160))
-  .force("x", d3.forceX(d => width*(zoneX[d.zone] ?? .5)).strength(.75))
-  .force("y", d3.forceY(d => height*(zoneY[d.zone] ?? .5)).strength(.75))
-  .force("collide", d3.forceCollide(d => d.type==="hub"?26:18));
+.force("link",d3.forceLink(data.links).id(d=>d.id).distance(55).strength(.08))
+.force("charge",d3.forceManyBody().strength(-160))
+.force("x",d3.forceX(d=>W*(zx[d.zone]??.5)).strength(.8))
+.force("y",d3.forceY(d=>H*(zy[d.zone]??.5)).strength(.8))
+.force("collide",d3.forceCollide(22));
 
-sim.on("tick", ()=>{
-  link
-    .attr("x1",d=>d.source.x)
-    .attr("y1",d=>d.source.y)
-    .attr("x2",d=>d.target.x)
-    .attr("y2",d=>d.target.y);
-
-  node.attr("cx",d=>d.x).attr("cy",d=>d.y);
-  label.attr("x",d=>d.x).attr("y",d=>d.y);
+sim.on("tick",()=>{
+ link.attr("x1",d=>d.source.x).attr("y1",d=>d.source.y)
+     .attr("x2",d=>d.target.x).attr("y2",d=>d.target.y);
+ node.attr("cx",d=>d.x).attr("cy",d=>d.y);
+ label.attr("x",d=>d.x).attr("y",d=>d.y);
 });
 
-// ---------- visibilité progressive
 
-function updateVisibility(){
-  node.attr("display", d=> visible.has(d.id)?null:"none");
-  label.attr("display", d=> visible.has(d.id)?null:"none");
-  link.attr("display", d=>{
-    const s=d.source.id||d.source;
-    const t=d.target.id||d.target;
-    return (visible.has(s)&&visible.has(t))?null:"none";
-  });
+// ---------- visibilité
+
+function update(){
+ node.attr("display",d=>visible.has(d.id)?null:"none");
+ label.attr("display",d=>visible.has(d.id)?null:"none");
+ link.attr("display",d=>{
+   const s=d.source.id||d.source;
+   const t=d.target.id||d.target;
+   return (visible.has(s)&&visible.has(t))?null:"none";
+ });
 }
 
-// ---------- panneau fiche
 
-const panel = document.getElementById("panel");
-const hint = document.getElementById("hint");
+// ---------- panel
 
-function renderPanel(d){
-  hint.textContent="";
-  panel.innerHTML = `
-    <p><strong>${d.label}</strong></p>
-    <p class="meta">${d.type}</p>
-    ${(d.keywords||[]).map(k=>`<span class="tag">${k}</span>`).join("")}
-    ${d.evidence?`<p><a href="${d.evidence}" target="_blank">preuve</a></p>`:""}
-  `;
+function show(d){
+ panel.innerHTML =
+ `<strong>${d.label}</strong><br>
+ ${(d.keywords||[]).map(k=>`<span class="tag">${k}</span>`).join("")}
+ ${d.evidence?`<p><a href="${d.evidence}" target="_blank">preuve</a></p>`:""}`;
 }
 
-function reset(){
-  visible = new Set(data.nodes.filter(n=>macroTypes.has(n.type)).map(n=>n.id));
-  updateVisibility();
-  panel.innerHTML="";
-  hint.textContent="Survol = résumé · clic = déployer la branche";
-}
-
-node.on("mouseover",(e,d)=>renderPanel(d))
+node.on("mouseover",(e,d)=>show(d))
 .on("click",(e,d)=>{
-  visible.add(d.id);
-  (neighbors[d.id]||[]).forEach(id=>visible.add(id));
-  updateVisibility();
-  if(d.evidence) window.open(d.evidence,"_blank");
+ visible.add(d.id);
+ (neighbors[d.id]||[]).forEach(id=>visible.add(id));
+ update();
+ if(d.evidence) window.open(d.evidence,"_blank");
 });
 
-document.getElementById("resetBtn").onclick = reset;
-
-// ---------- drag
+resetBtn.onclick=()=>{
+ visible=new Set(data.nodes.filter(n=>macroTypes.has(n.type)).map(n=>n.id));
+ update();
+ panel.innerHTML="";
+};
 
 node.call(d3.drag()
-  .on("start",(e,d)=>{ if(!e.active) sim.alphaTarget(.3).restart(); d.fx=d.x; d.fy=d.y; })
-  .on("drag",(e,d)=>{ d.fx=e.x; d.fy=e.y; })
-  .on("end",(e,d)=>{ if(!e.active) sim.alphaTarget(0); d.fx=null; d.fy=null; })
+.on("start",(e,d)=>{ if(!e.active) sim.alphaTarget(.3).restart(); d.fx=d.x; d.fy=d.y; })
+.on("drag",(e,d)=>{ d.fx=e.x; d.fy=e.y; })
+.on("end",(e,d)=>{ if(!e.active) sim.alphaTarget(0); d.fx=null; d.fy=null; })
 );
 
-reset();
+update();
 
 })();
 </script>
