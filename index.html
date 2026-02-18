@@ -68,6 +68,12 @@ body::after{
   position: fixed;
   inset: 0;
   z-index: 2;
+  display: grid;
+  grid-template-columns: minmax(320px, 460px) minmax(280px, 380px);
+  align-content: start;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 22px;
   pointer-events: none;
 }
 .ui a, .ui button{ pointer-events: auto; }
@@ -76,6 +82,7 @@ body::after{
     background: transparent;
     border: none;
     box-shadow: none;
+    pointer-events: auto;
   }
 
   h1{
@@ -151,6 +158,9 @@ body::after{
   /* petite contrainte de lecture de la fiche */
   #panel{
     max-width: 360px;
+    max-height: calc(100vh - 200px);
+    overflow-y: auto;
+    padding-right: 6px;
   }
 
   @media (max-width: 980px){
@@ -175,19 +185,17 @@ body::after{
   <section class="panel">
     <header>
       <h1 style="margin-left: 6px;">Emeline ROY</h1>
-      <p class="meta">Dossier PDF complet : disponible sur demande.</p>
-      <p class="meta links">
+      <p class="meta links" style="margin-left: 6px;">
         <a href="methodologie.html">Méthodologie</a>
         <span class="meta">·</span>
         <a href="https://www.linkedin.com/in/emeline-roy-141a7728/" target="_blank" rel="noopener">LinkedIn</a>
       </p>
-      <p class="meta">Interaction : survol = fiche · clic = déployer/replier · double-clic = ouvrir preuve</p>
     </header>
   </section>
 
   <aside class="panel">
     <div class="toprow">
-      <strong>Fiche</strong>
+      <strong>Détails</strong>
       <button id="resetBtn" type="button">Réinitialiser</button>
     </div>
     <p class="meta" id="hint">Survolez un nœud pour afficher ses métadonnées.</p>
