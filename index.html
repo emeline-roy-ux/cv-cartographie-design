@@ -29,53 +29,49 @@
     overflow:hidden;
   }
 
-  /* ✅ IMPORTANT : content + position + z-index (sinon rien n’apparaît) */
+  /*  IMPORTANT : content + position + z-index (sinon rien n’apparaît) */
   body::before{
-    content:"";
-    position: fixed;
-    inset: 0;
-    z-index: -3;
-    background:
-      radial-gradient(1200px 700px at 20% 20%, rgba(255,0,140,.22), transparent 55%),
-      radial-gradient(900px 650px at 70% 25%, rgba(0,170,255,.18), transparent 55%),
-      radial-gradient(900px 650px at 80% 75%, rgba(255,255,0,.12), transparent 60%),
-      url("assets/cmyk.jpg");
-    background-size: cover;
-    background-position: center;
-    filter: saturate(1.15) contrast(1.05);
-    opacity: .62;
-  }
+  content:"";
+  position: fixed;
+  inset: 0;
+  z-index: -3;
+  pointer-events: none;           /* ✅ IMPORTANT */
+  background:
+    radial-gradient(1200px 700px at 20% 20%, rgba(255,0,140,.22), transparent 55%),
+    radial-gradient(900px 650px at 70% 25%, rgba(0,170,255,.18), transparent 55%),
+    radial-gradient(900px 650px at 80% 75%, rgba(255,255,0,.12), transparent 60%),
+    url("assets/cmyk.jpg");
+  background-size: cover;
+  background-position: center;
+  filter: saturate(1.15) contrast(1.05);
+  opacity: .62;
+}
 
-  body::after{
-    content:"";
-    position: fixed;
-    inset: 0;
-    z-index: -2;
-    background: linear-gradient(180deg, rgba(5,6,10,.72), rgba(5,6,10,.52));
-  }
+body::after{
+  content:"";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;           /* ✅ IMPORTANT */
+  background: linear-gradient(180deg, rgba(5,6,10,.72), rgba(5,6,10,.52));
+}
 
-  /* Carte plein écran derrière */
-  #viz{
-    position: fixed;
-    inset: 0;
-    z-index: -1;
-  }
+/* ✅ la carte doit être au-dessus (z-index >= 0), sinon pas d’interactions */
+#viz{
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+}
 
-  /* UI par-dessus (sans cadres) */
-  .ui{
-    position: fixed;
-    inset: 0;
-    padding: 24px;
-    display: grid;
-    grid-template-columns: 1fr 360px;
-    gap: 24px;
-    align-items: start;
-
-    /* ✅ laisse passer les clics vers la carte */
-    pointer-events: none;
-  }
-  .ui a, .ui button{ pointer-events: auto; }
-
+/* UI au-dessus */
+.ui{
+  position: fixed;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+.ui a, .ui button{ pointer-events: auto; }
+  
   .panel{
     background: transparent;
     border: none;
