@@ -3,192 +3,232 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>CV cartographique — Design & Recherche</title>
+<title>CV cartographique — dispositif de recherche-création</title>
 
 <style>
-body { font-family: system-ui, sans-serif; margin: 40px; background:#f5f5f5; color:#222; }
-.grid { display:grid; grid-template-columns:1.6fr 1fr; gap:18px; }
-.card { background:#fff; padding:18px; border-radius:10px; box-shadow:0 0 0 1px #ddd; }
-#viz { width:100%; height:560px; background:#fff; border-radius:10px; box-shadow:0 0 0 1px #ddd; }
-.meta { font-size:13px; color:#666; }
-.tag { display:inline-block; padding:2px 8px; border:1px solid #ddd; border-radius:999px; margin:4px; font-size:12px; }
-button { border:1px solid #ddd; background:#fff; padding:8px 10px; border-radius:10px; cursor:pointer; }
+  body { font-family: system-ui, sans-serif; margin: 40px; background:#f5f5f5; color:#222; }
+  .grid { display:grid; grid-template-columns:1.6fr 1fr; gap:18px; align-items:start; }
+  .card { background:#fff; padding:18px; border-radius:10px; box-shadow:0 0 0 1px #ddd; }
+  #viz { width:100%; height:560px; background:#fff; border-radius:10px; box-shadow:0 0 0 1px #ddd; overflow:hidden; }
+  .meta { font-size:13px; color:#666; margin:6px 0 0 0; }
+  .tag { display:inline-block; padding:2px 8px; border:1px solid #ddd; border-radius:999px; margin:4px 6px 0 0; font-size:12px; color:#444; }
+  button { border:1px solid #ddd; background:#fff; padding:8px 10px; border-radius:10px; cursor:pointer; }
+  button:hover { background:#fafafa; }
+  a { color: inherit; }
 
-@media (max-width:900px){
- body { margin:18px; }
- .grid { grid-template-columns:1fr; }
- #viz { height:520px; }
-}
+  @media (max-width:900px){
+    body { margin:18px; }
+    .grid { grid-template-columns:1fr; }
+    #viz { height:520px; }
+  }
 </style>
 </head>
 
 <body>
 
 <div class="card" style="margin-bottom:18px;">
-<strong>CV cartographique — dispositif de recherche-création</strong>
-<p class="meta">
-Prototype contrôlé : profil · publications · recherche · enseignements  
-PDF académique complet : disponible sur demande
-</p>
+  <h1 style="margin:0 0 8px 0; font-size:28px;">CV cartographique — dispositif de recherche-création</h1>
+  <p class="meta" style="max-width:980px; line-height:1.6;">
+    Prototype contrôlé : profil · publications · recherche · enseignements.
+    Dossier académique complet : disponible sur demande.
+  </p>
+  <p class="meta">
+    <a href="methodologie.html">Méthodologie du dispositif</a> ·
+    <a href="https://www.linkedin.com/in/emeline-roy-141a7728/" target="_blank" rel="noopener">LinkedIn</a>
+  </p>
 </div>
 
 <div class="grid">
-<div id="viz"></div>
+  <div id="viz"></div>
 
-<div class="card">
-<strong>Fiche</strong>
-<button id="resetBtn">Réinitialiser</button>
-<p class="meta" id="hint">Survol = résumé · clic = déployer</p>
-<div id="panel"></div>
-</div>
+  <div class="card">
+    <div style="display:flex; align-items:center; justify-content:space-between; gap:10px;">
+      <strong>Fiche</strong>
+      <button id="resetBtn" type="button">Réinitialiser</button>
+    </div>
+    <p class="meta" id="hint">Survol = résumé · clic = déployer</p>
+    <div id="panel"></div>
+  </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
 <script>
 (async function(){
 
-const data = await fetch("data.json").then(r=>r.json());
+  const data = await fetch("data.json").then(r => r.json());
 
-const W = viz.clientWidth;
-const H = viz.clientHeight;
+  const vizEl = document.getElementById("viz");
+  const panelEl = document.getElementById("panel");
+  const hintEl = document.getElementById("hint");
+  const resetBtnEl = document.getElementById("resetBtn");
 
-const svg = d3.select("#viz").append("svg")
-.attr("width",W).attr("height",H);
+  const W = vizEl.clientWidth;
+  const H = vizEl.clientHeight;
 
-const g = svg.append("g");
+  const svg = d3.select(vizEl).append("svg")
+    .attr("width", W)
+    .attr("height", H);
 
-svg.call(d3.zoom().scaleExtent([0.6,2.5]).on("zoom",e=>g.attr("transform",e.transform)));
+  // Fond de zones (dans le SVG, en arrière-plan)
+  const zones = [
+    {label:"PROFIL", x:0,   y:0},
+    {label:"PUBLICATIONS", x:0.5, y:0},
+    {label:"RECHERCHE", x:0,   y:0.5},
+    {label:"ENSEIGNEMENTS", x:0.5, y:0.5}
+  ];
 
+  svg.append("g")
+    .selectAll("rect")
+    .data(zones)
+    .join("rect")
+    .attr("x", d => d.x * W)
+    .attr("y", d => d.y * H)
+    .attr("width", W/2)
+    .attr("height", H/2)
+    .attr("fill", "#fafafa");
 
-// ---------- fonds de zones
+  svg.append("g")
+    .selectAll("text")
+    .data(zones)
+    .join("text")
+    .attr("x", d => d.x * W + 18)
+    .attr("y", d => d.y * H + 26)
+    .text(d => d.label)
+    .attr("font-size", 12)
+    .attr("fill", "#999");
 
-const zones = [
-{label:"PROFIL", x:0, y:0},
-{label:"PUBLICATIONS", x:.5, y:0},
-{label:"RECHERCHE", x:0, y:.5},
-{label:"ENSEIGNEMENTS", x:.5, y:.5}
-];
+  const g = svg.append("g");
 
-svg.selectAll(".zbg")
-.data(zones)
-.join("rect")
-.attr("x",d=>d.x*W)
-.attr("y",d=>d.y*H)
-.attr("width",W/2)
-.attr("height",H/2)
-.attr("fill","#fafafa");
+  // zoom / pan
+  svg.call(
+    d3.zoom()
+      .scaleExtent([0.6, 2.5])
+      .on("zoom", (event) => g.attr("transform", event.transform))
+  );
 
-svg.selectAll(".zlabel")
-.data(zones)
-.join("text")
-.attr("x",d=>d.x*W+20)
-.attr("y",d=>d.y*H+26)
-.text(d=>d.label)
-.attr("font-size",12)
-.attr("fill","#999");
+  // Index des voisins (déploiement progressif)
+  const neighbors = {};
+  data.links.forEach(l => {
+    neighbors[l.source] ??= new Set();
+    neighbors[l.target] ??= new Set();
+    neighbors[l.source].add(l.target);
+    neighbors[l.target].add(l.source);
+  });
 
+  // Vue macro : afficher aussi les hubs (sinon publications/enseignement ne se voient pas)
+  const macroTypes = new Set(["profil","axe","institution","reseau","position","hub"]);
+  let visible = new Set(data.nodes.filter(n => macroTypes.has(n.type)).map(n => n.id));
 
-// ---------- voisins
+  // Liens
+  const link = g.append("g")
+    .selectAll("line")
+    .data(data.links)
+    .join("line")
+    .attr("stroke", "#ddd")
+    .attr("stroke-width", 1.2);
 
-const neighbors = {};
-data.links.forEach(l=>{
- neighbors[l.source] ??= new Set();
- neighbors[l.target] ??= new Set();
- neighbors[l.source].add(l.target);
- neighbors[l.target].add(l.source);
-});
+  // Nœuds
+  const node = g.append("g")
+    .selectAll("circle")
+    .data(data.nodes)
+    .join("circle")
+    .attr("r", d => d.type === "hub" ? 18 : (d.type === "axe" ? 14 : 10))
+    .attr("fill", d => d.type === "hub" ? "#f0f0f0" : "#fff")
+    .attr("stroke", "#555")
+    .attr("stroke-width", 1.2)
+    .style("cursor", "pointer");
 
-const macroTypes = new Set(["profil","axe","institution","reseau","position","hub"]);
-let visible = new Set(data.nodes.filter(n=>macroTypes.has(n.type)).map(n=>n.id));
+  // Labels
+  const label = g.append("g")
+    .selectAll("text")
+    .data(data.nodes)
+    .join("text")
+    .text(d => d.label)
+    .attr("font-size", 12)
+    .attr("dx", 14)
+    .attr("dy", 4)
+    .attr("fill", "#222");
 
+  // Forces par zones (quadrants nets)
+  const zx = { profil:0.25, publications:0.75, recherche:0.25, enseignement:0.75 };
+  const zy = { profil:0.25, publications:0.25, recherche:0.75, enseignement:0.75 };
 
-// ---------- graph
+  const sim = d3.forceSimulation(data.nodes)
+    .force("link", d3.forceLink(data.links).id(d => d.id).distance(55).strength(0.08))
+    .force("charge", d3.forceManyBody().strength(-160))
+    .force("x", d3.forceX(d => W * (zx[d.zone] ?? 0.5)).strength(0.8))
+    .force("y", d3.forceY(d => H * (zy[d.zone] ?? 0.5)).strength(0.8))
+    .force("collide", d3.forceCollide(d => d.type === "hub" ? 26 : 18).iterations(2));
 
-const link = g.selectAll("line")
-.data(data.links)
-.join("line")
-.attr("stroke","#ddd");
+  sim.on("tick", () => {
+    link
+      .attr("x1", d => d.source.x).attr("y1", d => d.source.y)
+      .attr("x2", d => d.target.x).attr("y2", d => d.target.y);
 
-const node = g.selectAll("circle")
-.data(data.nodes)
-.join("circle")
-.attr("r",d=> d.type==="hub"?18:(d.type==="axe"?14:10))
-.attr("fill",d=> d.type==="hub"?"#f0f0f0":"#fff")
-.attr("stroke","#555");
+    node
+      .attr("cx", d => d.x).attr("cy", d => d.y);
 
-const label = g.selectAll("text.node")
-.data(data.nodes)
-.join("text")
-.attr("class","node")
-.text(d=>d.label)
-.attr("font-size",12)
-.attr("dx",14)
-.attr("dy",4);
+    label
+      .attr("x", d => d.x).attr("y", d => d.y);
+  });
 
+  function updateVisibility() {
+    node.attr("display", d => visible.has(d.id) ? null : "none");
+    label.attr("display", d => visible.has(d.id) ? null : "none");
+    link.attr("display", d => {
+      const sid = d.source.id || d.source;
+      const tid = d.target.id || d.target;
+      return (visible.has(sid) && visible.has(tid)) ? null : "none";
+    });
+  }
 
-// ---------- forces zones
+  function renderPanel(d) {
+    hintEl.textContent = "";
+    const tags = (d.keywords || []).map(k => `<span class="tag">${k}</span>`).join("");
+    const years = (d.year !== undefined)
+      ? `Année : ${d.year}`
+      : (d.yearStart ? `Période : ${d.yearStart} — ${d.yearEnd || "…"}` : "");
 
-const zx={profil:.25,publications:.75,recherche:.25,enseignement:.75};
-const zy={profil:.25,publications:.25,recherche:.75,enseignement:.75};
+    panelEl.innerHTML = `
+      <p style="margin:10px 0 6px 0;"><strong>${d.label}</strong></p>
+      <p class="meta" style="margin:0 0 6px 0;">${d.type}${years ? " · " + years : ""}</p>
+      <div>${tags}</div>
+      ${d.evidence ? `<p style="margin-top:10px;"><a href="${d.evidence}" target="_blank" rel="noopener">Preuve / ancrage</a></p>` : ""}
+    `;
+  }
 
-const sim = d3.forceSimulation(data.nodes)
-.force("link",d3.forceLink(data.links).id(d=>d.id).distance(55).strength(.08))
-.force("charge",d3.forceManyBody().strength(-160))
-.force("x",d3.forceX(d=>W*(zx[d.zone]??.5)).strength(.8))
-.force("y",d3.forceY(d=>H*(zy[d.zone]??.5)).strength(.8))
-.force("collide",d3.forceCollide(22));
+  function reset() {
+    visible = new Set(data.nodes.filter(n => macroTypes.has(n.type)).map(n => n.id));
+    updateVisibility();
+    panelEl.innerHTML = "";
+    hintEl.textContent = "Survol = résumé · clic = déployer";
+  }
 
-sim.on("tick",()=>{
- link.attr("x1",d=>d.source.x).attr("y1",d=>d.source.y)
-     .attr("x2",d=>d.target.x).attr("y2",d=>d.target.y);
- node.attr("cx",d=>d.x).attr("cy",d=>d.y);
- label.attr("x",d=>d.x).attr("y",d=>d.y);
-});
+  node
+    .on("mouseover", (event, d) => renderPanel(d))
+    .on("click", (event, d) => {
+      visible.add(d.id);
+      (neighbors[d.id] || []).forEach(id => visible.add(id));
+      updateVisibility();
+      if (d.evidence) window.open(d.evidence, "_blank");
+    });
 
+  resetBtnEl.addEventListener("click", reset);
 
-// ---------- visibilité
+  node.call(d3.drag()
+    .on("start", (event, d) => {
+      if (!event.active) sim.alphaTarget(0.25).restart();
+      d.fx = d.x; d.fy = d.y;
+    })
+    .on("drag", (event, d) => { d.fx = event.x; d.fy = event.y; })
+    .on("end", (event, d) => {
+      if (!event.active) sim.alphaTarget(0);
+      d.fx = null; d.fy = null;
+    })
+  );
 
-function update(){
- node.attr("display",d=>visible.has(d.id)?null:"none");
- label.attr("display",d=>visible.has(d.id)?null:"none");
- link.attr("display",d=>{
-   const s=d.source.id||d.source;
-   const t=d.target.id||d.target;
-   return (visible.has(s)&&visible.has(t))?null:"none";
- });
-}
-
-
-// ---------- panel
-
-function show(d){
- panel.innerHTML =
- `<strong>${d.label}</strong><br>
- ${(d.keywords||[]).map(k=>`<span class="tag">${k}</span>`).join("")}
- ${d.evidence?`<p><a href="${d.evidence}" target="_blank">preuve</a></p>`:""}`;
-}
-
-node.on("mouseover",(e,d)=>show(d))
-.on("click",(e,d)=>{
- visible.add(d.id);
- (neighbors[d.id]||[]).forEach(id=>visible.add(id));
- update();
- if(d.evidence) window.open(d.evidence,"_blank");
-});
-
-resetBtn.onclick=()=>{
- visible=new Set(data.nodes.filter(n=>macroTypes.has(n.type)).map(n=>n.id));
- update();
- panel.innerHTML="";
-};
-
-node.call(d3.drag()
-.on("start",(e,d)=>{ if(!e.active) sim.alphaTarget(.3).restart(); d.fx=d.x; d.fy=d.y; })
-.on("drag",(e,d)=>{ d.fx=e.x; d.fy=e.y; })
-.on("end",(e,d)=>{ if(!e.active) sim.alphaTarget(0); d.fx=null; d.fy=null; })
-);
-
-update();
+  // Démarrage
+  reset();
 
 })();
 </script>
