@@ -6,19 +6,55 @@
       "label": "CV — territoire de recherche",
       "yearStart": 2015,
       "yearEnd": 2026,
-      "keywords": ["design", "sciences de l’éducation", "numérique"],
+      "keywords": [
+        "design",
+        "sciences de l’éducation",
+        "numérique"
+      ],
       "evidence": null
     },
-
-    { "id": "profil", "type": "branch", "label": "Profil", "parent": "cv" },
-    { "id": "recherche", "type": "branch", "label": "Recherche", "parent": "cv" },
-    { "id": "enseignement", "type": "branch", "label": "Enseignements", "parent": "cv" },
-
-    { "id": "statut", "type": "branch", "label": "Statut", "parent": "profil" },
-    { "id": "labos", "type": "branch", "label": "Laboratoires & rattachements", "parent": "profil" },
-    { "id": "formation", "type": "branch", "label": "Formation & diplômes", "parent": "profil" },
-    { "id": "experiences", "type": "branch", "label": "Expériences / fonctions", "parent": "profil" },
-
+    {
+      "id": "profil",
+      "type": "branch",
+      "label": "Profil",
+      "parent": "cv"
+    },
+    {
+      "id": "recherche",
+      "type": "branch",
+      "label": "Recherche",
+      "parent": "cv"
+    },
+    {
+      "id": "enseignement",
+      "type": "branch",
+      "label": "Enseignements",
+      "parent": "cv"
+    },
+    {
+      "id": "statut",
+      "type": "branch",
+      "label": "Statut",
+      "parent": "profil"
+    },
+    {
+      "id": "labos",
+      "type": "branch",
+      "label": "Laboratoires & rattachements",
+      "parent": "profil"
+    },
+    {
+      "id": "formation",
+      "type": "branch",
+      "label": "Formation & diplômes",
+      "parent": "profil"
+    },
+    {
+      "id": "experiences",
+      "type": "branch",
+      "label": "Expériences / fonctions",
+      "parent": "profil"
+    },
     {
       "id": "mcf",
       "type": "leaf",
@@ -26,7 +62,11 @@
       "parent": "statut",
       "yearStart": 2024,
       "yearEnd": 2026,
-      "keywords": ["MCF", "70e", "18e"],
+      "keywords": [
+        "MCF",
+        "70e",
+        "18e"
+      ],
       "evidence": "https://adef.univ-amu.fr/fr/annuaire/roy-emeline"
     },
     {
@@ -36,16 +76,20 @@
       "parent": "statut",
       "yearStart": 2020,
       "yearEnd": 2024,
-      "keywords": ["ATER"],
+      "keywords": [
+        "ATER"
+      ],
       "evidence": null
     },
-
     {
       "id": "adef",
       "type": "leaf",
       "label": "UR 4671 ADEF — Aix-Marseille Université",
       "parent": "labos",
-      "keywords": ["UR", "ADEF"],
+      "keywords": [
+        "UR",
+        "ADEF"
+      ],
       "evidence": "https://adef.univ-amu.fr/fr"
     },
     {
@@ -53,14 +97,30 @@
       "type": "leaf",
       "label": "UPR PROJEKT — Université de Nîmes (associée)",
       "parent": "labos",
-      "keywords": ["UPR", "PROJEKT"],
+      "keywords": [
+        "UPR",
+        "PROJEKT"
+      ],
       "evidence": "https://projekt.unimes.fr/"
     },
-
-    { "id": "axes", "type": "branch", "label": "Axes / programmes", "parent": "recherche" },
-    { "id": "publications", "type": "branch", "label": "Publications", "parent": "recherche" },
-    { "id": "vie_scientifique", "type": "branch", "label": "Vie scientifique", "parent": "recherche" },
-
+    {
+      "id": "axes",
+      "type": "branch",
+      "label": "Axes / programmes",
+      "parent": "recherche"
+    },
+    {
+      "id": "publications",
+      "type": "branch",
+      "label": "Publications",
+      "parent": "recherche"
+    },
+    {
+      "id": "vie_scientifique",
+      "type": "branch",
+      "label": "Vie scientifique",
+      "parent": "recherche"
+    },
     {
       "id": "axe_didactique",
       "type": "leaf",
@@ -68,7 +128,11 @@
       "parent": "axes",
       "yearStart": 2018,
       "yearEnd": 2026,
-      "keywords": ["TACD", "didactique", "activité"],
+      "keywords": [
+        "TACD",
+        "didactique",
+        "activité"
+      ],
       "evidence": null
     },
     {
@@ -78,28 +142,106 @@
       "parent": "axes",
       "yearStart": 2018,
       "yearEnd": 2026,
-      "keywords": ["créativité", "curriculum"],
+      "keywords": [
+        "créativité",
+        "curriculum"
+      ],
       "evidence": null
     },
-
-    { "id": "acl_70", "type": "branch", "label": "Articles ACL (70e)", "parent": "publications" },
-    { "id": "acl_18", "type": "branch", "label": "Articles ACL (18e)", "parent": "publications" },
-    { "id": "chapitres", "type": "branch", "label": "Chapitres", "parent": "publications" },
-
     {
-  "id": "pub_curj_2024",
-  "type": "leaf",
-  "label": "Curriculum Journal (2024) — disciplinary matrix…",
-  "parent": "acl_18",
-  "year": 2024,
-  "keywords": ["curriculum", "matrice disciplinaire"],
-  "quote": "Roy, É. et McLain, M. (2024). The disciplinary matrix of applied arts and artistic cultures. The Curriculum journal, 36(1), 15-35. https://doi.org/10.1002/curj.251",
-  "summary": "Article ACL (18e). Propose une lecture outillée de la matrice disciplinaire en design/éducation.",
-  "details": ["DOI indexé", "Cadre : curriculum studies", "Méthode : analyse outillée"],
-  "image": "assets/visuels/curj_2024.jpg",
-  "evidence": "https://doi.org/10.1002/curj.251"
-},
-
+      "id": "acl_70",
+      "type": "branch",
+      "label": "Articles ACL (70e)",
+      "parent": "publications",
+      "bibliography": [
+        {
+          "text": "Benelkadi, P.-A. et Roy, É. (2025). L’évolution de la place du langage graphique dans les séquences d’arts plastiques de cycle 4 : une analyse des prescriptions de pratiques numériques de 2010 à 2023. Recherches en didactiques."
+        },
+        {
+          "text": "Roy, É. et Balleydier, N. (2025). Les erreurs opportunes. Cahiers pédagogiques, 602(7), 36-37.",
+          "url": "https://doi.org/10.3917/cape.602.0036"
+        },
+        {
+          "text": "Roy, É., Pasquier, A., Rosso, N. et Rezzi, N. (2025). Influence du dispositif des Cordées de la réussite sur des élèves de 3ᵉ de collège REP : Une analyse des perceptions et des effets sur le développement personnel et l'orientation. La Nouvelle Revue - Éducation et Société Inclusives, 103(2)."
+        },
+        {
+          "text": "Roy, É. et Rowe, A. (2025). The Designer as Mediator: Expanding the Roles in Social Design and Project Facilitation. Art, Design and Communication in Higher Education, online first.",
+          "url": "https://doi.org/10.1386/adch_00116_1"
+        },
+        {
+          "text": "Balleydier, N. et Roy, É. (2025). L’erreur en arts appliqués et cultures artistiques, valorisation et dépassement par la démarche de projet en lycée professionnel. Didactique, 6(1), 93-114.",
+          "url": "https://doi.org/10.37571/2025.0104"
+        },
+        {
+          "text": "Moineau, C. et Roy, É. (2025). Pratiques de design en alternance : mise en regard d’activités formatives. Phronesis, Hors série, Volume 14(HS1), 80-97.",
+          "url": "https://shs.cairn.info/revue-phronesis-2025-hs1-page-80?lang=fr"
+        },
+        {
+          "text": "Roy, É., Moineau, C. et Tortochot, É. (2024). Innover socialement par le design et développer des compétences transformatives au lycée professionnel. Nouveaux cahiers de la recherche en éducation, 26(1), 10–34.",
+          "url": "https://doi.org/10.7202/1113231ar"
+        },
+        {
+          "text": "Roy, É., Thébault-Royet, L., Dalmon, J., Farsy, S. et Moineau, C. (2024). Gestes des professeurs de design lors d'activités de réflexion collective en STD2A. Journal de recherche en éducations artistiques, 3, 62-77.",
+          "url": "https://doi.org/10.26034/vd.jrea.2024.5076"
+        },
+        {
+          "text": "Roy, É. et McLain, M. (2024). The disciplinary matrix of applied arts and artistic cultures. The Curriculum journal, 36(1), 15-35.",
+          "url": "https://doi.org/10.1002/curj.251"
+        },
+        {
+          "text": "Moineau, C., Farsy, S., Tortochot, É. et Roy, É. (2023). Le rapport à l’évaluation dans trois situations d’« éducation à » la conception. Travail et Apprentissages, 26, 160-186.",
+          "url": "https://doi.org/10.3917/ta.026.0160"
+        },
+        {
+          "text": "Roy, É., Tortochot, É. et Moineau, C. (2023). Situation didactique, situation opérationnelle de conception : construction, apports et emprunts théoriques d’une didactique du design. Travail et Apprentissages, 25, 65-89.",
+          "url": "https://doi.org/10.3917/ta.025.0065"
+        },
+        {
+          "text": "Roy, É. (2023). Les représentations de la créativité en arts appliqués d’élèves de lycée professionnel. Didactique, 4(1), 26-49.",
+          "url": "https://doi.org/10.37571/2023.0102"
+        },
+        {
+          "text": "Roy, É. et Sido, X. (2023). L’enseignement des arts appliqués et cultures artistiques en lycée professionnel, une configuration disciplinaire duale et éclatée. Recherches en didactiques, 35, 59-78.",
+          "url": "https://doi.org/10.3917/rdid1.035.0059"
+        },
+        {
+          "text": "Roy, É. (2022). Didactique des arts appliqués en lycée professionnel : l’élaboration de milieux didactiques pensés pour la dévolution. Revue des sciences de l'éducation, 48(1).",
+          "url": "https://doi.org/10.7202/1092603ar"
+        }
+      ]
+    },
+    {
+      "id": "acl_18",
+      "type": "branch",
+      "label": "Articles ACL (18e)",
+      "parent": "publications"
+    },
+    {
+      "id": "chapitres",
+      "type": "branch",
+      "label": "Chapitres",
+      "parent": "publications"
+    },
+    {
+      "id": "pub_curj_2024",
+      "type": "leaf",
+      "label": "Curriculum Journal (2024) — disciplinary matrix…",
+      "parent": "acl_18",
+      "year": 2024,
+      "keywords": [
+        "curriculum",
+        "matrice disciplinaire"
+      ],
+      "quote": "Roy, É. et McLain, M. (2024). The disciplinary matrix of applied arts and artistic cultures. The Curriculum journal, 36(1), 15-35. https://doi.org/10.1002/curj.251",
+      "summary": "Article ACL (18e). Propose une lecture outillée de la matrice disciplinaire en design/éducation.",
+      "details": [
+        "DOI indexé",
+        "Cadre : curriculum studies",
+        "Méthode : analyse outillée"
+      ],
+      "image": "assets/visuels/curj_2024.jpg",
+      "evidence": "https://doi.org/10.1002/curj.251"
+    },
     {
       "id": "gis",
       "type": "leaf",
@@ -107,7 +249,11 @@
       "parent": "vie_scientifique",
       "yearStart": 2025,
       "yearEnd": 2026,
-      "keywords": ["réseau", "édition", "animation"],
+      "keywords": [
+        "réseau",
+        "édition",
+        "animation"
+      ],
       "evidence": "https://gisartseduc.hypotheses.org/"
     },
     {
@@ -115,7 +261,10 @@
       "type": "leaf",
       "label": "Jurys / expertises (sélection)",
       "parent": "vie_scientifique",
-      "keywords": ["jury", "expertise"],
+      "keywords": [
+        "jury",
+        "expertise"
+      ],
       "evidence": null
     },
     {
@@ -123,7 +272,10 @@
       "type": "leaf",
       "label": "Organisation de journées / séminaires (sélection)",
       "parent": "vie_scientifique",
-      "keywords": ["journée d’étude", "séminaire"],
+      "keywords": [
+        "journée d’étude",
+        "séminaire"
+      ],
       "evidence": null
     },
     {
@@ -131,13 +283,23 @@
       "type": "leaf",
       "label": "Encadrements (M2 / doctorat selon dossiers)",
       "parent": "vie_scientifique",
-      "keywords": ["encadrement"],
+      "keywords": [
+        "encadrement"
+      ],
       "evidence": null
     },
-
-    { "id": "ens_sc_edu", "type": "branch", "label": "Sciences de l’éducation", "parent": "enseignement" },
-    { "id": "ens_design", "type": "branch", "label": "Design", "parent": "enseignement" },
-
+    {
+      "id": "ens_sc_edu",
+      "type": "branch",
+      "label": "Sciences de l’éducation",
+      "parent": "enseignement"
+    },
+    {
+      "id": "ens_design",
+      "type": "branch",
+      "label": "Design",
+      "parent": "enseignement"
+    },
     {
       "id": "master_meef",
       "type": "leaf",
@@ -145,7 +307,11 @@
       "parent": "ens_sc_edu",
       "yearStart": 2020,
       "yearEnd": 2026,
-      "keywords": ["CAPET/CAPLP", "problématisation", "mémoire"],
+      "keywords": [
+        "CAPET/CAPLP",
+        "problématisation",
+        "mémoire"
+      ],
       "evidence": null
     },
     {
@@ -155,7 +321,9 @@
       "parent": "ens_sc_edu",
       "yearStart": 2024,
       "yearEnd": 2026,
-      "keywords": ["doctorat"],
+      "keywords": [
+        "doctorat"
+      ],
       "evidence": null
     },
     {
@@ -165,7 +333,10 @@
       "parent": "ens_design",
       "yearStart": 2020,
       "yearEnd": 2026,
-      "keywords": ["méthodes", "projet"],
+      "keywords": [
+        "méthodes",
+        "projet"
+      ],
       "evidence": null
     },
     {
@@ -175,7 +346,10 @@
       "parent": "ens_design",
       "yearStart": 2020,
       "yearEnd": 2026,
-      "keywords": ["DSAA", "recherche"],
+      "keywords": [
+        "DSAA",
+        "recherche"
+      ],
       "evidence": null
     }
   ]
