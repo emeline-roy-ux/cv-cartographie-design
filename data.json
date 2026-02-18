@@ -87,14 +87,17 @@
     { "id": "chapitres", "type": "branch", "label": "Chapitres", "parent": "publications" },
 
     {
-      "id": "pub_curj_2024",
-      "type": "leaf",
-      "label": "ACL — Curriculum Journal (2024) — disciplinary matrix…",
-      "parent": "acl_18",
-      "year": 2024,
-      "keywords": ["curriculum", "matrice disciplinaire"],
-      "evidence": "https://doi.org/10.1002/curj.251"
-    },
+  "id": "pub_curj_2024",
+  "type": "leaf",
+  "label": "ACL — Curriculum Journal (2024) — disciplinary matrix…",
+  "parent": "acl_18",
+  "year": 2024,
+  "keywords": ["curriculum", "matrice disciplinaire"],
+  "summary": "Article ACL (18e). Propose une lecture outillée de la matrice disciplinaire en design/éducation.",
+  "details": ["DOI indexé", "Cadre : curriculum studies", "Méthode : analyse outillée"],
+  "image": "assets/visuels/curj_2024.jpg",
+  "evidence": "https://doi.org/10.1002/curj.251"
+},
 
     {
       "id": "gis",
