@@ -2,260 +2,155 @@
   "nodes": [
     {
       "id": "profil",
-      "type": "profil",
-      "zone": "profil",
-      "label": "Profil — Parcours & ancrages",
+      "type": "root",
+      "label": "Profil",
       "yearStart": 2015,
       "yearEnd": 2026,
-      "keywords": ["design", "didactique", "recherche-création", "numérique"],
+      "keywords": ["design", "sciences de l’éducation", "numérique"],
+      "evidence": null
+    },
+
+    { "id": "statut", "type": "branch", "label": "Statut", "parent": "profil" },
+    { "id": "labos", "type": "branch", "label": "Laboratoires & rattachements", "parent": "profil" },
+    { "id": "formation", "type": "branch", "label": "Formation & diplômes", "parent": "profil" },
+    { "id": "experiences", "type": "branch", "label": "Expériences / fonctions", "parent": "profil" },
+
+    {
+      "id": "mcf",
+      "type": "leaf",
+      "label": "MCF — AMU / INSPÉ (70e) — qualifiée 18e",
+      "parent": "statut",
+      "yearStart": 2024,
+      "yearEnd": 2026,
+      "keywords": ["MCF", "70e", "18e"],
       "evidence": "https://adef.univ-amu.fr/fr/annuaire/roy-emeline"
+    },
+    {
+      "id": "ater",
+      "type": "leaf",
+      "label": "ATER — AMU / INSPÉ",
+      "parent": "statut",
+      "yearStart": 2020,
+      "yearEnd": 2024,
+      "keywords": ["ATER"],
+      "evidence": null
     },
 
     {
-      "id": "inst_adef",
-      "type": "institution",
-      "zone": "profil",
+      "id": "adef",
+      "type": "leaf",
       "label": "UR 4671 ADEF — Aix-Marseille Université",
-      "keywords": ["laboratoire", "sciences de l’éducation"],
+      "parent": "labos",
+      "keywords": ["UR", "ADEF"],
       "evidence": "https://adef.univ-amu.fr/fr"
     },
     {
-      "id": "inst_projekt",
-      "type": "institution",
-      "zone": "profil",
+      "id": "projekt",
+      "type": "leaf",
       "label": "UPR PROJEKT — Université de Nîmes (associée)",
-      "keywords": ["design", "recherche"],
+      "parent": "labos",
+      "keywords": ["UPR", "PROJEKT"],
       "evidence": "https://projekt.unimes.fr/"
     },
-    {
-      "id": "pos_ater",
-      "type": "position",
-      "zone": "profil",
-      "label": "ATER — AMU / INSPÉ",
-      "yearStart": 2020,
-      "yearEnd": 2024,
-      "keywords": ["enseignement", "recherche"]
-    },
-    {
-      "id": "pos_mcf",
-      "type": "position",
-      "zone": "profil",
-      "label": "MCF — AMU / INSPÉ (70e) — qualifiée 18e",
-      "yearStart": 2024,
-      "yearEnd": 2026,
-      "keywords": ["maîtresse de conférences", "design", "éducation"]
-    },
+
+    { "id": "recherche", "type": "branch", "label": "Recherche", "parent": "profil" },
+
+    { "id": "axes", "type": "branch", "label": "Axes / programmes", "parent": "recherche" },
+    { "id": "publications", "type": "branch", "label": "Publications", "parent": "recherche" },
+    { "id": "vie_scientifique", "type": "branch", "label": "Vie scientifique", "parent": "recherche" },
 
     {
-      "id": "zone_publications",
-      "type": "hub",
-      "zone": "publications",
-      "label": "Publications — ACL (sélection probante)",
-      "keywords": ["DOI", "ACL", "70e/18e"]
+      "id": "axe_didactique",
+      "type": "leaf",
+      "label": "Axe — Activité enseignante & didactique du design",
+      "parent": "axes",
+      "yearStart": 2018,
+      "yearEnd": 2026,
+      "keywords": ["TACD", "didactique", "activité"],
+      "evidence": null
     },
     {
+      "id": "axe_creativite",
+      "type": "leaf",
+      "label": "Axe — Créativité, références, curriculum",
+      "parent": "axes",
+      "yearStart": 2018,
+      "yearEnd": 2026,
+      "keywords": ["créativité", "curriculum"],
+      "evidence": null
+    },
+
+    { "id": "acl_70", "type": "branch", "label": "Articles ACL (70e)", "parent": "publications" },
+    { "id": "acl_18", "type": "branch", "label": "Articles ACL (18e)", "parent": "publications" },
+    { "id": "chapitres", "type": "branch", "label": "Chapitres", "parent": "publications" },
+
+    {
       "id": "pub_curj_2024",
-      "type": "publication",
-      "zone": "publications",
-      "label": "Curriculum Journal (2024) — disciplinary matrix…",
+      "type": "leaf",
+      "label": "ACL — Curriculum Journal (2024) — disciplinary matrix…",
+      "parent": "acl_18",
       "year": 2024,
       "keywords": ["curriculum", "matrice disciplinaire"],
       "evidence": "https://doi.org/10.1002/curj.251"
     },
-    {
-      "id": "pub_rse_2022",
-      "type": "publication",
-      "zone": "publications",
-      "label": "Revue des sciences de l’éducation (2022) — didactique des arts appliqués…",
-      "year": 2022,
-      "keywords": ["LP", "milieu didactique", "dévolution"],
-      "evidence": "https://doi.org/10.7202/1092603ar"
-    },
-    {
-      "id": "pub_ta_2023a",
-      "type": "publication",
-      "zone": "publications",
-      "label": "Travail & Apprentissages (2023) — situation de conception…",
-      "year": 2023,
-      "keywords": ["conception", "didactique du design"],
-      "evidence": "https://doi.org/10.3917/ta.025.0065"
-    },
-    {
-      "id": "pub_ta_2023b",
-      "type": "publication",
-      "zone": "publications",
-      "label": "Travail & Apprentissages (2023) — rapport à l’évaluation…",
-      "year": 2023,
-      "keywords": ["évaluation", "LP"],
-      "evidence": "https://doi.org/10.3917/ta.026.0160"
-    },
-    {
-      "id": "pub_jrea_2024",
-      "type": "publication",
-      "zone": "publications",
-      "label": "JREA (2024) — gestes des professeurs de design…",
-      "year": 2024,
-      "keywords": ["gestes professoraux", "STD2A"],
-      "evidence": "https://doi.org/10.26034/vd.jrea.2024.5076"
-    },
-    {
-      "id": "pub_ncre_2024",
-      "type": "publication",
-      "zone": "publications",
-      "label": "NCRÉ (2024) — innover socialement par le design…",
-      "year": 2024,
-      "keywords": ["design social", "compétences transformatives"],
-      "evidence": "https://doi.org/10.7202/1113231ar"
-    },
-    {
-      "id": "pub_rd_2023",
-      "type": "publication",
-      "zone": "publications",
-      "label": "Recherches en didactiques (2023) — enseignement des arts appliqués…",
-      "year": 2023,
-      "keywords": ["configuration disciplinaire", "LP"],
-      "evidence": "https://doi.org/10.3917/rdid1.035.0059"
-    },
-    {
-      "id": "pub_deed_2025",
-      "type": "publication",
-      "zone": "publications",
-      "label": "DEED (2025) — ICC et créativité…",
-      "year": 2025,
-      "keywords": ["ICC", "créativité", "LP"],
-      "evidence": "https://doi.org/10.71585/deed.i2.15"
-    },
-    {
-      "id": "pub_adch_2025",
-      "type": "publication",
-      "zone": "publications",
-      "label": "ADCH (2025) — Designer as Mediator…",
-      "year": 2025,
-      "keywords": ["médiation", "design social"],
-      "evidence": "https://doi.org/10.1386/adch_00116_1"
-    },
 
     {
-      "id": "zone_recherche",
-      "type": "hub",
-      "zone": "recherche",
-      "label": "Activités de recherche — encadrement, jurys, organisation",
-      "keywords": ["animation scientifique", "encadrement", "jury"]
-    },
-    {
-      "id": "axe1",
-      "type": "axe",
-      "zone": "recherche",
-      "label": "Axe — Activité enseignante & didactique du design",
-      "yearStart": 2018,
-      "yearEnd": 2026,
-      "keywords": ["TACD", "interactions", "gestes"]
-    },
-    {
-      "id": "axe2",
-      "type": "axe",
-      "zone": "recherche",
-      "label": "Axe — Créativité, références, curriculum",
-      "yearStart": 2018,
-      "yearEnd": 2026,
-      "keywords": ["créativité", "références", "curriculum"]
-    },
-    {
-      "id": "act_jury",
-      "type": "research_activity",
-      "zone": "recherche",
-      "label": "Jurys / expertises (sélection)",
-      "yearStart": 2022,
-      "yearEnd": 2026,
-      "keywords": ["jury", "évaluation scientifique"]
-    },
-    {
-      "id": "act_org",
-      "type": "research_activity",
-      "zone": "recherche",
-      "label": "Organisation de journées / séminaires (sélection)",
-      "yearStart": 2022,
-      "yearEnd": 2026,
-      "keywords": ["séminaire", "journée d’étude", "édition"]
-    },
-    {
-      "id": "reseau_gis",
-      "type": "reseau",
-      "zone": "recherche",
-      "label": "GIS Arts & Éducation (animation)",
+      "id": "gis",
+      "type": "leaf",
+      "label": "GIS Arts & Éducation — animation / Hypothèses",
+      "parent": "vie_scientifique",
       "yearStart": 2025,
       "yearEnd": 2026,
-      "keywords": ["réseau", "Hypothèses"],
+      "keywords": ["réseau", "édition", "animation"],
       "evidence": "https://gisartseduc.hypotheses.org/"
     },
+    { "id": "jurys", "type": "leaf", "label": "Jurys / expertises (sélection)", "parent": "vie_scientifique", "keywords": ["jury", "expertise"], "evidence": null },
+    { "id": "orga", "type": "leaf", "label": "Organisation de journées / séminaires (sélection)", "parent": "vie_scientifique", "keywords": ["journée d’étude", "séminaire"], "evidence": null },
+    { "id": "encadrement", "type": "leaf", "label": "Encadrements (M2 / doctorat selon dossiers)", "parent": "vie_scientifique", "keywords": ["encadrement"], "evidence": null },
+
+    { "id": "enseignement", "type": "branch", "label": "Enseignements", "parent": "profil" },
+    { "id": "ens_sc_edu", "type": "branch", "label": "Sciences de l’éducation", "parent": "enseignement" },
+    { "id": "ens_design", "type": "branch", "label": "Design", "parent": "enseignement" },
 
     {
-      "id": "zone_enseignement",
-      "type": "hub",
-      "zone": "enseignement",
-      "label": "Enseignements — du Bac+1 au Doctorat",
-      "keywords": ["licence", "master", "doctorat"]
-    },
-    {
-      "id": "ens_b1b3",
-      "type": "teaching",
-      "zone": "enseignement",
-      "label": "Bac+1–3 — outils du projet / culture design / méthodes",
+      "id": "master_meef",
+      "type": "leaf",
+      "label": "Master MEEF Design — concours / didactique / mémoire",
+      "parent": "ens_sc_edu",
       "yearStart": 2020,
       "yearEnd": 2026,
-      "keywords": ["méthodes", "projet", "culture design"]
+      "keywords": ["CAPET/CAPLP", "problématisation", "mémoire"],
+      "evidence": null
     },
     {
-      "id": "ens_m1m2",
-      "type": "teaching",
-      "zone": "enseignement",
-      "label": "Bac+4–5 — Master MEEF Design : concours, didactique, recherche",
-      "yearStart": 2020,
-      "yearEnd": 2026,
-      "keywords": ["CAPET/CAPLP", "didactique", "mémoire"]
-    },
-    {
-      "id": "ens_doctorat",
-      "type": "teaching",
-      "zone": "enseignement",
-      "label": "Doctorat — encadrement / co-encadrement (selon dossiers)",
+      "id": "doctorat",
+      "type": "leaf",
+      "label": "Doctorat — séminaires / encadrements (selon dossiers)",
+      "parent": "ens_sc_edu",
       "yearStart": 2024,
       "yearEnd": 2026,
-      "keywords": ["doctorat", "encadrement"]
+      "keywords": ["doctorat"],
+      "evidence": null
+    },
+    {
+      "id": "licence",
+      "type": "leaf",
+      "label": "Bac+1–3 — méthodes du projet / culture design",
+      "parent": "ens_design",
+      "yearStart": 2020,
+      "yearEnd": 2026,
+      "keywords": ["méthodes", "projet"],
+      "evidence": null
+    },
+    {
+      "id": "dsaa",
+      "type": "leaf",
+      "label": "Bac+4–5 — DSAA / Master-DSAA (selon dispositifs)",
+      "parent": "ens_design",
+      "yearStart": 2020,
+      "yearEnd": 2026,
+      "keywords": ["DSAA", "recherche"],
+      "evidence": null
     }
-  ],
-
-  "links": [
-    { "source": "profil", "target": "inst_adef", "relation": "ancre" },
-    { "source": "profil", "target": "inst_projekt", "relation": "associe" },
-    { "source": "profil", "target": "pos_ater", "relation": "parcours" },
-    { "source": "profil", "target": "pos_mcf", "relation": "parcours" },
-
-    { "source": "zone_publications", "target": "pub_curj_2024", "relation": "contient" },
-    { "source": "zone_publications", "target": "pub_rse_2022", "relation": "contient" },
-    { "source": "zone_publications", "target": "pub_ta_2023a", "relation": "contient" },
-    { "source": "zone_publications", "target": "pub_ta_2023b", "relation": "contient" },
-    { "source": "zone_publications", "target": "pub_jrea_2024", "relation": "contient" },
-    { "source": "zone_publications", "target": "pub_ncre_2024", "relation": "contient" },
-    { "source": "zone_publications", "target": "pub_rd_2023", "relation": "contient" },
-    { "source": "zone_publications", "target": "pub_deed_2025", "relation": "contient" },
-    { "source": "zone_publications", "target": "pub_adch_2025", "relation": "contient" },
-
-    { "source": "zone_recherche", "target": "axe1", "relation": "structure" },
-    { "source": "zone_recherche", "target": "axe2", "relation": "structure" },
-    { "source": "zone_recherche", "target": "act_jury", "relation": "inclut" },
-    { "source": "zone_recherche", "target": "act_org", "relation": "inclut" },
-    { "source": "zone_recherche", "target": "reseau_gis", "relation": "s_appuie_sur" },
-
-    { "source": "zone_enseignement", "target": "ens_b1b3", "relation": "contient" },
-    { "source": "zone_enseignement", "target": "ens_m1m2", "relation": "contient" },
-    { "source": "zone_enseignement", "target": "ens_doctorat", "relation": "contient" },
-
-    { "source": "axe1", "target": "pub_jrea_2024", "relation": "soutient" },
-    { "source": "axe2", "target": "pub_curj_2024", "relation": "soutient" },
-    { "source": "axe2", "target": "pub_deed_2025", "relation": "soutient" },
-
-    { "source": "pos_mcf", "target": "zone_enseignement", "relation": "porte" },
-    { "source": "pos_mcf", "target": "zone_recherche", "relation": "porte" }
   ]
 }
