@@ -10,7 +10,7 @@
   .grid { display:grid; grid-template-columns:1.6fr 1fr; gap:18px; align-items:start; }
   .card { background:#fff; padding:18px; border-radius:10px; box-shadow:0 0 0 1px #ddd; }
   #viz { width:100%; height:560px; background:#fff; border-radius:10px; box-shadow:0 0 0 1px #ddd; overflow:hidden; }
-  .meta { font-size:13px; color:#666; margin:6px 0 0 0; }
+  .meta { font-size:13px; color:#666; margin:6px 0 0 0; max-width: 980px; line-height:1.6; }
   .tag { display:inline-block; padding:2px 8px; border:1px solid #ddd; border-radius:999px; margin:4px 6px 0 0; font-size:12px; color:#444; }
   button { border:1px solid #ddd; background:#fff; padding:8px 10px; border-radius:10px; cursor:pointer; }
   button:hover { background:#fafafa; }
@@ -28,8 +28,9 @@
 
 <div class="card" style="margin-bottom:18px;">
   <h1 style="margin:0 0 8px 0; font-size:28px;">CV cartographique — dispositif de recherche-création</h1>
-  <p class="meta" style="max-width:980px; line-height:1.6;">
-    Prototype contrôlé : profil · publications · recherche · enseignements.
+  <p class="meta">
+    Atlas contrôlé (zones stables) : profil · publications · recherche · enseignements.
+    Les relations (liens) sont révélées localement à la demande (instrument d’enquête).
     Dossier académique complet : disponible sur demande.
   </p>
   <p class="meta">
@@ -46,7 +47,7 @@
       <strong>Fiche</strong>
       <button id="resetBtn" type="button">Réinitialiser</button>
     </div>
-    <p class="meta" id="hint">Survol = résumé · clic = déployer</p>
+    <p class="meta" id="hint">Survol = fiche + liens locaux · clic = déployer la branche</p>
     <div id="panel"></div>
   </div>
 </div>
@@ -69,12 +70,12 @@
     .attr("width", W)
     .attr("height", H);
 
-  // Fond de zones (dans le SVG, en arrière-plan)
+  // -------------------- Fonds + titres de zones (atlas)
   const zones = [
-    {label:"PROFIL", x:0,   y:0},
-    {label:"PUBLICATIONS", x:0.5, y:0},
-    {label:"RECHERCHE", x:0,   y:0.5},
-    {label:"ENSEIGNEMENTS", x:0.5, y:0.5}
+    {key:"profil", label:"PROFIL", x:0,   y:0},
+    {key:"publications", label:"PUBLICATIONS", x:0.5, y:0},
+    {key:"recherche", label:"RECHERCHE", x:0,   y:0.5},
+    {key:"enseignement", label:"ENSEIGNEMENTS", x:0.5, y:0.5}
   ];
 
   svg.append("g")
@@ -97,16 +98,16 @@
     .attr("font-size", 12)
     .attr("fill", "#999");
 
+  // -------------------- Groupe pour le graphe (zoom/pan)
   const g = svg.append("g");
 
-  // zoom / pan
   svg.call(
     d3.zoom()
       .scaleExtent([0.6, 2.5])
       .on("zoom", (event) => g.attr("transform", event.transform))
   );
 
-  // Index des voisins (déploiement progressif)
+  // -------------------- Index des voisins (déploiement progressif)
   const neighbors = {};
   data.links.forEach(l => {
     neighbors[l.source] ??= new Set();
@@ -115,19 +116,20 @@
     neighbors[l.target].add(l.source);
   });
 
-  // Vue macro : afficher aussi les hubs (sinon publications/enseignement ne se voient pas)
+  // -------------------- Vue macro : hubs visibles
   const macroTypes = new Set(["profil","axe","institution","reseau","position","hub"]);
   let visible = new Set(data.nodes.filter(n => macroTypes.has(n.type)).map(n => n.id));
 
-  // Liens
+  // -------------------- Liens (invisibles par défaut, révélés localement)
   const link = g.append("g")
     .selectAll("line")
     .data(data.links)
     .join("line")
-    .attr("stroke", "#ddd")
-    .attr("stroke-width", 1.2);
+    .attr("stroke", "#d2d2d2")
+    .attr("stroke-width", 1.2)
+    .attr("opacity", 0);
 
-  // Nœuds
+  // -------------------- Nœuds
   const node = g.append("g")
     .selectAll("circle")
     .data(data.nodes)
@@ -138,7 +140,9 @@
     .attr("stroke-width", 1.2)
     .style("cursor", "pointer");
 
-  // Labels
+  // -------------------- Labels
+  // Choix volontaire : labels macro visibles, labels fins au survol via la fiche
+  // (Sinon superposition). Vous pourrez affiner plus tard.
   const label = g.append("g")
     .selectAll("text")
     .data(data.nodes)
@@ -149,16 +153,17 @@
     .attr("dy", 4)
     .attr("fill", "#222");
 
-  // Forces par zones (quadrants nets)
+  // -------------------- Forces par zones (quadrants nets) + lien sans attraction
   const zx = { profil:0.25, publications:0.75, recherche:0.25, enseignement:0.75 };
   const zy = { profil:0.25, publications:0.25, recherche:0.75, enseignement:0.75 };
 
   const sim = d3.forceSimulation(data.nodes)
-    .force("link", d3.forceLink(data.links).id(d => d.id).distance(55).strength(0.08))
-    .force("charge", d3.forceManyBody().strength(-160))
-    .force("x", d3.forceX(d => W * (zx[d.zone] ?? 0.5)).strength(0.8))
-    .force("y", d3.forceY(d => H * (zy[d.zone] ?? 0.5)).strength(0.8))
-    .force("collide", d3.forceCollide(d => d.type === "hub" ? 26 : 18).iterations(2));
+    // liens sans attraction (atlas stable)
+    .force("link", d3.forceLink(data.links).id(d => d.id).distance(55).strength(0.0))
+    .force("charge", d3.forceManyBody().strength(-170))
+    .force("x", d3.forceX(d => W * (zx[d.zone] ?? 0.5)).strength(0.85))
+    .force("y", d3.forceY(d => H * (zy[d.zone] ?? 0.5)).strength(0.85))
+    .force("collide", d3.forceCollide(d => d.type === "hub" ? 28 : 18).iterations(2));
 
   sim.on("tick", () => {
     link
@@ -172,9 +177,11 @@
       .attr("x", d => d.x).attr("y", d => d.y);
   });
 
+  // -------------------- Visibilité
   function updateVisibility() {
     node.attr("display", d => visible.has(d.id) ? null : "none");
     label.attr("display", d => visible.has(d.id) ? null : "none");
+    // liens affichés seulement si endpoints visibles (en plus de l’opacité locale)
     link.attr("display", d => {
       const sid = d.source.id || d.source;
       const tid = d.target.id || d.target;
@@ -182,6 +189,20 @@
     });
   }
 
+  // -------------------- Liens locaux (instrument d’enquête)
+  function showLocalLinks(focusId) {
+    link.attr("opacity", d => {
+      const sid = d.source.id || d.source;
+      const tid = d.target.id || d.target;
+      return (sid === focusId || tid === focusId) ? 1 : 0;
+    });
+  }
+
+  function hideLinks() {
+    link.attr("opacity", 0);
+  }
+
+  // -------------------- Panneau
   function renderPanel(d) {
     hintEl.textContent = "";
     const tags = (d.keywords || []).map(k => `<span class="tag">${k}</span>`).join("");
@@ -200,21 +221,39 @@
   function reset() {
     visible = new Set(data.nodes.filter(n => macroTypes.has(n.type)).map(n => n.id));
     updateVisibility();
+    hideLinks();
     panelEl.innerHTML = "";
-    hintEl.textContent = "Survol = résumé · clic = déployer";
+    hintEl.textContent = "Survol = fiche + liens locaux · clic = déployer la branche";
   }
 
+  // -------------------- Interactions
   node
-    .on("mouseover", (event, d) => renderPanel(d))
+    .on("mouseover", (event, d) => {
+      renderPanel(d);
+      showLocalLinks(d.id);
+    })
+    .on("mouseout", () => {
+      // on laisse la fiche en place, mais on retire les liens (réduit le bruit)
+      hideLinks();
+    })
     .on("click", (event, d) => {
+      // déployer (progressive disclosure)
       visible.add(d.id);
       (neighbors[d.id] || []).forEach(id => visible.add(id));
       updateVisibility();
+      showLocalLinks(d.id);
+
+      // Ouvrir preuve uniquement sur double-clic implicite ? (ici : clic = déploiement seulement)
+      // On évite d’ouvrir une nouvelle page à chaque clic d’exploration.
+    })
+    .on("dblclick", (event, d) => {
+      // double-clic = ouvrir la preuve (si disponible)
       if (d.evidence) window.open(d.evidence, "_blank");
     });
 
   resetBtnEl.addEventListener("click", reset);
 
+  // -------------------- Drag
   node.call(d3.drag()
     .on("start", (event, d) => {
       if (!event.active) sim.alphaTarget(0.25).restart();
