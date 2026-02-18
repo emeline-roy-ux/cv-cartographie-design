@@ -223,11 +223,15 @@
 
   const g = svg.append("g");
 
-  svg.call(
-    d3.zoom()
-      .scaleExtent([0.6, 3])
-      .on("zoom", (event) => g.attr("transform", event.transform))
-  );
+  const zoom = d3.zoom()
+  .scaleExtent([0.6, 3])
+  .filter((event) => {
+    const t = event.target;
+    return !(t && (t.tagName === "circle" || t.tagName === "text"));
+  })
+  .on("zoom", (event) => g.attr("transform", event.transform));
+
+svg.call(zoom);
 
   // build nodes/links (parent -> link)
   const nodes = data.nodes.map(d => ({...d}));
@@ -345,6 +349,7 @@
   nodeSel
     .on("mouseover", (event, d) => renderPanel(d))
     .on("click", (event, d) => {
+      event.stopPropagation();
       const neigh = neighbors[d.id] ? Array.from(neighbors[d.id]) : [];
       const allVisible = neigh.every(id => visible.has(id));
 
@@ -359,6 +364,7 @@
       updateVisibility();
     })
     .on("dblclick", (event, d) => {
+      event.stopPropagation();
       if (d.evidence) window.open(d.evidence, "_blank");
     });
 
