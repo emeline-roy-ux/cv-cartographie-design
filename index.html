@@ -6,251 +6,180 @@
 <title>Cartographie de parcours — Design & Recherche</title>
 
 <style>
-  body { font-family: system-ui, sans-serif; margin: 40px; background: #f5f5f5; color: #222; }
-  h1 { font-size: 26px; margin: 0 0 12px 0; }
-  p { max-width: 900px; line-height: 1.6; margin: 0 0 12px 0; }
-  .grid { display: grid; grid-template-columns: 1.6fr 1fr; gap: 18px; align-items: start; }
-  .card { background: #fff; padding: 18px; border-radius: 10px; box-shadow: 0 0 0 1px #ddd; }
-  #viz { width: 100%; height: 560px; border-radius: 10px; overflow: hidden; background: #fff; box-shadow: 0 0 0 1px #ddd; }
-  .meta { font-size: 13px; color: #666; }
-  .tag { display:inline-block; padding: 2px 8px; border: 1px solid #ddd; border-radius: 999px; margin: 4px 6px 0 0; font-size: 12px; color:#444; }
-  a { color: inherit; }
-  button { border:1px solid #ddd; background:#fff; padding:8px 10px; border-radius:10px; cursor:pointer; }
-  button:hover { background:#fafafa; }
+body { font-family: system-ui, sans-serif; margin: 40px; background:#f5f5f5; color:#222; }
+h1 { font-size: 26px; margin: 0 0 12px 0; }
+p { max-width: 900px; line-height: 1.6; }
+.grid { display:grid; grid-template-columns:1.6fr 1fr; gap:18px; }
+.card { background:#fff; padding:18px; border-radius:10px; box-shadow:0 0 0 1px #ddd; }
+#viz { width:100%; height:560px; background:#fff; border-radius:10px; box-shadow:0 0 0 1px #ddd; }
+.meta { font-size:13px; color:#666; }
+.tag { display:inline-block; padding:2px 8px; border:1px solid #ddd; border-radius:999px; margin:4px 6px 0 0; font-size:12px; }
+button { border:1px solid #ddd; background:#fff; padding:8px 10px; border-radius:10px; cursor:pointer; }
 
-  /* Mobile : on passe en colonne */
-  @media (max-width: 900px) {
-    body { margin: 18px; }
-    .grid { grid-template-columns: 1fr; }
-    #viz { height: 520px; }
-  }
+@media (max-width:900px){
+  body { margin:18px; }
+  .grid { grid-template-columns:1fr; }
+  #viz { height:520px; }
+}
 </style>
 </head>
 
 <body>
 
 <div class="card" style="margin-bottom:18px;">
-  <h1>Dispositif cartographique — Parcours scientifique en design</h1>
-  <p>
-    Ce site constitue un dispositif expérimental de recherche-création : il propose une cartographie
-    relationnelle (axes / productions / enseignements / responsabilités) et met en visibilité une maîtrise
-    formelle, systémique et numérique. Le PDF académique demeure le document de référence.
-  </p>
+<h1>Dispositif cartographique — Parcours scientifique en design</h1>
+<p>Cartographie relationnelle expérimentale (prototype contrôlé). Le dossier académique complet demeure la référence.</p>
 
-  <p class="meta">
-    Interaction : déplacer les nœuds · survol = résumé · clic = déployer une branche (et ouvrir une ressource si disponible)
-  </p>
-
-  <p class="meta">
-    <a href="methodologie.html">Méthodologie du dispositif</a>
-    ·
-    <a href="https://www.linkedin.com/in/emeline-roy-141a7728/" target="_blank" rel="noopener">LinkedIn</a>
-    · Dossier académique complet : disponible sur demande
-  </p>
+<p class="meta">
+<a href="methodologie.html">Méthodologie</a> ·
+<a href="https://www.linkedin.com/in/emeline-roy-141a7728/" target="_blank">LinkedIn</a> ·
+Dossier complet : sur demande
+</p>
 </div>
 
 <div class="grid">
-  <div id="viz"></div>
+<div id="viz"></div>
 
-  <div class="card">
-    <div style="display:flex; gap:10px; align-items:center; justify-content:space-between;">
-      <strong>Fiche</strong>
-      <button id="resetBtn" type="button">Réinitialiser</button>
-    </div>
-    <p class="meta" id="hint">Survolez un nœud pour afficher ses métadonnées. Cliquez pour déployer sa branche.</p>
-    <div id="panel"></div>
-  </div>
+<div class="card">
+<strong>Fiche</strong>
+<button id="resetBtn">Réinitialiser</button>
+<p class="meta" id="hint">Survol = résumé · clic = déployer</p>
+<div id="panel"></div>
+</div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
 <script>
-(async function() {
-  const data = await fetch("data.json").then(r => r.json());
+(async function(){
 
-  const vizEl = document.getElementById("viz");
-  const width = vizEl.clientWidth;
-  const height = vizEl.clientHeight;
+const data = await fetch("data.json").then(r=>r.json());
 
-  const svg = d3.select("#viz").append("svg")
-    .attr("width", width)
-    .attr("height", height);
+const width = document.getElementById("viz").clientWidth;
+const height = document.getElementById("viz").clientHeight;
 
-  const g = svg.append("g");
+const svg = d3.select("#viz").append("svg")
+.attr("width", width)
+.attr("height", height);
 
-  // zoom/pan
-  svg.call(
-    d3.zoom()
-      .scaleExtent([0.6, 2.5])
-      .on("zoom", (event) => g.attr("transform", event.transform))
-  );
+const g = svg.append("g");
 
-  // --- Déploiement progressif (focus + context) -----------------------------
+svg.call(d3.zoom().scaleExtent([0.6,2.5]).on("zoom", e => g.attr("transform", e.transform)));
 
-  // Index des voisins à partir des liens (source/target sont des ids dans le JSON)
-  const neighbors = {};
-  data.links.forEach(l => {
-    neighbors[l.source] ??= new Set();
-    neighbors[l.target] ??= new Set();
-    neighbors[l.source].add(l.target);
-    neighbors[l.target].add(l.source);
-  });
 
-  // Vue macro : nœuds structurants affichés au départ
-  // (adapter la liste si vous voulez un autre "niveau 0")
-  const macroTypes = new Set(["profil", "axe", "institution", "reseau", "position"]);
-  let visible = new Set(
-    data.nodes.filter(n => macroTypes.has(n.type)).map(n => n.id)
-  );
+// ---------- voisins (déploiement progressif)
+const neighbors = {};
+data.links.forEach(l=>{
+  neighbors[l.source] ??= new Set();
+  neighbors[l.target] ??= new Set();
+  neighbors[l.source].add(l.target);
+  neighbors[l.target].add(l.source);
+});
 
-  // --------------------------------------------------------------------------
+const macroTypes = new Set(["profil","axe","institution","reseau","position"]);
+let visible = new Set(data.nodes.filter(n=>macroTypes.has(n.type)).map(n=>n.id));
 
-  const link = g.append("g")
-    .selectAll("line")
-    .data(data.links)
-    .join("line")
-    .attr("stroke", "#cfcfcf")
-    .attr("stroke-width", 1.2);
 
-  const node = g.append("g")
-    .selectAll("circle")
-    .data(data.nodes)
-    .join("circle")
-    .attr("r", d => d.type === "axe" ? 16 : (d.type === "profil" ? 14 : 10))
-    .attr("stroke", "#666")
-    .attr("stroke-width", 1)
-    .attr("fill", "#fff")
-    .style("cursor", "pointer");
+// ---------- liens
+const link = g.selectAll("line")
+.data(data.links)
+.join("line")
+.attr("stroke","#ccc");
 
-  const label = g.append("g")
-    .selectAll("text")
-    .data(data.nodes)
-    .join("text")
-    .text(d => d.label)
-    .attr("font-size", 12)
-    .attr("dx", 14)
-    .attr("dy", 4)
-    .attr("fill", "#222");
 
-  const sim = d3.forceSimulation(data.nodes)
-   const zoneX = {
-  profil: width * 0.25,
-  publications: width * 0.75,
-  recherche: width * 0.25,
-  enseignement: width * 0.75
-};
+// ---------- noeuds
+const node = g.selectAll("circle")
+.data(data.nodes)
+.join("circle")
+.attr("r", d=> d.type==="axe"?16:10)
+.attr("fill","#fff")
+.attr("stroke","#666")
+.style("cursor","pointer");
 
-const zoneY = {
-  profil: height * 0.25,
-  publications: height * 0.25,
-  recherche: height * 0.75,
-  enseignement: height * 0.75
-};
 
-const zoneX = {
-  profil: width * 0.25,
-  publications: width * 0.75,
-  recherche: width * 0.25,
-  enseignement: width * 0.75
-};
+// ---------- labels
+const label = g.selectAll("text")
+.data(data.nodes)
+.join("text")
+.text(d=>d.label)
+.attr("font-size",12)
+.attr("dx",14)
+.attr("dy",4);
 
-const zoneY = {
-  profil: height * 0.25,
-  publications: height * 0.25,
-  recherche: height * 0.75,
-  enseignement: height * 0.75
-};
+
+// ---------- forces par zones
+const zoneX = { profil:.25, publications:.75, recherche:.25, enseignement:.75 };
+const zoneY = { profil:.25, publications:.25, recherche:.75, enseignement:.75 };
 
 const sim = d3.forceSimulation(data.nodes)
-  .force("link", d3.forceLink(data.links).id(d => d.id).distance(90))
-  .force("charge", d3.forceManyBody().strength(-220))
-  .force("x", d3.forceX(d => zoneX[d.zone] || width/2).strength(0.25))
-  .force("y", d3.forceY(d => zoneY[d.zone] || height/2).strength(0.25))
-  .force("collide", d3.forceCollide().radius(d => (d.type === "axe" ? 26 : 16)));
+.force("link", d3.forceLink(data.links).id(d=>d.id).distance(90))
+.force("charge", d3.forceManyBody().strength(-240))
+.force("x", d3.forceX(d => width*(zoneX[d.zone] ?? .5)).strength(.3))
+.force("y", d3.forceY(d => height*(zoneY[d.zone] ?? .5)).strength(.3))
+.force("collide", d3.forceCollide(18));
 
-  sim.on("tick", () => {
-    link
-      .attr("x1", d => d.source.x).attr("y1", d => d.source.y)
-      .attr("x2", d => d.target.x).attr("y2", d => d.target.y);
+sim.on("tick", ()=>{
+  link.attr("x1",d=>d.source.x)
+      .attr("y1",d=>d.source.y)
+      .attr("x2",d=>d.target.x)
+      .attr("y2",d=>d.target.y);
 
-    node
-      .attr("cx", d => d.x).attr("cy", d => d.y);
+  node.attr("cx",d=>d.x).attr("cy",d=>d.y);
+  label.attr("x",d=>d.x).attr("y",d=>d.y);
+});
 
-    label
-      .attr("x", d => d.x).attr("y", d => d.y);
-  });
 
-  function updateVisibility() {
-    node.attr("display", d => visible.has(d.id) ? null : "none");
-    label.attr("display", d => visible.has(d.id) ? null : "none");
-    link.attr("display", d => {
-      // une fois la simulation lancée, d.source/d.target deviennent des objets -> on récupère l'id
-      const sid = d.source.id || d.source;
-      const tid = d.target.id || d.target;
-      return (visible.has(sid) && visible.has(tid)) ? null : "none";
-    });
-  }
+// ---------- visibilité
+function updateVisibility(){
+node.attr("display", d=> visible.has(d.id)?null:"none");
+label.attr("display", d=> visible.has(d.id)?null:"none");
+link.attr("display", d=>{
+ const sid=d.source.id||d.source;
+ const tid=d.target.id||d.target;
+ return (visible.has(sid)&&visible.has(tid))?null:"none";
+});
+}
 
-  // panel
-  const panel = document.getElementById("panel");
-  const hint = document.getElementById("hint");
 
-  function renderPanel(d) {
-    hint.textContent = "";
-    const keywords = (d.keywords || []).map(k => `<span class="tag">${k}</span>`).join("");
-    const years = (d.year !== undefined)
-      ? `Année : ${d.year}`
-      : (d.yearStart ? `Période : ${d.yearStart} — ${d.yearEnd || "…"}` : "");
+// ---------- panneau
+const panel = document.getElementById("panel");
+const hint = document.getElementById("hint");
 
-    panel.innerHTML = `
-      <p><strong>${d.label}</strong></p>
-      <p class="meta">${d.type}${years ? " · " + years : ""}</p>
-      <div>${keywords}</div>
-      ${d.evidence ? `<p style="margin-top:12px;"><a href="${d.evidence}" target="_blank" rel="noopener">Preuve / ancrage</a></p>` : ""}
-      ${(!d.evidence && d.url) ? `<p style="margin-top:12px;"><a href="${d.url}" target="_blank" rel="noopener">Ouvrir la ressource</a></p>` : ""}
-    `;
-  }
+function renderPanel(d){
+hint.textContent="";
+panel.innerHTML = `
+<p><strong>${d.label}</strong></p>
+<p class="meta">${d.type}</p>
+${(d.keywords||[]).map(k=>`<span class="tag">${k}</span>`).join("")}
+${d.evidence?`<p><a href="${d.evidence}" target="_blank">preuve</a></p>`:""}
+`;
+}
 
-  function resetPanel() {
-    visible = new Set(
-      data.nodes.filter(n => macroTypes.has(n.type)).map(n => n.id)
-    );
-    updateVisibility();
-    hint.textContent = "Survolez un nœud pour afficher ses métadonnées. Cliquez pour déployer sa branche.";
-    panel.innerHTML = "";
-  }
+function reset(){
+visible = new Set(data.nodes.filter(n=>macroTypes.has(n.type)).map(n=>n.id));
+updateVisibility();
+panel.innerHTML="";
+hint.textContent="Survol = résumé · clic = déployer";
+}
 
-  node
-    .on("mouseover", (event, d) => renderPanel(d))
-    .on("click", (event, d) => {
-      // déploiement progressif : on ajoute le nœud + ses voisins directs
-      visible.add(d.id);
-      (neighbors[d.id] || []).forEach(id => visible.add(id));
-      updateVisibility();
+node.on("mouseover",(e,d)=>renderPanel(d))
+.on("click",(e,d)=>{
+ visible.add(d.id);
+ (neighbors[d.id]||[]).forEach(id=>visible.add(id));
+ updateVisibility();
+ if(d.evidence) window.open(d.evidence,"_blank");
+});
 
-      // option : si une preuve existe, on l'ouvre (sinon, ne rien faire)
-      if (d.evidence) window.open(d.evidence, "_blank");
-      else if (d.url) window.open(d.url, "_blank");
-    });
+document.getElementById("resetBtn").onclick = reset;
 
-  document.getElementById("resetBtn").addEventListener("click", resetPanel);
+node.call(d3.drag()
+.on("start",(e,d)=>{ if(!e.active) sim.alphaTarget(.3).restart(); d.fx=d.x; d.fy=d.y; })
+.on("drag",(e,d)=>{ d.fx=e.x; d.fy=e.y; })
+.on("end",(e,d)=>{ if(!e.active) sim.alphaTarget(0); d.fx=null; d.fy=null; })
+);
 
-  // drag
-  node.call(d3.drag()
-    .on("start", (event, d) => {
-      if (!event.active) sim.alphaTarget(0.25).restart();
-      d.fx = d.x; d.fy = d.y;
-    })
-    .on("drag", (event, d) => { d.fx = event.x; d.fy = event.y; })
-    .on("end", (event, d) => {
-      if (!event.active) sim.alphaTarget(0);
-      d.fx = null; d.fy = null;
-    })
-  );
+reset();
 
-  // Affichage initial : vue macro
-  resetPanel();
 })();
 </script>
-
 </body>
 </html>
