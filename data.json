@@ -1,44 +1,273 @@
 {
   "nodes": [
     {
+      "id": "profil",
+      "type": "profil",
+      "layer": "profil",
+      "label": "Émeline Roy — MCF (70e) qualifiée (18e)",
+      "yearStart": 2015,
+      "yearEnd": 2026,
+      "keywords": ["design", "didactique", "recherche-création", "numérique"],
+      "url": "https://adef.univ-amu.fr/fr/annuaire/roy-emeline",
+      "evidence": "https://adef.univ-amu.fr/fr/annuaire/roy-emeline"
+    },
+
+    { "id": "inst_adef", "type": "institution", "layer": "reseaux", "label": "UR 4671 ADEF — AMU", "keywords": ["laboratoire", "sciences de l’éducation"], "url": "https://adef.univ-amu.fr/fr", "evidence": "https://adef.univ-amu.fr/fr" },
+    { "id": "inst_projekt", "type": "institution", "layer": "reseaux", "label": "UPR PROJEKT — Université de Nîmes (membre associée)", "keywords": ["design", "recherche"], "url": "https://projekt.unimes.fr/", "evidence": "https://projekt.unimes.fr/" },
+    { "id": "inst_gis", "type": "reseau", "layer": "reseaux", "label": "GIS Arts & Éducation", "keywords": ["réseau", "édition scientifique", "médiation"], "url": "https://gisartseduc.hypotheses.org/", "evidence": "https://gisartseduc.hypotheses.org/" },
+    { "id": "inst_gcaf", "type": "reseau", "layer": "reseaux", "label": "ADEF-GCAF (carnet Hypothèses)", "keywords": ["édition", "veille", "carnet"], "url": "https://gcaf.hypotheses.org/", "evidence": "https://gcaf.hypotheses.org/" },
+
+    {
       "id": "axe1",
       "type": "axe",
-      "label": "Analyse didactique de l’activité enseignante",
-      "keywords": ["didactique", "interactions", "TACD"],
+      "layer": "recherche",
+      "label": "Axe 1 — Analyse didactique de l’activité enseignante",
       "yearStart": 2018,
       "yearEnd": 2026,
-      "url": null
+      "keywords": ["TACD", "interactions didactiques", "gestes professoraux"],
+      "method": "qualitative + analyse interactionnelle",
+      "terrain": "LP / STD2A / formations design"
     },
+    {
+      "id": "axe2",
+      "type": "axe",
+      "layer": "recherche",
+      "label": "Axe 2 — Rapport des élèves à la créativité et aux enseignements artistiques",
+      "yearStart": 2018,
+      "yearEnd": 2026,
+      "keywords": ["créativité", "erreur", "références culturelles", "compétences transformatives"],
+      "method": "mixte (qual + quant)",
+      "terrain": "voie professionnelle"
+    },
+    {
+      "id": "axe3",
+      "type": "axe",
+      "layer": "recherche",
+      "label": "Axe 3 — Pratiques de création-conception (niveaux et dispositifs)",
+      "yearStart": 2018,
+      "yearEnd": 2026,
+      "keywords": ["conception", "projet", "alternance", "médiation"],
+      "method": "analyse de dispositifs / comparaisons",
+      "terrain": "LP / STD2A / BTS / licence / master"
+    },
+    {
+      "id": "axe4",
+      "type": "axe",
+      "layer": "recherche",
+      "label": "Axe 4 — Prescriptions institutionnelles et matrice disciplinaire",
+      "yearStart": 2018,
+      "yearEnd": 2026,
+      "keywords": ["curriculum", "prescriptions", "matrice disciplinaire"],
+      "method": "analyse curriculaire",
+      "terrain": "enseignement secondaire + supérieur"
+    },
+
+    {
+      "id": "pos_mcf_amu",
+      "type": "position",
+      "layer": "parcours",
+      "label": "Maîtresse de conférences — AMU / INSPÉ (192h EqTD/an)",
+      "yearStart": 2024,
+      "yearEnd": 2026,
+      "keywords": ["MCF", "INSPÉ", "formation enseignants", "design"],
+      "evidence": "https://adef.univ-amu.fr/fr/annuaire/roy-emeline"
+    },
+    {
+      "id": "pos_ater_amu",
+      "type": "position",
+      "layer": "parcours",
+      "label": "ATER — AMU / INSPÉ (192h EqTD/an)",
+      "yearStart": 2020,
+      "yearEnd": 2024,
+      "keywords": ["ATER", "enseignement", "recherche"]
+    },
+
+    {
+      "id": "resp_gis_adj",
+      "type": "responsibility",
+      "layer": "responsabilites",
+      "label": "Directrice adjointe — GIS Arts & Éducation",
+      "yearStart": 2025,
+      "yearEnd": 2026,
+      "keywords": ["coordination", "stratégie", "accompagnement doctoral"],
+      "url": "https://gisartseduc.hypotheses.org/"
+    },
+    {
+      "id": "resp_master_dsaa",
+      "type": "responsibility",
+      "layer": "responsabilites",
+      "label": "Coordinatrice AMU — Master-DSAA (design)",
+      "yearStart": 2025,
+      "yearEnd": 2026,
+      "keywords": ["coordination", "équipe pédagogique", "recherche en design"]
+    },
+    {
+      "id": "resp_meef_tutorat",
+      "type": "responsibility",
+      "layer": "responsabilites",
+      "label": "Responsable du tutorat — Master MEEF Design & métiers d’art",
+      "yearStart": 2022,
+      "yearEnd": 2026,
+      "keywords": ["stages", "conventions", "accompagnement"]
+    },
+
+    {
+      "id": "ens_meef_design",
+      "type": "teaching",
+      "layer": "enseignement",
+      "label": "Enseigner et apprendre (Master MEEF Design & métiers d’art)",
+      "yearStart": 2020,
+      "yearEnd": 2026,
+      "keywords": ["analyse de situations", "évaluation", "innovation pédagogique", "LP"]
+    },
+    {
+      "id": "ens_memoire_meef",
+      "type": "teaching",
+      "layer": "enseignement",
+      "label": "Initiation à la recherche / Mémoire (Master MEEF Design & métiers d’art)",
+      "yearStart": 2020,
+      "yearEnd": 2026,
+      "keywords": ["problématisation", "méthodologies", "APA 7", "éthique"],
+      "method": "formation à la recherche"
+    },
+
     {
       "id": "pub_curj_2024",
       "type": "publication",
-      "label": "The disciplinary matrix of applied arts and artistic cultures",
+      "layer": "publications",
+      "status": "publie",
+      "label": "The disciplinary matrix of applied arts and artistic cultures (Curriculum Journal)",
       "year": 2024,
       "keywords": ["curriculum", "disciplinary matrix"],
-      "url": "https://doi.org/10.1002/curj.251"
+      "url": "https://doi.org/10.1002/curj.251",
+      "evidence": "https://doi.org/10.1002/curj.251"
     },
     {
-      "id": "ens_meef",
-      "type": "teaching",
-      "label": "Master MEEF Design & métiers d’art — formation aux concours",
-      "yearStart": 2020,
-      "yearEnd": 2026,
-      "keywords": ["problématisation", "mémoire", "CAPET/CAPLP"],
-      "url": null
+      "id": "pub_rse_2022",
+      "type": "publication",
+      "layer": "publications",
+      "status": "publie",
+      "label": "Didactique des arts appliqués en lycée professionnel : milieux didactiques et dévolution (Revue des sciences de l’éducation)",
+      "year": 2022,
+      "keywords": ["dévolution", "milieu didactique", "LP"],
+      "url": "https://doi.org/10.7202/1092603ar",
+      "evidence": "https://doi.org/10.7202/1092603ar"
     },
     {
-      "id": "resp_gis",
-      "type": "responsibility",
-      "label": "GIS Arts & Éducation — direction adjointe / animation éditoriale",
-      "yearStart": 2025,
-      "yearEnd": 2026,
-      "keywords": ["réseau", "édition", "médiation scientifique"],
-      "url": "https://gisartseduc.hypotheses.org/"
+      "id": "pub_ncre_2024",
+      "type": "publication",
+      "layer": "publications",
+      "status": "publie",
+      "label": "Innover socialement par le design… (Nouveaux cahiers de la recherche en éducation)",
+      "year": 2024,
+      "keywords": ["design social", "compétences transformatives", "LP"],
+      "url": "https://doi.org/10.7202/1113231ar",
+      "evidence": "https://doi.org/10.7202/1113231ar"
+    },
+    {
+      "id": "pub_jrea_2024",
+      "type": "publication",
+      "layer": "publications",
+      "status": "publie",
+      "label": "Gestes des professeurs de design… (Journal de recherche en éducations artistiques)",
+      "year": 2024,
+      "keywords": ["gestes professoraux", "STD2A", "réflexion collective"],
+      "url": "https://doi.org/10.26034/vd.jrea.2024.5076",
+      "evidence": "https://doi.org/10.26034/vd.jrea.2024.5076"
+    },
+    {
+      "id": "pub_ta_2023a",
+      "type": "publication",
+      "layer": "publications",
+      "status": "publie",
+      "label": "Situation didactique, situation opérationnelle de conception… (Travail et Apprentissages)",
+      "year": 2023,
+      "keywords": ["didactique du design", "conception", "cadres théoriques"],
+      "url": "https://doi.org/10.3917/ta.025.0065",
+      "evidence": "https://doi.org/10.3917/ta.025.0065"
+    },
+    {
+      "id": "pub_ta_2023b",
+      "type": "publication",
+      "layer": "publications",
+      "status": "publie",
+      "label": "Le rapport à l’évaluation… (Travail et Apprentissages)",
+      "year": 2023,
+      "keywords": ["évaluation", "éducation à", "situations"],
+      "url": "https://doi.org/10.3917/ta.026.0160",
+      "evidence": "https://doi.org/10.3917/ta.026.0160"
+    },
+    {
+      "id": "pub_didactique_2023",
+      "type": "publication",
+      "layer": "publications",
+      "status": "publie",
+      "label": "Les représentations de la créativité… (Didactique)",
+      "year": 2023,
+      "keywords": ["créativité", "représentations", "LP"],
+      "url": "https://doi.org/10.37571/2023.0102",
+      "evidence": "https://doi.org/10.37571/2023.0102"
+    },
+    {
+      "id": "pub_rd_2023",
+      "type": "publication",
+      "layer": "publications",
+      "status": "publie",
+      "label": "L’enseignement des arts appliqués… (Recherches en didactiques)",
+      "year": 2023,
+      "keywords": ["configuration disciplinaire", "LP"],
+      "url": "https://doi.org/10.3917/rdid1.035.0059",
+      "evidence": "https://doi.org/10.3917/rdid1.035.0059"
+    },
+    {
+      "id": "pub_deed_2025",
+      "type": "publication",
+      "layer": "publications",
+      "status": "publie",
+      "label": "L’influence des références aux ICC sur la créativité… (DEED)",
+      "year": 2025,
+      "keywords": ["industries culturelles", "créativité", "LP"],
+      "url": "https://doi.org/10.71585/deed.i2.15",
+      "evidence": "https://doi.org/10.71585/deed.i2.15"
+    },
+    {
+      "id": "pub_adch_2025",
+      "type": "publication",
+      "layer": "publications",
+      "status": "publie",
+      "label": "The Designer as Mediator… (Art, Design and Communication in Higher Education)",
+      "year": 2025,
+      "keywords": ["médiation", "design social", "compétences"],
+      "url": "https://doi.org/10.1386/adch_00116_1",
+      "evidence": "https://doi.org/10.1386/adch_00116_1"
     }
   ],
+
   "links": [
-    { "source": "axe1", "target": "pub_curj_2024", "relation": "soutient" },
-    { "source": "axe1", "target": "ens_meef", "relation": "alimente" },
-    { "source": "ens_meef", "target": "resp_gis", "relation": "connecte" }
+    { "source": "profil", "target": "inst_adef", "relation": "ancre_institutionnelle" },
+    { "source": "profil", "target": "inst_projekt", "relation": "collabore" },
+    { "source": "profil", "target": "inst_gis", "relation": "anime" },
+
+    { "source": "pos_mcf_amu", "target": "inst_adef", "relation": "rattache" },
+    { "source": "pos_ater_amu", "target": "inst_adef", "relation": "rattache" },
+
+    { "source": "pos_mcf_amu", "target": "resp_gis_adj", "relation": "porte" },
+    { "source": "resp_gis_adj", "target": "inst_gis", "relation": "structure" },
+
+    { "source": "pos_mcf_amu", "target": "resp_master_dsaa", "relation": "porte" },
+    { "source": "pos_mcf_amu", "target": "resp_meef_tutorat", "relation": "porte" },
+
+    { "source": "pos_mcf_amu", "target": "ens_meef_design", "relation": "enseigne" },
+    { "source": "pos_mcf_amu", "target": "ens_memoire_meef", "relation": "enseigne" },
+
+    { "source": "axe4", "target": "pub_curj_2024", "relation": "soutient" },
+    { "source": "axe1", "target": "pub_jrea_2024", "relation": "soutient" },
+    { "source": "axe2", "target": "pub_didactique_2023", "relation": "soutient" },
+    { "source": "axe2", "target": "pub_deed_2025", "relation": "soutient" },
+    { "source": "axe3", "target": "pub_adch_2025", "relation": "soutient" },
+    { "source": "axe4", "target": "pub_rse_2022", "relation": "soutient" },
+    { "source": "axe3", "target": "pub_ta_2023a", "relation": "soutient" },
+    { "source": "axe3", "target": "pub_ta_2023b", "relation": "soutient" },
+    { "source": "axe3", "target": "pub_ncre_2024", "relation": "connecte" }
   ]
 }
