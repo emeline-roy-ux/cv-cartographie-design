@@ -132,10 +132,27 @@
     .attr("fill", "#222");
 
   const sim = d3.forceSimulation(data.nodes)
-    .force("link", d3.forceLink(data.links).id(d => d.id).distance(95))
-    .force("charge", d3.forceManyBody().strength(-280))
-    .force("center", d3.forceCenter(width/2, height/2))
-    .force("collide", d3.forceCollide().radius(d => (d.type === "axe" ? 24 : 16)));
+   const zoneX = {
+  profil: width * 0.25,
+  publications: width * 0.75,
+  recherche: width * 0.25,
+  enseignement: width * 0.75
+};
+
+const zoneY = {
+  profil: height * 0.25,
+  publications: height * 0.25,
+  recherche: height * 0.75,
+  enseignement: height * 0.75
+};
+
+const sim = d3.forceSimulation(data.nodes)
+  .force("link", d3.forceLink(data.links).id(d => d.id).distance(90))
+  .force("charge", d3.forceManyBody().strength(-220))
+  .force("x", d3.forceX(d => zoneX[d.zone] || width/2).strength(0.25))
+  .force("y", d3.forceY(d => zoneY[d.zone] || height/2).strength(0.25))
+  .force("collide", d3.forceCollide().radius(d => (d.type === "axe" ? 26 : 16)));
+
 
   sim.on("tick", () => {
     link
