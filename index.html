@@ -296,9 +296,31 @@ svg.call(zoom);
       if (s === root.id || t === root.id) return 160;
       return 70;
     }).strength(0.12))
-    .force("charge", d3.forceManyBody().strength(-180))
+    .force("charge", d3.forceManyBody().strength(-170))
     .force("center", d3.forceCenter(W/2, H/2))
-    .force("collide", d3.forceCollide().radius(d => (d.type === "root" ? 26 : 16)).iterations(2));
+    .force("collide", d3.forceCollide().radius(d => (d.type === "root" ? 26 : 16)).iterations(2))
+    // Garde un mouvement permanent, très lent, type "constellation"
+    .force("drift", (() => {
+      let localNodes = [];
+      return Object.assign((alpha) => {
+        const t = Date.now() * 0.00009;
+        localNodes.forEach((n) => {
+          n.vx += Math.cos(t + n._phase) * 0.0009 * alpha;
+          n.vy += Math.sin(t * 0.9 + n._phase) * 0.0009 * alpha;
+        });
+      }, {
+        initialize(ns) {
+          localNodes = ns;
+          localNodes.forEach((n, i) => {
+            n._phase = (i / Math.max(localNodes.length, 1)) * Math.PI * 2;
+          });
+        }
+      });
+    })())
+    .alphaDecay(0.03)
+    .alphaMin(0.002)
+    .alphaTarget(0.02)
+    .velocityDecay(0.5);
 
   sim.on("tick", () => {
     linkSel
