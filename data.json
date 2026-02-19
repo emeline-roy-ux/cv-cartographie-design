@@ -107,7 +107,57 @@
       "id": "publications",
       "type": "branch",
       "label": "Publications",
-      "parent": "recherche"
+      "parent": "recherche",
+      "bibliography": [
+        {
+          "text": "Récapitulatif des productions et des activités scientifiques"
+        },
+        {
+          "text": "Publications"
+        },
+        {
+          "text": "Publiés ou acceptés"
+        },
+        {
+          "text": "ACL - Articles dans des revues internationales ou nationales à comité de lecture"
+        },
+        {
+          "text": "CNU 70 : 15"
+        },
+        {
+          "text": "CNU 18 : 3"
+        },
+        {
+          "text": "ACTI - Actes de colloques internationaux : 2"
+        },
+        {
+          "text": "COS/ch - Chapitres d’ouvrages scientifiques : 4"
+        },
+        {
+          "text": "Communications scientifiques"
+        },
+        {
+          "text": "C-ACTI - Communications avec actes dans un colloque international : 2"
+        },
+        {
+          "text": "C-COM - Communications orales sans actes lors de colloques ou journées d’études : 15"
+        },
+        {
+          "text": "Autres communications : séminaires : 10"
+        },
+        {
+          "text": "Autres activités scientifiques"
+        },
+        {
+          "text": "Implication dans des programmes de recherche ou appels à projet : 4"
+        },
+        {
+          "text": "Coorganisations de colloques internationaux et de journées d’études : 5"
+        },
+        {
+          "text": "Codirection d’ouvrage scientifique : 3"
+        }
+      ]
     },
     {
       "id": "vie_scientifique",
@@ -181,13 +231,64 @@
       "id": "acl_18",
       "type": "branch",
       "label": "Articles ACL (18e)",
-      "parent": "publications"
+      "parent": "publications",
+      "bibliography": [
+        {
+          "text": "Roy, E., Moineau, C., Mattei, L et Tortochot, E. (2025). La matrice disciplinaire de l'enseignement du design un miroir de l'évolution des pratiques de design. Design, Arts, Média, 11.",
+          "url": "https://journal.dampress.org/issues/les-matrices-disciplinaires-du-design/design-scolaire-et-matrice-disciplinaire-normaliser-stabiliser-reinterpreter"
+        },
+        {
+          "text": "Roy, É. (2025). L’influence des références aux industries culturelles et créatives sur la créativité des élèves en arts appliqués, une étude de cas en lycée professionnel. Revue Designer l’enseignement, Enseigner le Design, 2, 13-27.",
+          "url": "https://doi.org/10.71585/deed.i2.15"
+        },
+        {
+          "text": "Moineau, C., Roy, É. et Tortochot, É. (2022). Design social et enseignement secondaire en France : l’émergence d’un design pédagogique ? Sciences du Design, 15, 109-125.",
+          "url": "https://doi.org/10.3917/sdd.015.0109"
+        }
+      ]
     },
     {
       "id": "chapitres",
       "type": "branch",
       "label": "Chapitres",
-      "parent": "publications"
+      "parent": "publications",
+      "bibliography": [
+        {
+          "text": "Roy, É., Cerisier, C., Mirault, J. et Tortochot, E. (2026). Déconstruire la pensée linéaire par le dessin dans les épreuves de concours de recrutement des enseignants en design. Dans Laisney P. (dir) Structuration de la recherche en éducation L’héritage scientifique de Jacques Ginestié. Presses universitaires de Provence."
+        },
+        {
+          "text": "Moineau, C., Walgenwitz, R. et Roy, É. (2026). Matière, écologie et compétences en design : une réflexion sur un projet de DSAA en design produit. Dans Dupont, J., Moineau, C. et Didier, J. (dir.), Repenser la matière : matière, design, pédagogie, écologie. UTBM."
+        },
+        {
+          "text": "Roy, É. (2026). Appréhender la matière pour former au lycée, par le design, à un futur souhaitable ? Dans Dupont, J., Moineau, C. et Didier, J. (dir.), Repenser la matière : matière, design, pédagogie, écologie. UTBM."
+        },
+        {
+          "text": "Tortochot, É., Roy, É. et Moineau, C. (2026). Le corps médiateur dans l'enseignement-apprentissage du design en lycée professionnel. Dans Trajanoski, A., Périssé, C. et Boulet, S. (dir.), Corps et création artistique : repenser les approches dans un contexte de formation. UTBM."
+        },
+        {
+          "text": "Roy, É. et Moineau, C. (2026). Quelles pratiques de médiation dans l'apprentissage de design d'innovation sociale ?. Dans Roy, E., Claverie, I. et Papon, L (dir), Regard Pluriels sur les enseignements artistiques. Delatour."
+        },
+        {
+          "text": "Roy, É., Tortochot, É. et Moineau, C. (2025). La matrice disciplinaire des arts appliqués et cultures artistiques. Dans Didier, J. et Dupont, J. (dir.), Enseigner le design : enjeux de démocratie. UTBM.",
+          "url": "https://www.researchgate.net/publication/387715307_La_matrice_disciplinaire_des_Arts_appliques_et_Cultures_artistiques"
+        },
+        {
+          "text": "Roy, É. (2023). Postures et gestes professionnels de l'enseignant d'arts appliqués de lycée professionnel. Dans Tortochot, E, Moineau, C et Roy, E. (dir.), Enseigner le design : un geste créatif et une activité formative. Delatour.",
+          "url": "https://amubox.univ-amu.fr/s/C599zdPebb6ZjBd"
+        },
+        {
+          "text": "Cusenier, É. et Colson, P. (2022). L’enseignement des arts appliqués en lycée professionnel en faveur du réengagement des élèves. Dans Roy, E. et Papon, L. (dir.), Créer pour éduquer en faveur de la persévérance scolaire. Delatour.",
+          "url": "https://www.researchgate.net/publication/345939063_L'enseignement_des_arts_appliques_en_lycee_professionnel_en_faveur_du_reengagement_des_eleves"
+        },
+        {
+          "text": "Roy, É., Tortochot, É. et Moineau, C. (2021). L’expérience de design : une activité transdisciplinaire de création-conception qui s’apprend pour (ré)engager l’élève dans l’activité d’apprentissage. Dans Arnaud-Bestieu, A. et Tortochot, É. (dir.), Geste créatif, activité formative. Réengager les élèves dans les apprentissages par les enseignements artistiques. L'Harmattan.",
+          "url": "https://www.researchgate.net/publication/352836199_L'experience_de_design_une_activite_transdisciplinaire_de_creation-conception_qui_s'apprend_pour_reengager_l'eleve_dans_l'activite_d'apprentissage"
+        },
+        {
+          "text": "Cusenier, É. et Tortochot, É. (2019). Les compétences artistiques et citoyennes dans l'activité de création-conception. Étude des « Arts appliqués et cultures artistiques » en lycée professionnel. Dans Tortochot, E., Rezzi, N. et Terrien, P. (dir.), Créer pour éduquer. La place de la transversalité . L'Harmattan.",
+          "url": "https://www.researchgate.net/publication/333673351_Les_competences_artistiques_et_citoyennes_dans_l'activite_de_creation-conception_Etude_des_Arts_appliques_et_cultures_artistiques_en_lycee_professionnel"
+        }
+      ]
     },
     {
       "id": "pub_curj_2024",
