@@ -330,16 +330,16 @@ svg.call(zoom);
       const source = item.url
         ? `<a href="${item.url}" target="_blank" rel="noopener" style="color:var(--ink); text-decoration:none; border-bottom:1px solid rgba(255,255,255,.28);">Lien</a>`
         : "";
-      return `<li style="margin-bottom:8px; line-height:1.45;">${item.text}${source ? ` ${source}` : ""}</li>`;
+      return `<p style="margin:0 0 8px 0; line-height:1.4; font-size:12px; font-weight:400;">${item.text}${source ? ` ${source}` : ""}</p>`;
     }).join("");
 
     panelEl.innerHTML = `
-      <p style="margin:10px 0 6px 0; font-family: Space Grotesk, Inter Tight, system-ui, sans-serif; letter-spacing:-.01em;">
-        <strong>${d.label}</strong>
+      <p style="margin:10px 0 6px 0; font-family: Space Grotesk, Inter Tight, system-ui, sans-serif; letter-spacing:-.01em; font-weight:400; font-size:14px;">
+        ${d.label}
       </p>
       <p class="meta" style="margin:0 0 6px 0;">${d.type || ""}${years ? " · " + years : ""}</p>
       <div>${tags}</div>
-      ${bibliography ? `<ol style="margin:12px 0 0 18px; padding:0;">${bibliography}</ol>` : ""}
+      ${bibliography ? `<div style="margin-top:12px;">${bibliography}</div>` : ""}
       ${d.evidence ? `<p style="margin-top:10px;"><a href="${d.evidence}" target="_blank" rel="noopener" style="color:var(--ink); text-decoration:none; border-bottom:1px solid rgba(255,255,255,.28);">Preuve / ancrage</a></p>` : ""}
     `;
   }
