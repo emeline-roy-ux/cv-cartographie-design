@@ -157,13 +157,15 @@
         {
           "text": "Codirection d’ouvrage scientifique : 3"
         }
-      ]
+      ],
+      "summary": "Production scientifique, publications et communications recensées à partir de l’arborescence du CV."
     },
     {
       "id": "vie_scientifique",
       "type": "branch",
       "label": "Vie scientifique",
-      "parent": "recherche"
+      "parent": "recherche",
+      "summary": "Activités collectives de recherche: animation, organisation, encadrement et expertises."
     },
     {
       "id": "acl_70",
@@ -360,13 +362,13 @@
       "id": "ens_sc_edu",
       "type": "branch",
       "label": "Sciences de l’éducation",
-      "parent": "enseignement"
+      "parent": "enseignements"
     },
     {
       "id": "ens_design",
       "type": "branch",
       "label": "Design",
-      "parent": "enseignement"
+      "parent": "enseignements"
     },
     {
       "id": "master_meef",
@@ -393,6 +395,61 @@
         "doctorat"
       ],
       "evidence": null
+    },
+    {
+      "id": "enseignements",
+      "type": "branch",
+      "label": "Enseignements",
+      "parent": "cv",
+      "summary": "Activités d’enseignement en sciences de l’éducation et design, du master au doctorat."
+    },
+    {
+      "id": "responsabilites_institutionnelles",
+      "type": "branch",
+      "label": "Responsabilités institutionnelles",
+      "parent": "cv",
+      "summary": "Fonctions institutionnelles et responsabilités académiques liées aux missions d’enseignement et de recherche."
+    },
+    {
+      "id": "resp_statut",
+      "type": "leaf",
+      "label": "Fonctions universitaires et qualifications CNU",
+      "parent": "responsabilites_institutionnelles",
+      "yearStart": 2020,
+      "yearEnd": 2026,
+      "keywords": [
+        "MCF",
+        "ATER",
+        "CNU 70e",
+        "CNU 18e"
+      ],
+      "summary": "Responsabilités exercées en tant qu’ATER puis MCF, avec qualifications CNU associées."
+    },
+    {
+      "id": "resp_laboratoires",
+      "type": "leaf",
+      "label": "Rattachements de laboratoire et animation de réseau",
+      "parent": "responsabilites_institutionnelles",
+      "yearStart": 2020,
+      "yearEnd": 2026,
+      "keywords": [
+        "ADEF",
+        "PROJEKT",
+        "coordination"
+      ],
+      "summary": "Participation aux dynamiques de laboratoire et à la structuration d’axes de recherche-création."
+    },
+    {
+      "id": "resp_jurys",
+      "type": "leaf",
+      "label": "Jurys, expertises et responsabilités de diplôme",
+      "parent": "responsabilites_institutionnelles",
+      "keywords": [
+        "jury",
+        "expertise",
+        "diplôme"
+      ],
+      "summary": "Interventions en jurys et expertises dans des dispositifs académiques et professionnels."
     }
   ]
 }

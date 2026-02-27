@@ -1,419 +1,635 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Emeline ROY — CV cartographique</title>
-
-<!-- Typographies gratuites, UI modernes -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
-
-<style>
-  :root{
-    --ink: rgba(255,255,255,.92);
-    --muted: rgba(255,255,255,.70);
-    --stroke: rgba(255,255,255,.18);
-    --shadowText:
-      0 2px 14px rgba(0,0,0,.55),
-      0 1px 2px rgba(0,0,0,.55);
-  }
-
-  html, body { height: 100%; }
-  body{
-    margin:0;
-    font-family: "Inter Tight", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-    color: var(--ink);
-    background:#05060a;
-    overflow:hidden;
-  }
-
-  /*  IMPORTANT : content + position + z-index (sinon rien n’apparaît) */
-  body::before{
-  content:"";
-  position: fixed;
-  inset: 0;
-  z-index: -3;
-  pointer-events: none;           /* ✅ IMPORTANT */
-  background:
-    radial-gradient(1200px 700px at 20% 20%, rgba(255,0,140,.22), transparent 55%),
-    radial-gradient(900px 650px at 70% 25%, rgba(0,170,255,.18), transparent 55%),
-    radial-gradient(900px 650px at 80% 75%, rgba(255,255,0,.12), transparent 60%),
-    url("assets/cmyk.jpg");
-  background-size: cover;
-  background-position: center;
-  filter: saturate(1.15) contrast(1.05);
-  opacity: .62;
-}
-
-body::after{
-  content:"";
-  position: fixed;
-  inset: 0;
-  z-index: -2;
-  pointer-events: none;           /* ✅ IMPORTANT */
-  background: linear-gradient(180deg, rgba(5,6,10,.72), rgba(5,6,10,.52));
-}
-
-/* ✅ la carte doit être au-dessus (z-index >= 0), sinon pas d’interactions */
-#viz{
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-}
-
-/* UI au-dessus */
-.ui{
-  position: fixed;
-  inset: 0;
-  z-index: 2;
-  display: grid;
-  grid-template-columns: minmax(320px, 460px) minmax(280px, 380px);
-  align-content: start;
-  justify-content: space-between;
-  gap: 20px;
-  padding: 22px;
-  pointer-events: none;
-}
-.ui a, .ui button{ pointer-events: auto; }
-  
-  .panel{
-    background: transparent;
-    border: none;
-    box-shadow: none;
-    pointer-events: auto;
-  }
-
-  h1{
-    font-family: "Space Grotesk", "Inter Tight", system-ui, sans-serif;
-    font-size: 34px;
-    line-height: 1.05;
-    margin: 0 0 10px 0;
-    letter-spacing: -0.03em;
-    text-shadow: var(--shadowText);
-  }
-
-  .meta{
-    font-size: 13px;
-    line-height: 1.6;
-    margin: 8px 0 0 0;
-    color: var(--muted);
-    letter-spacing: -0.006em;
-    text-shadow: var(--shadowText);
-  }
-
-  .links{
-    display:flex;
-    gap:10px;
-    flex-wrap: wrap;
-    align-items: baseline;
-    margin-top: 10px;
-  }
-
-  .links a{
-    color: var(--ink);
-    text-decoration: none;
-    border-bottom: 1px solid rgba(255,255,255,.28);
-  }
-  .links a:hover{ border-bottom-color: rgba(255,255,255,.7); }
-
-  .toprow{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap: 12px;
-    margin-bottom: 10px;
-  }
-
-  .toprow strong{
-    font-family: "Space Grotesk", "Inter Tight", system-ui, sans-serif;
-    font-weight: 600;
-    letter-spacing: -0.02em;
-    text-shadow: var(--shadowText);
-  }
-
-  button{
-    font: inherit;
-    color: var(--ink);
-    background: rgba(255,255,255,.06);
-    border: 1px solid rgba(255,255,255,.18);
-    border-radius: 12px;
-    padding: 8px 10px;
-    cursor: pointer;
-  }
-  button:hover{ background: rgba(255,255,255,.10); }
-
-  .tag{
-    display:inline-block;
-    padding: 3px 10px;
-    border: 1px solid rgba(255,255,255,.24);
-    border-radius: 999px;
-    margin: 6px 6px 0 0;
-    font-size: 12px;
-    color: rgba(255,255,255,.74);
-    text-shadow: var(--shadowText);
-  }
-
-  /* petite contrainte de lecture de la fiche */
-  #panel{
-    max-width: 360px;
-    max-height: calc(100vh - 200px);
-    overflow-y: auto;
-    padding-right: 6px;
-  }
-
-  @media (max-width: 980px){
-    .ui{
-      grid-template-columns: 1fr;
-      grid-template-rows: auto auto;
-      padding: 16px;
-      gap: 14px;
-      overflow: auto; /* le texte peut scroller, la carte reste derrière */
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Emeline ROY — CV cartographique</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&family=Sora:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #07090f;
+      --ink: rgba(246, 249, 255, 0.95);
+      --muted: rgba(230, 237, 250, 0.72);
+      --line: rgba(230, 237, 250, 0.22);
+      --line-strong: rgba(230, 237, 250, 0.45);
+      --accent: #8bc6ff;
+      --header-h: 66px;
+      --font-heading: "Space Grotesk", "Sora", sans-serif;
+      --font-body: "Inter", system-ui, -apple-system, sans-serif;
+      --hero-h: clamp(280px, 42vh, 420px);
     }
-    h1{ font-size: 28px; }
-    #panel{ max-width: none; }
-  }
-</style>
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--font-body);
+      line-height: 1.5;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      background: url("assets/cmyk.jpg") center / cover no-repeat;
+      filter: saturate(1.06) contrast(1.06);
+      opacity: 0.56;
+      pointer-events: none;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background:
+        linear-gradient(180deg, rgba(7,9,15,0.86) 0%, rgba(7,9,15,0.72) 28%, rgba(7,9,15,0.92) 100%),
+        radial-gradient(900px 480px at 75% 10%, rgba(129, 101, 255, 0.14), transparent 56%);
+      pointer-events: none;
+    }
+
+    .top-nav {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      min-height: var(--header-h);
+      backdrop-filter: blur(9px);
+      -webkit-backdrop-filter: blur(9px);
+      background: rgba(7, 9, 15, 0.48);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0.65rem 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .brand {
+      font-family: var(--font-heading);
+      font-size: 0.98rem;
+      letter-spacing: 0.01em;
+      color: var(--ink);
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .menu {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 0.35rem 1rem;
+    }
+
+    .menu a {
+      text-decoration: none;
+      color: var(--muted);
+      font-size: 0.92rem;
+      border-bottom: 1px solid transparent;
+      padding: 0.22rem 0;
+      transition: color 160ms ease, border-color 160ms ease;
+    }
+    .menu a:hover,
+    .menu a.active { color: var(--ink); border-color: var(--line-strong); }
+    .menu a:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+      border-radius: 3px;
+    }
+
+    .hero {
+      position: relative;
+      height: var(--hero-h);
+      border-bottom: 1px solid var(--line);
+      overflow: hidden;
+    }
+
+    #hero-viz {
+      position: absolute;
+      inset: 0;
+    }
+
+    .hero-copy {
+      position: relative;
+      z-index: 2;
+      max-width: 1100px;
+      margin: 0 auto;
+      height: 100%;
+      padding: 1.2rem 1rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      pointer-events: none;
+    }
+
+    .hero-copy h1 {
+      margin: 0;
+      font-family: var(--font-heading);
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      letter-spacing: -0.02em;
+    }
+
+    .hero-copy p {
+      margin: 0.3rem 0 0;
+      max-width: 62ch;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .tooltip {
+      position: absolute;
+      z-index: 5;
+      pointer-events: none;
+      min-width: 190px;
+      max-width: 280px;
+      padding: 0.55rem 0.7rem;
+      border: 1px solid var(--line-strong);
+      background: rgba(7, 9, 15, 0.74);
+      backdrop-filter: blur(8px);
+      border-radius: 8px;
+      font-size: 0.82rem;
+      color: var(--ink);
+      opacity: 0;
+      transform: translateY(6px);
+      transition: opacity 120ms ease, transform 120ms ease;
+    }
+    .tooltip.visible { opacity: 1; transform: translateY(0); }
+    .tooltip strong { font-family: var(--font-heading); display: block; margin-bottom: 0.2rem; }
+
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 1.6rem 1rem 3rem;
+    }
+
+    .content-section {
+      scroll-margin-top: calc(var(--header-h) + 20px);
+      padding: 1rem 0 1.4rem;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .content-section h2 {
+      margin: 0;
+      font-family: var(--font-heading);
+      font-size: clamp(1.15rem, 1.4vw, 1.4rem);
+      letter-spacing: -0.01em;
+    }
+
+    .section-summary {
+      margin: 0.4rem 0 1rem;
+      color: var(--muted);
+      max-width: 75ch;
+      font-size: 0.93rem;
+    }
+
+    .tree-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 0.9rem;
+    }
+
+    .tree-item {
+      padding: 0.45rem 0;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .tree-item h3 {
+      margin: 0;
+      font-size: 0.98rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+    }
+
+    .meta-line { margin: 0.25rem 0 0; color: var(--muted); font-size: 0.84rem; }
+    .keywords { margin: 0.25rem 0 0; display: flex; flex-wrap: wrap; gap: 0.35rem; }
+    .keywords span { font-size: 0.75rem; border: 1px solid rgba(255,255,255,0.19); border-radius: 999px; padding: 0.15rem 0.5rem; color: var(--muted); }
+    .evidence-link {
+      display: inline-block;
+      margin-top: 0.35rem;
+      font-size: 0.82rem;
+      color: var(--ink);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(255,255,255,0.36);
+    }
+
+    .sublist { list-style: none; margin: 0.55rem 0 0.1rem; padding: 0 0 0 0.75rem; border-left: 1px solid rgba(255,255,255,0.16); }
+    .sublist li { margin: 0.36rem 0; font-size: 0.88rem; color: var(--muted); }
+
+    @media (max-width: 840px) {
+      .nav-inner { flex-direction: column; align-items: flex-start; }
+      .menu { justify-content: flex-start; gap: 0.3rem 0.75rem; }
+      :root { --header-h: 96px; }
+      main { padding-top: 1rem; }
+    }
+  </style>
 </head>
-
 <body>
+  <header class="top-nav">
+    <div class="nav-inner">
+      <a class="brand" href="#top">Emeline ROY · Recherche-création</a>
+      <nav aria-label="Navigation principale">
+        <ul class="menu" id="menu"></ul>
+      </nav>
+    </div>
+  </header>
 
-<div id="viz"></div>
-
-<div class="ui">
-  <section class="panel">
-    <header>
-      <h1 style="margin-left: 6px;">Emeline ROY</h1>
-      <p class="meta links" style="margin-left: 6px;">
-        <a href="methodologie.html">Méthodologie</a>
-        <span class="meta">·</span>
-        <a href="https://www.linkedin.com/in/emeline-roy-141a7728/" target="_blank" rel="noopener">LinkedIn</a>
-      </p>
-    </header>
+  <section class="hero" id="top" aria-label="Constellation de navigation">
+    <div id="hero-viz"></div>
+    <div class="hero-copy">
+      <h1>CV cartographique</h1>
+      <p>Constellation élastique en tête de page, puis structuration éditoriale du contenu en sections académiques.</p>
+    </div>
+    <div class="tooltip" id="node-tooltip" role="status" aria-live="polite"></div>
   </section>
 
-  <aside class="panel">
-    <div class="toprow">
-      <strong>Détails</strong>
-      <button id="resetBtn" type="button">Réinitialiser</button>
-    </div>
-    <p class="meta" id="hint">Survolez un nœud pour afficher ses métadonnées.</p>
-    <div id="panel"></div>
-  </aside>
-</div>
+  <main id="content"></main>
 
-<script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
-<script>
-(async function () {
-  const data = await fetch("data.json").then(r => r.json());
+  <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+  <script>
+    const SECTION_CONFIG = [
+      { id: "publications", title: "Publications" },
+      { id: "vie_scientifique", title: "Vie scientifique" },
+      { id: "responsabilites_institutionnelles", title: "Responsabilités" },
+      { id: "enseignements", title: "Enseignements" },
+      { id: "methodologie", title: "Méthodologie", href: "methodologie.html" },
+      { id: "linkedin", title: "LinkedIn", href: "https://www.linkedin.com/in/emeline-roy-141a7728/" }
+    ];
 
-  const vizEl = document.getElementById("viz");
-  const panelEl = document.getElementById("panel");
-  const hintEl  = document.getElementById("hint");
-  const resetBtnEl = document.getElementById("resetBtn");
+    const HERO_NODES = SECTION_CONFIG.filter(s => !s.href).map(s => s.id);
 
-  function measure(){
-    return { W: vizEl.clientWidth, H: vizEl.clientHeight };
-  }
-  let { W, H } = measure();
+    const menuEl = document.getElementById("menu");
+    const contentEl = document.getElementById("content");
+    const heroEl = document.getElementById("hero-viz");
+    const tooltipEl = document.getElementById("node-tooltip");
 
-  // reset svg if hot reloaded / duplicated
-  d3.select(vizEl).selectAll("*").remove();
+    const nodeById = new Map();
+    const childrenByParent = new Map();
 
-  const svg = d3.select(vizEl).append("svg")
-    .attr("width", W)
-    .attr("height", H)
-    .style("touch-action", "none");
-
-  const g = svg.append("g");
-
-  const zoom = d3.zoom()
-  .scaleExtent([0.6, 3])
-  .filter((event) => {
-    const t = event.target;
-    return !(t && (t.tagName === "circle" || t.tagName === "text"));
-  })
-  .on("zoom", (event) => g.attr("transform", event.transform));
-
-svg.call(zoom);
-
-  // build nodes/links (parent -> link)
-  const nodes = data.nodes.map(d => ({...d}));
-  const links = nodes.filter(n => n.parent).map(n => ({ source: n.parent, target: n.id }));
-
-  // neighbors for toggle
-  const neighbors = {};
-  links.forEach(l => {
-    neighbors[l.source] ??= new Set();
-    neighbors[l.target] ??= new Set();
-    neighbors[l.source].add(l.target);
-    neighbors[l.target].add(l.source);
-  });
-
-  // visibility : root + first level
-  const root = nodes.find(n => !n.parent) || nodes[0];
-  const firstLevel = nodes.filter(n => n.parent === root.id).map(n => n.id);
-  let visible = new Set([root.id, ...firstLevel]);
-
-  const LINK_STROKE = "rgba(255,255,255,.14)";
-  const NODE_STROKE = "rgba(255,255,255,.55)";
-  const NODE_FILL   = "rgba(0,0,0,.08)";
-  const LABEL_FILL  = "rgba(255,255,255,.62)";
-
-  const linkSel = g.append("g")
-    .selectAll("line")
-    .data(links)
-    .join("line")
-    .attr("stroke", LINK_STROKE)
-    .attr("stroke-width", 1.1);
-
-  const nodeSel = g.append("g")
-    .selectAll("circle")
-    .data(nodes)
-    .join("circle")
-    .attr("r", d => d.type === "root" ? 12 : (d.type === "branch" ? 9 : 6))
-    .attr("fill", NODE_FILL)
-    .attr("stroke", NODE_STROKE)
-    .attr("stroke-width", 1.2)
-    .style("cursor", "pointer");
-
-  const labelSel = g.append("g")
-    .selectAll("text")
-    .data(nodes)
-    .join("text")
-    .text(d => d.label)
-    .attr("font-size", 11)
-    .attr("dx", 10)
-    .attr("dy", 4)
-    .attr("fill", LABEL_FILL)
-    .attr("opacity", 0.55);
-
-  const sim = d3.forceSimulation(nodes)
-    .force("link", d3.forceLink(links).id(d => d.id).distance(d => {
-      const s = (d.source.id || d.source);
-      const t = (d.target.id || d.target);
-      if (s === root.id || t === root.id) return 160;
-      return 70;
-    }).strength(0.12))
-    .force("charge", d3.forceManyBody().strength(-170))
-    .force("center", d3.forceCenter(W/2, H/2))
-    .force("collide", d3.forceCollide().radius(d => (d.type === "root" ? 26 : 16)).iterations(2))
-    // Garde un mouvement permanent, très lent, type "constellation"
-    .force("drift", (() => {
-      let localNodes = [];
-      return Object.assign((alpha) => {
-        const t = Date.now() * 0.00009;
-        localNodes.forEach((n) => {
-          n.vx += Math.cos(t + n._phase) * 0.0009 * alpha;
-          n.vy += Math.sin(t * 0.9 + n._phase) * 0.0009 * alpha;
-        });
-      }, {
-        initialize(ns) {
-          localNodes = ns;
-          localNodes.forEach((n, i) => {
-            n._phase = (i / Math.max(localNodes.length, 1)) * Math.PI * 2;
-          });
-        }
+    function sanitizeData(nodes) {
+      nodes.forEach(node => {
+        nodeById.set(node.id, node);
+        const parent = node.parent || null;
+        if (!childrenByParent.has(parent)) childrenByParent.set(parent, []);
+        childrenByParent.get(parent).push(node);
       });
-    })())
-    .alphaDecay(0.03)
-    .alphaMin(0.002)
-    .alphaTarget(0.02)
-    .velocityDecay(0.5);
+    }
 
-  sim.on("tick", () => {
-    linkSel
-      .attr("x1", d => d.source.x).attr("y1", d => d.source.y)
-      .attr("x2", d => d.target.x).attr("y2", d => d.target.y);
+    function getChildren(id) {
+      return (childrenByParent.get(id) || []).slice();
+    }
 
-    nodeSel
-      .attr("cx", d => d.x).attr("cy", d => d.y);
-
-    labelSel
-      .attr("x", d => d.x).attr("y", d => d.y);
-  });
-
-  function isVisible(id){ return visible.has(id); }
-
-  function updateVisibility(){
-    nodeSel.attr("display", d => isVisible(d.id) ? null : "none");
-    labelSel.attr("display", d => isVisible(d.id) ? null : "none");
-    linkSel.attr("display", d => (isVisible(d.source.id) && isVisible(d.target.id)) ? null : "none");
-  }
-
-  function renderPanel(d){
-    hintEl.textContent = "";
-    const tags = (d.keywords || []).map(k => `<span class="tag">${k}</span>`).join("");
-    const years = (d.year !== undefined)
-      ? `Année : ${d.year}`
-      : (d.yearStart ? `Période : ${d.yearStart} — ${d.yearEnd || "…"}` : "");
-    const bibliography = (d.bibliography || []).map(item => {
-      const source = item.url
-        ? `<a href="${item.url}" target="_blank" rel="noopener" style="color:var(--ink); text-decoration:none; border-bottom:1px solid rgba(255,255,255,.28);">Lien</a>`
-        : "";
-      return `<p style="margin:0 0 8px 0; line-height:1.4; font-size:12px; font-weight:400;">${item.text}${source ? ` ${source}` : ""}</p>`;
-    }).join("");
-
-    panelEl.innerHTML = `
-      <p style="margin:10px 0 6px 0; font-family: Space Grotesk, Inter Tight, system-ui, sans-serif; letter-spacing:-.01em; font-weight:400; font-size:14px;">
-        ${d.label}
-      </p>
-      <p class="meta" style="margin:0 0 6px 0;">${d.type || ""}${years ? " · " + years : ""}</p>
-      <div>${tags}</div>
-      ${bibliography ? `<div style="margin-top:12px;">${bibliography}</div>` : ""}
-      ${d.evidence ? `<p style="margin-top:10px;"><a href="${d.evidence}" target="_blank" rel="noopener" style="color:var(--ink); text-decoration:none; border-bottom:1px solid rgba(255,255,255,.28);">Preuve / ancrage</a></p>` : ""}
-    `;
-  }
-
-  function resetPanel(){
-    hintEl.textContent = "Survolez un nœud pour afficher ses métadonnées.";
-    panelEl.innerHTML = "";
-  }
-
-  function resetAll(){
-    visible = new Set([root.id, ...firstLevel]);
-    updateVisibility();
-    resetPanel();
-    sim.alpha(0.7).restart();
-  }
-  resetBtnEl.addEventListener("click", resetAll);
-
-  // interactions (IMPORTANT: chain .on calls correctly)
-  nodeSel
-    .on("mouseover", (event, d) => renderPanel(d))
-    .on("click", (event, d) => {
-      event.stopPropagation();
-      const neigh = neighbors[d.id] ? Array.from(neighbors[d.id]) : [];
-      const allVisible = neigh.every(id => visible.has(id));
-
-      if (allVisible) {
-        neigh.forEach(id => {
-          if (id !== root.id && !firstLevel.includes(id)) visible.delete(id);
-        });
-      } else {
-        visible.add(d.id);
-        neigh.forEach(id => visible.add(id));
+    function getDescendants(id) {
+      const descendants = [];
+      const stack = [...getChildren(id)];
+      while (stack.length) {
+        const current = stack.shift();
+        descendants.push(current);
+        stack.push(...getChildren(current.id));
       }
-      updateVisibility();
-    })
-    .on("dblclick", (event, d) => {
-      event.stopPropagation();
-      if (d.evidence) window.open(d.evidence, "_blank");
+      return descendants;
+    }
+
+    function nodeYears(node) {
+      if (node.year) return String(node.year);
+      if (node.yearStart && node.yearEnd) return `${node.yearStart}–${node.yearEnd}`;
+      if (node.yearStart) return `Depuis ${node.yearStart}`;
+      return "";
+    }
+
+    function microPreview(node) {
+      const years = nodeYears(node);
+      const kws = (node.keywords || []).slice(0, 3).join(" · ");
+      return [years, kws].filter(Boolean).join(" — ") || "Aperçu de la section";
+    }
+
+    function renderMenu() {
+      menuEl.innerHTML = "";
+      SECTION_CONFIG.forEach(item => {
+        const li = document.createElement("li");
+        const a = document.createElement("a");
+        a.textContent = item.title;
+        if (item.href) {
+          a.href = item.href;
+          if (item.href.startsWith("http")) {
+            a.target = "_blank";
+            a.rel = "noopener noreferrer";
+          }
+        } else {
+          a.href = `#${item.id}`;
+          a.dataset.section = item.id;
+        }
+        li.appendChild(a);
+        menuEl.appendChild(li);
+      });
+    }
+
+    function renderSections() {
+      const fragment = document.createDocumentFragment();
+      HERO_NODES.forEach(sectionId => {
+        const sectionNode = nodeById.get(sectionId);
+        if (!sectionNode) return;
+
+        const section = document.createElement("section");
+        section.className = "content-section";
+        section.id = sectionId;
+
+        const h2 = document.createElement("h2");
+        h2.textContent = sectionNode.label;
+        section.appendChild(h2);
+
+        const summary = document.createElement("p");
+        summary.className = "section-summary";
+        summary.textContent = sectionNode.summary || `Entrées générées automatiquement depuis l'arborescence data.json (${sectionNode.id}).`;
+        section.appendChild(summary);
+
+        const list = document.createElement("ul");
+        list.className = "tree-list";
+
+        getChildren(sectionId).forEach(child => {
+          const item = document.createElement("li");
+          item.className = "tree-item";
+
+          const title = document.createElement("h3");
+          title.textContent = child.label;
+          item.appendChild(title);
+
+          const meta = document.createElement("p");
+          meta.className = "meta-line";
+          meta.textContent = [nodeYears(child), child.summary || ""].filter(Boolean).join(" · ");
+          if (meta.textContent) item.appendChild(meta);
+
+          if ((child.keywords || []).length) {
+            const tags = document.createElement("div");
+            tags.className = "keywords";
+            child.keywords.forEach(kw => {
+              const chip = document.createElement("span");
+              chip.textContent = kw;
+              tags.appendChild(chip);
+            });
+            item.appendChild(tags);
+          }
+
+          if (child.evidence) {
+            const evidence = document.createElement("a");
+            evidence.className = "evidence-link";
+            evidence.href = child.evidence;
+            evidence.target = "_blank";
+            evidence.rel = "noopener noreferrer";
+            evidence.textContent = "Preuve";
+            item.appendChild(evidence);
+          }
+
+          const nestedChildren = getDescendants(child.id);
+          if (nestedChildren.length) {
+            const sublist = document.createElement("ul");
+            sublist.className = "sublist";
+            nestedChildren.forEach(desc => {
+              const subItem = document.createElement("li");
+              const parts = [desc.label, nodeYears(desc)].filter(Boolean);
+              subItem.textContent = parts.join(" — ");
+              if (desc.bibliography && Array.isArray(desc.bibliography)) {
+                const small = document.createElement("small");
+                small.textContent = ` (${desc.bibliography.length} références)`;
+                subItem.appendChild(small);
+              }
+              sublist.appendChild(subItem);
+            });
+            item.appendChild(sublist);
+          }
+
+          if (Array.isArray(child.bibliography) && child.bibliography.length) {
+            const bibList = document.createElement("ul");
+            bibList.className = "sublist";
+            child.bibliography.slice(0, 6).forEach(ref => {
+              const li = document.createElement("li");
+              li.textContent = ref.text;
+              if (ref.url) {
+                const link = document.createElement("a");
+                link.href = ref.url;
+                link.target = "_blank";
+                link.rel = "noopener noreferrer";
+                link.className = "evidence-link";
+                link.style.marginLeft = "0.45rem";
+                link.textContent = "Lien";
+                li.appendChild(link);
+              }
+              bibList.appendChild(li);
+            });
+            item.appendChild(bibList);
+          }
+
+          list.appendChild(item);
+        });
+
+        section.appendChild(list);
+        fragment.appendChild(section);
+      });
+      contentEl.innerHTML = "";
+      contentEl.appendChild(fragment);
+    }
+
+    function setActiveMenu(sectionId) {
+      document.querySelectorAll(".menu a[data-section]").forEach(link => {
+        link.classList.toggle("active", link.dataset.section === sectionId);
+      });
+    }
+
+    function enableScrollSpy() {
+      const observer = new IntersectionObserver(entries => {
+        const visible = entries
+          .filter(entry => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+        if (visible) setActiveMenu(visible.target.id);
+      }, {
+        threshold: [0.25, 0.5, 0.75],
+        rootMargin: "-15% 0px -45% 0px"
+      });
+
+      HERO_NODES.forEach(id => {
+        const section = document.getElementById(id);
+        if (section) observer.observe(section);
+      });
+    }
+
+    function initConstellation() {
+      const width = heroEl.clientWidth;
+      const height = heroEl.clientHeight;
+
+      const nodes = HERO_NODES.map(id => {
+        const source = nodeById.get(id) || { id, label: id.replaceAll("_", " "), keywords: [] };
+        return {
+          id,
+          label: source.label,
+          summary: source.summary || "",
+          evidence: source.evidence || null,
+          keywords: source.keywords || [],
+          x: width / 2 + (Math.random() - 0.5) * 100,
+          y: height / 2 + (Math.random() - 0.5) * 60
+        };
+      });
+
+      const links = [
+        { source: nodes[0].id, target: nodes[1].id },
+        { source: nodes[1].id, target: nodes[2].id },
+        { source: nodes[2].id, target: nodes[3].id },
+        { source: nodes[3].id, target: nodes[0].id },
+        { source: nodes[0].id, target: nodes[2].id }
+      ];
+
+      const svg = d3.select("#hero-viz").append("svg")
+        .attr("width", width)
+        .attr("height", height)
+        .attr("viewBox", `0 0 ${width} ${height}`);
+
+      const zoomLayer = svg.append("g");
+      const linkLayer = zoomLayer.append("g");
+      const nodeLayer = zoomLayer.append("g");
+
+      const simulation = d3.forceSimulation(nodes)
+        .force("link", d3.forceLink(links).id(d => d.id).distance(160).strength(0.22))
+        .force("charge", d3.forceManyBody().strength(-165))
+        .force("center", d3.forceCenter(width / 2, height / 2).strength(0.06))
+        .force("collide", d3.forceCollide().radius(52).strength(0.85))
+        .velocityDecay(0.42)
+        .alphaMin(0.03);
+
+      const linksEl = linkLayer.selectAll("line")
+        .data(links)
+        .join("line")
+        .attr("stroke", "rgba(220, 233, 255, 0.34)")
+        .attr("stroke-width", 1.2);
+
+      const nodeEl = nodeLayer.selectAll("g")
+        .data(nodes)
+        .join("g")
+        .style("cursor", "pointer");
+
+      nodeEl.append("circle")
+        .attr("r", 20)
+        .attr("fill", "rgba(9, 12, 21, 0.9)")
+        .attr("stroke", "rgba(229, 238, 255, 0.8)")
+        .attr("stroke-width", 1.35);
+
+      nodeEl.append("text")
+        .text(d => d.id.replaceAll("_", " "))
+        .attr("text-anchor", "middle")
+        .attr("dy", 35)
+        .attr("fill", "rgba(245, 248, 255, 0.9)")
+        .style("font-size", "11px")
+        .style("font-family", "Inter, sans-serif")
+        .style("letter-spacing", "0.02em");
+
+      simulation.on("tick", () => {
+        linksEl
+          .attr("x1", d => d.source.x)
+          .attr("y1", d => d.source.y)
+          .attr("x2", d => d.target.x)
+          .attr("y2", d => d.target.y);
+
+        nodeEl.attr("transform", d => `translate(${d.x},${d.y})`);
+      });
+
+      const drag = d3.drag()
+        .on("start", (event, d) => {
+          if (!event.active) simulation.alphaTarget(0.14).restart();
+          d.fx = d.x;
+          d.fy = d.y;
+        })
+        .on("drag", (event, d) => {
+          d.fx = event.x;
+          d.fy = event.y;
+        })
+        .on("end", (event, d) => {
+          if (!event.active) simulation.alphaTarget(0.04);
+          d.fx = null;
+          d.fy = null;
+        });
+
+      nodeEl.call(drag)
+        .on("mouseover", function(event, d) {
+          d3.select(this).select("circle")
+            .transition().duration(120)
+            .attr("stroke", "#8bc6ff")
+            .attr("stroke-width", 2.1)
+            .attr("r", 22);
+
+          tooltipEl.innerHTML = `<strong>${d.label}</strong>${microPreview(nodeById.get(d.id) || d)}`;
+          tooltipEl.style.left = `${Math.min(event.pageX + 10, window.innerWidth - 260)}px`;
+          tooltipEl.style.top = `${event.pageY + 10}px`;
+          tooltipEl.classList.add("visible");
+        })
+        .on("mousemove", (event) => {
+          tooltipEl.style.left = `${Math.min(event.pageX + 10, window.innerWidth - 260)}px`;
+          tooltipEl.style.top = `${event.pageY + 10}px`;
+        })
+        .on("mouseout", function() {
+          d3.select(this).select("circle")
+            .transition().duration(120)
+            .attr("stroke", "rgba(229, 238, 255, 0.8)")
+            .attr("stroke-width", 1.35)
+            .attr("r", 20);
+          tooltipEl.classList.remove("visible");
+        })
+        .on("click", (_, d) => {
+          const target = document.getElementById(d.id);
+          if (target) {
+            target.scrollIntoView({ behavior: "smooth", block: "start" });
+            setActiveMenu(d.id);
+          }
+        })
+        .on("dblclick", (_, d) => {
+          if (d.evidence) {
+            window.open(d.evidence, "_blank", "noopener,noreferrer");
+          }
+        });
+
+      const zoom = d3.zoom()
+        .scaleExtent([0.85, 1.6])
+        .translateExtent([[0, 0], [width, height]])
+        .on("zoom", (event) => {
+          zoomLayer.attr("transform", event.transform);
+        });
+
+      svg.call(zoom);
+
+      window.addEventListener("resize", () => {
+        const w = heroEl.clientWidth;
+        const h = heroEl.clientHeight;
+        svg.attr("width", w).attr("height", h).attr("viewBox", `0 0 ${w} ${h}`);
+        simulation.force("center", d3.forceCenter(w / 2, h / 2).strength(0.06));
+        simulation.alpha(0.24).restart();
+      });
+    }
+
+    async function init() {
+      const data = await fetch("data.json").then(res => res.json());
+      sanitizeData(data.nodes || []);
+      renderMenu();
+      renderSections();
+      enableScrollSpy();
+      setActiveMenu(HERO_NODES[0]);
+      initConstellation();
+    }
+
+    init().catch(err => {
+      console.error(err);
+      contentEl.innerHTML = "<p>Erreur de chargement des données.</p>";
     });
-
-  updateVisibility();
-  resetPanel();
-
-  window.addEventListener("resize", () => {
-    ({ W, H } = measure());
-    svg.attr("width", W).attr("height", H);
-    sim.force("center", d3.forceCenter(W/2, H/2));
-    sim.alpha(0.6).restart();
-  });
-
-})();
-</script>
-
+  </script>
 </body>
 </html>
