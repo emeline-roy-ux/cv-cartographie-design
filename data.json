@@ -359,49 +359,11 @@
       "evidence": null
     },
     {
-      "id": "ens_sc_edu",
-      "type": "branch",
-      "label": "Sciences de l’éducation",
-      "parent": "enseignements"
-    },
-    {
-      "id": "ens_design",
-      "type": "branch",
-      "label": "Design",
-      "parent": "enseignements"
-    },
-    {
-      "id": "master_meef",
-      "type": "leaf",
-      "label": "Master MEEF Design — concours / didactique / mémoire",
-      "parent": "ens_sc_edu",
-      "yearStart": 2020,
-      "yearEnd": 2026,
-      "keywords": [
-        "CAPET/CAPLP",
-        "problématisation",
-        "mémoire"
-      ],
-      "evidence": null
-    },
-    {
-      "id": "doctorat",
-      "type": "leaf",
-      "label": "Doctorat — séminaires / encadrements (selon dossiers)",
-      "parent": "ens_sc_edu",
-      "yearStart": 2024,
-      "yearEnd": 2026,
-      "keywords": [
-        "doctorat"
-      ],
-      "evidence": null
-    },
-    {
       "id": "enseignements",
       "type": "branch",
       "label": "Enseignements",
       "parent": "cv",
-      "summary": "Activités d’enseignement en sciences de l’éducation et design, du master au doctorat."
+      "summary": "Les enseignements s’articulent autour de deux thématiques principales : (1) la recherche en design ; (2) enseigner et apprendre le design et les métiers d’art."
     },
     {
       "id": "responsabilites_institutionnelles",
@@ -450,6 +412,207 @@
         "diplôme"
       ],
       "summary": "Interventions en jurys et expertises dans des dispositifs académiques et professionnels."
+    },
+    {
+      "id": "ens_theme_recherche_design",
+      "type": "branch",
+      "parent": "enseignements",
+      "label": "1) Recherche en design",
+      "summary": "Cours centrés sur la recherche en design, les méthodes de projet et la structuration de connaissances situées.",
+      "keywords": [
+        "recherche en design",
+        "méthodologie",
+        "épistémologie"
+      ]
+    },
+    {
+      "id": "ens_meef_design_dma",
+      "type": "leaf",
+      "parent": "enseignements",
+      "label": "Master 1 & 2 MEEF Design et métiers d’art — Le design",
+      "summary": "Ressources théoriques, techniques et culturelles ; transposition didactique ; techniques d’atelier ; conception de situations d’enseignement-apprentissage ; interdisciplinarité ; analyse des pratiques et articulation formation–recherche.",
+      "keywords": [
+        "didactique du design",
+        "formation des enseignant·es",
+        "ingénierie pédagogique",
+        "recherche-action",
+        "transitions écologiques"
+      ]
+    },
+    {
+      "id": "ens_dsaa_m1_memoire",
+      "type": "leaf",
+      "parent": "enseignements",
+      "label": "Master 1 Design (DSAA) — UE Mémoire de recherche professionnelle",
+      "summary": "Élaboration du mémoire professionnel : problématique située, cadre théorique, méthodologies en arts appliqués, veille scientifique et environnements numériques (bases de données, IA génératives).",
+      "keywords": [
+        "recherche en design",
+        "problématisation",
+        "écriture scientifique",
+        "numérique critique"
+      ]
+    },
+    {
+      "id": "ens_dsaa_m1_prospective",
+      "type": "leaf",
+      "parent": "enseignements",
+      "label": "Master 1 Design (DSAA) — UE Prospectives, pratiques et médiations",
+      "summary": "Espace d’expérimentation prospective articulant conception, réflexion critique et médiation ; scénarios intégrant transitions écologiques, mutations socio-techniques et créativités artificielles.",
+      "keywords": [
+        "prospective en design",
+        "médiation de projet",
+        "cultures numériques",
+        "innovation"
+      ]
+    },
+    {
+      "id": "ens_lp_textile_mode",
+      "type": "leaf",
+      "parent": "enseignements",
+      "label": "Licence professionnelle design textile et mode",
+      "summary": "Initiation aux fondements de la recherche en design appliquée au textile et à la mode : problématique, veille créative, expérimentations matières, analyse d’usages et formalisation des démarches.",
+      "keywords": [
+        "textile et mode",
+        "expérimentation matérielle",
+        "veille créative",
+        "innovation"
+      ]
+    },
+    {
+      "id": "ens_l3_design",
+      "type": "leaf",
+      "parent": "enseignements",
+      "label": "Licence 3 Design",
+      "summary": "Co-enseignement sur l’enseignement du design, la pédagogie de projet et l’analyse de prescription ; sensibilisation à l’épistémologie du design et à ses principes didactiques.",
+      "evidence": "https://sites.google.com/view/didactique-du-design/accueil",
+      "keywords": [
+        "épistémologie du design",
+        "didactique du design",
+        "designer-pédagogue"
+      ]
+    },
+    {
+      "id": "ens_bts_esthetique",
+      "type": "leaf",
+      "parent": "enseignements",
+      "label": "BTS Esthétique — Design de communication",
+      "summary": "Conception de visuels pour la promotion de produits cosmétiques : communication visuelle, merchandising, branding, outils numériques et identité de marque.",
+      "keywords": [
+        "image publicitaire",
+        "médias numériques",
+        "graphisme",
+        "expérience utilisateur"
+      ]
+    },
+    {
+      "id": "ens_bachelor_event",
+      "type": "leaf",
+      "parent": "enseignements",
+      "label": "Bachelor événementiel — Histoire de la mode et merchandising",
+      "summary": "Professionnalisation autour de l’histoire de la mode et de la vitrine : investigation in situ à l’Odysséum et réalisation de vitrines en interaction avec des professionnel·les du prêt-à-porter.",
+      "keywords": [
+        "histoire de la mode",
+        "merchandising",
+        "démarche de création"
+      ]
+    },
+    {
+      "id": "ens_theme_apprendre_design",
+      "type": "branch",
+      "parent": "enseignements",
+      "label": "2) Enseigner et apprendre le design et les métiers d’art",
+      "summary": "Approches didactiques et pédagogiques centrées sur les apprentissages, l’inclusion, la posture professionnelle et la recherche sur les pratiques.",
+      "keywords": [
+        "pédagogie du projet",
+        "inclusion",
+        "analyse des pratiques"
+      ]
+    },
+    {
+      "id": "ens_meef_eleves_inclusion",
+      "type": "leaf",
+      "parent": "enseignements",
+      "label": "Master 1 & 2 MEEF Design et métiers d’art — Élèves, inclusion et engagement",
+      "summary": "Analyse des apprentissages en design et adaptation des démarches de projet à la diversité des profils ; engagement créatif, coopération et éducations transversales en atelier.",
+      "keywords": [
+        "inclusion en atelier",
+        "engagement créatif",
+        "culture matérielle"
+      ]
+    },
+    {
+      "id": "ens_meef_posture_coop",
+      "type": "leaf",
+      "parent": "enseignements",
+      "label": "Master 1 & 2 MEEF Design et métiers d’art — Posture professionnelle et coopération éducative",
+      "summary": "Construction d’une posture enseignante en design articulant responsabilité, sécurité des pratiques techniques, éthique du projet, coopération éducative et culture numérique.",
+      "keywords": [
+        "identité professionnelle",
+        "éthique du projet",
+        "sécurité en atelier",
+        "culture numérique"
+      ]
+    },
+    {
+      "id": "ens_meef_analyse_pratiques",
+      "type": "leaf",
+      "parent": "enseignements",
+      "label": "Master 1 & 2 MEEF Design et métiers d’art — Analyse des pratiques et recherche en didactique du design",
+      "summary": "Analyse des situations d’enseignement en atelier, fablab et salle de projet ; initiation aux méthodes de recherche en éducation et à la documentation réflexive des pratiques.",
+      "keywords": [
+        "design-based research",
+        "réflexivité",
+        "documentation de projet"
+      ]
+    },
+    {
+      "id": "ens_autres_innovation",
+      "type": "branch",
+      "parent": "enseignements",
+      "label": "Autres cours : innovation pédagogique, recherche et humanités",
+      "summary": "Enseignements en innovation pédagogique et méthodologies de recherche, du supérieur aux formations sociales.",
+      "keywords": [
+        "innovation pédagogique",
+        "recherche",
+        "humanités"
+      ]
+    },
+    {
+      "id": "ens_cipe_amu",
+      "type": "leaf",
+      "parent": "enseignements",
+      "label": "Doctorant·es chargé·es d’enseignement (AMU) — CIPE Innovation pédagogique : méthodes, outils numériques et IA",
+      "summary": "Formation aux fondamentaux de l’ingénierie pédagogique : objectifs d’apprentissage, méthodes actives, évaluation, Moodle, hybridation et intégration raisonnée de l’IA.",
+      "keywords": [
+        "enseignement supérieur",
+        "Moodle",
+        "IA",
+        "éthique du numérique"
+      ]
+    },
+    {
+      "id": "ens_m1_m2_recherche_edu",
+      "type": "leaf",
+      "parent": "enseignements",
+      "label": "Master 1 & 2 Métiers de la recherche et de l’expertise en éducation",
+      "summary": "Processus scientifique, théories et activités en sciences de l’éducation : concepts didactiques, gestes professoraux, épistémologie pratique et conception de dispositifs éducatifs.",
+      "keywords": [
+        "sciences de l’éducation",
+        "didactique comparée",
+        "dispositifs éducatifs"
+      ]
+    },
+    {
+      "id": "ens_dsts",
+      "type": "leaf",
+      "parent": "enseignements",
+      "label": "Diplôme supérieur de travail social — Initiation à la recherche",
+      "summary": "Première approche de la recherche : documentation, modélisation, méthodes qualitatives et quantitatives, identification des données et outils de traitement de texte pour documents longs.",
+      "keywords": [
+        "initiation à la recherche",
+        "méthodologies",
+        "normes rédactionnelles"
+      ]
     }
   ]
 }
