@@ -1,0 +1,26 @@
+[
+  {
+    "id": "hal-profile",
+    "year": 2026,
+    "title": "Profil HAL — Emeline Cusenier / Roy",
+    "source": "Archives ouvertes HAL",
+    "docType": "notice",
+    "url": "https://hal.science/search/index/?q=authIdHal_s:emeline-cusenier"
+  },
+  {
+    "id": "hal-deed-2025",
+    "year": 2025,
+    "title": "L’influence des références aux industries culturelles et créatives sur la créativité des élèves en arts appliqués",
+    "source": "Designer l’enseignement, Enseigner le Design",
+    "docType": "article",
+    "url": "https://hal.science/search/index/?q=L%E2%80%99influence+des+r%C3%A9f%C3%A9rences+aux+industries+culturelles+et+cr%C3%A9atives"
+  },
+  {
+    "id": "hal-sdd-2022",
+    "year": 2022,
+    "title": "Design social et enseignement secondaire en France : l’émergence d’un design pédagogique ?",
+    "source": "Sciences du Design",
+    "docType": "article",
+    "url": "https://hal.science/search/index/?q=Design+social+et+enseignement+secondaire+en+France"
+  }
+]
