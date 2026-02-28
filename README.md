@@ -36,22 +36,17 @@ Options utiles :
 
 ### 2) Brancher les données HAL dans la section Publications
 
-Tu peux ensuite charger `hal-publications.json` et remplacer/compléter les entrées de la section `publications` dans `index.html`.
+C’est déjà intégré dans `index.html` : le site tente de charger `hal-publications.json` au démarrage.
 
-Exemple minimal (dans `init()`):
+- Si le fichier est présent, ses entrées sont injectées automatiquement comme enfants de `publications`.
+- Si le fichier est absent, le site continue d’utiliser uniquement `data.json` (fallback silencieux).
 
 ```js
-const data = await fetch("data.json").then(res => res.json());
-
-// Optionnel : fusion HAL
 const halPublications = await fetch("hal-publications.json")
   .then(res => (res.ok ? res.json() : []))
   .catch(() => []);
 
-const publicationsNode = data.nodes.find(n => n.id === "publications");
-if (publicationsNode && Array.isArray(halPublications) && halPublications.length) {
-  publicationsNode.summary = `${halPublications.length} publication(s) synchronisée(s) depuis HAL.`;
-}
+mergeHalPublications(data.nodes || [], halPublications);
 ```
 
 ### Pourquoi cette approche ?

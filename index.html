@@ -317,6 +317,45 @@
       return [years, kws].filter(Boolean).join(" — ") || "Aperçu de la section";
     }
 
+
+    function safeSlug(value) {
+      return String(value || "")
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[̀-ͯ]/g, "")
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/(^-|-$)/g, "") || "publication";
+    }
+
+    function mergeHalPublications(nodes, halPublications) {
+      if (!Array.isArray(nodes) || !Array.isArray(halPublications) || !halPublications.length) return;
+
+      const publicationsNode = nodes.find(node => node.id === "publications");
+      if (!publicationsNode) return;
+
+      const filteredNodes = nodes.filter(node => !String(node.id || "").startsWith("hal_pub_"));
+      nodes.length = 0;
+      filteredNodes.forEach(node => nodes.push(node));
+
+      const mappedPublications = halPublications
+        .filter(pub => pub && typeof pub.title === "string" && pub.title.trim())
+        .map((pub, index) => {
+          const stableIdPart = pub.id ? safeSlug(pub.id) : `${safeSlug(pub.title)}-${index + 1}`;
+          return {
+            id: `hal_pub_${stableIdPart}`,
+            parent: "publications",
+            label: pub.title.trim(),
+            year: pub.year || null,
+            summary: [pub.source, pub.docType].filter(Boolean).join(" · "),
+            evidence: pub.url || null,
+            keywords: ["HAL"]
+          };
+        });
+
+      mappedPublications.forEach(pub => nodes.push(pub));
+      publicationsNode.summary = `${mappedPublications.length} publication(s) synchronisée(s) depuis HAL.`;
+    }
+
     function renderMenu() {
       menuEl.innerHTML = "";
       SECTION_CONFIG.forEach(item => {
@@ -618,6 +657,11 @@
 
     async function init() {
       const data = await fetch("data.json").then(res => res.json());
+      const halPublications = await fetch("hal-publications.json")
+        .then(res => (res.ok ? res.json() : []))
+        .catch(() => []);
+
+      mergeHalPublications(data.nodes || [], halPublications);
       sanitizeData(data.nodes || []);
       renderMenu();
       renderSections();
