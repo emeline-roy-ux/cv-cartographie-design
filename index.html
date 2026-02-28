@@ -332,7 +332,20 @@
       const publicationsNode = nodes.find(node => node.id === "publications");
       if (!publicationsNode) return;
 
-      const filteredNodes = nodes.filter(node => !String(node.id || "").startsWith("hal_pub_"));
+      const descendantsToRemove = new Set();
+      const queue = ["publications"];
+
+      while (queue.length) {
+        const current = queue.shift();
+        nodes.forEach(node => {
+          if (node.parent === current) {
+            descendantsToRemove.add(node.id);
+            queue.push(node.id);
+          }
+        });
+      }
+
+      const filteredNodes = nodes.filter(node => !descendantsToRemove.has(node.id));
       nodes.length = 0;
       filteredNodes.forEach(node => nodes.push(node));
 
@@ -353,6 +366,59 @@
 
       mappedPublications.forEach(pub => nodes.push(pub));
       publicationsNode.summary = `${mappedPublications.length} publication(s) synchronisée(s) depuis HAL.`;
+    }
+
+    function normalizeHalDoc(doc, index) {
+      const title = Array.isArray(doc?.title_s) && doc.title_s.length
+        ? doc.title_s[0]
+        : (typeof doc?.label_s === "string" ? doc.label_s : null);
+
+      const source = [doc?.journalTitle_s, doc?.conferenceTitle_s, doc?.bookTitle_s]
+        .filter(Boolean)
+        .map(value => String(value).trim())
+        .find(Boolean) || null;
+
+      const url = Array.isArray(doc?.files_s) && doc.files_s.length
+        ? doc.files_s[0]
+        : (doc?.uri_s || null);
+
+      return {
+        id: doc?.docid || doc?.halId_s || `hal-${index + 1}`,
+        year: doc?.producedDateY_i || doc?.publicationDateY_i || null,
+        title,
+        source,
+        docType: doc?.docType_s || null,
+        url
+      };
+    }
+
+    async function fetchHalPublications() {
+      const params = new URLSearchParams({
+        q: "authIdHal_s:emeline-cusenier",
+        rows: "200",
+        sort: "producedDateY_i desc",
+        wt: "json",
+        fl: "docid,halId_s,title_s,label_s,uri_s,files_s,docType_s,producedDateY_i,publicationDateY_i,journalTitle_s,conferenceTitle_s,bookTitle_s"
+      });
+
+      try {
+        const halUrl = `https://api.archives-ouvertes.fr/search/?${params.toString()}`;
+        const response = await fetch(halUrl);
+        if (!response.ok) throw new Error(`HAL API HTTP ${response.status}`);
+
+        const payload = await response.json();
+        const docs = payload?.response?.docs;
+        if (!Array.isArray(docs)) throw new Error("HAL payload invalide");
+
+        return docs
+          .map(normalizeHalDoc)
+          .filter(pub => pub && typeof pub.title === "string" && pub.title.trim());
+      } catch (error) {
+        console.warn("HAL API inaccessible, fallback sur hal-publications.json", error);
+        return fetch("hal-publications.json")
+          .then(res => (res.ok ? res.json() : []))
+          .catch(() => []);
+      }
     }
 
     function renderMenu() {
@@ -656,9 +722,7 @@
 
     async function init() {
       const data = await fetch("data.json").then(res => res.json());
-      const halPublications = await fetch("hal-publications.json")
-        .then(res => (res.ok ? res.json() : []))
-        .catch(() => []);
+      const halPublications = await fetchHalPublications();
 
       mergeHalPublications(data.nodes || [], halPublications);
       sanitizeData(data.nodes || []);
