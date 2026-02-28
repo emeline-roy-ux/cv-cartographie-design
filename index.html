@@ -203,6 +203,15 @@
       gap: 0.9rem;
     }
 
+    .publication-group { margin-top: 1rem; }
+    .publication-group h3 {
+      margin: 0 0 0.6rem;
+      font-family: var(--font-heading);
+      font-size: 0.9rem;
+      letter-spacing: 0.04em;
+      color: var(--muted);
+    }
+
     .tree-item {
       padding: 0.45rem 0;
       border-top: 1px solid rgba(255,255,255,0.08);
@@ -241,7 +250,7 @@
 <body>
   <header class="top-nav">
     <div class="nav-inner">
-      <a class="brand" href="#top">Emeline ROY · Recherche-création</a>
+      <a class="brand" href="#top">Emeline ROY · Enseignante-chercheuse</a>
       <nav aria-label="Navigation principale">
         <ul class="menu" id="menu"></ul>
       </nav>
@@ -252,7 +261,6 @@
     <div id="hero-viz"></div>
     <div class="hero-copy">
       <h1>CV cartographique</h1>
-      <p>Constellation élastique en tête de page, puis structuration éditoriale du contenu en sections académiques.</p>
     </div>
     <div class="tooltip" id="node-tooltip" role="status" aria-live="polite"></div>
   </section>
@@ -358,14 +366,28 @@
             parent: "publications",
             label: pub.title.trim(),
             year: pub.year || null,
-            summary: [pub.source, pub.docType].filter(Boolean).join(" · "),
+            summary: [pub.source, pub.authorsLabel].filter(Boolean).join(" · "),
             evidence: pub.url || null,
-            keywords: ["HAL"]
+            keywords: ["HAL", pub.category || "ART"]
           };
         });
 
       mappedPublications.forEach(pub => nodes.push(pub));
-      publicationsNode.summary = `${mappedPublications.length} publication(s) synchronisée(s) depuis HAL.`;
+    }
+
+    function formatHalAuthors(authors) {
+      if (!Array.isArray(authors) || !authors.length) return "";
+      return authors.join(", ");
+    }
+
+    function classifyHalType(docType, halId) {
+      const normalizedDocType = String(docType || "").toLowerCase();
+      const normalizedHalId = String(halId || "").toUpperCase();
+
+      if (normalizedDocType.includes("poster") || normalizedHalId.startsWith("POSTER")) return "POSTER";
+      if (normalizedDocType.includes("comm") || normalizedDocType.includes("conf") || normalizedHalId.startsWith("COMM")) return "COMM";
+      if (normalizedDocType.includes("book") || normalizedDocType.includes("chapter") || normalizedHalId.startsWith("COUV")) return "COUV";
+      return "ART";
     }
 
     function normalizeHalDoc(doc, index) {
@@ -382,12 +404,20 @@
         ? doc.files_s[0]
         : (doc?.uri_s || null);
 
+      const authors = Array.isArray(doc?.authFullName_s)
+        ? doc.authFullName_s.filter(Boolean).map(name => String(name).trim())
+        : [];
+
       return {
         id: doc?.docid || doc?.halId_s || `hal-${index + 1}`,
+        halId: doc?.halId_s || null,
         year: doc?.producedDateY_i || doc?.publicationDateY_i || null,
         title,
         source,
         docType: doc?.docType_s || null,
+        authors,
+        authorsLabel: formatHalAuthors(authors),
+        category: classifyHalType(doc?.docType_s, doc?.halId_s),
         url
       };
     }
@@ -398,7 +428,7 @@
         rows: "200",
         sort: "producedDateY_i desc",
         wt: "json",
-        fl: "docid,halId_s,title_s,label_s,uri_s,files_s,docType_s,producedDateY_i,publicationDateY_i,journalTitle_s,conferenceTitle_s,bookTitle_s"
+        fl: "docid,halId_s,title_s,label_s,uri_s,files_s,docType_s,producedDateY_i,publicationDateY_i,journalTitle_s,conferenceTitle_s,bookTitle_s,authFullName_s"
       });
 
       try {
@@ -464,7 +494,46 @@
         const list = document.createElement("ul");
         list.className = "tree-list";
 
-        getChildren(sectionId).forEach(child => {
+        const sectionChildren = getChildren(sectionId);
+        const publicationGroups = ["ART", "COUV", "COMM", "POSTER"];
+        const groupedPublicationChildren = sectionId === "publications"
+          ? publicationGroups.flatMap(group => sectionChildren.filter(child => (child.keywords || []).includes(group)))
+          : sectionChildren;
+
+        const childrenToRender = sectionId === "publications" ? groupedPublicationChildren : sectionChildren;
+
+        if (sectionId === "publications") {
+          publicationGroups.forEach(group => {
+            const groupChildren = sectionChildren.filter(child => (child.keywords || []).includes(group));
+            if (!groupChildren.length) return;
+
+            const groupWrap = document.createElement("div");
+            groupWrap.className = "publication-group";
+
+            const groupTitle = document.createElement("h3");
+            groupTitle.textContent = group;
+            groupWrap.appendChild(groupTitle);
+
+            const groupList = document.createElement("ul");
+            groupList.className = "tree-list";
+
+            groupChildren.forEach(child => {
+              const item = buildTreeItem(child);
+              groupList.appendChild(item);
+            });
+
+            groupWrap.appendChild(groupList);
+            section.appendChild(groupWrap);
+          });
+        }
+
+        childrenToRender.forEach(child => {
+          if (sectionId === "publications") return;
+          const item = buildTreeItem(child);
+          list.appendChild(item);
+        });
+
+        function buildTreeItem(child) {
           const item = document.createElement("li");
           item.className = "tree-item";
 
@@ -494,7 +563,7 @@
             evidence.href = child.evidence;
             evidence.target = "_blank";
             evidence.rel = "noopener noreferrer";
-            evidence.textContent = "Preuve";
+            evidence.textContent = "Lien";
             item.appendChild(evidence);
           }
 
@@ -537,10 +606,10 @@
             item.appendChild(bibList);
           }
 
-          list.appendChild(item);
-        });
+          return item;
+        }
 
-        section.appendChild(list);
+        if (sectionId !== "publications") section.appendChild(list);
         fragment.appendChild(section);
       });
       contentEl.innerHTML = "";
@@ -629,14 +698,6 @@
         .attr("stroke", "rgba(229, 238, 255, 0.8)")
         .attr("stroke-width", 1.35);
 
-      nodeEl.append("text")
-        .text(d => d.id.replaceAll("_", " "))
-        .attr("text-anchor", "middle")
-        .attr("dy", 35)
-        .attr("fill", "rgba(245, 248, 255, 0.9)")
-        .style("font-size", "11px")
-        .style("font-family", "Inter, sans-serif")
-        .style("letter-spacing", "0.02em");
 
       simulation.on("tick", () => {
         linksEl
