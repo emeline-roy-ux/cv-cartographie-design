@@ -115,17 +115,13 @@
       height: var(--hero-h);
       border-bottom: 1px solid var(--line);
       overflow: hidden;
-      max-width: 1100px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(300px, min(52vw, 620px));
-      align-items: stretch;
     }
 
     #hero-viz {
-      position: relative;
-      justify-self: end;
-      width: 100%;
+      position: absolute;
+      top: 0;
+      right: clamp(0.5rem, 4vw, 3rem);
+      width: min(52vw, 620px);
       height: 100%;
       transition: top 220ms ease, right 220ms ease, width 220ms ease, height 220ms ease, border-color 220ms ease, background-color 220ms ease;
     }
@@ -149,8 +145,10 @@
     .hero-copy {
       position: relative;
       z-index: 2;
+      max-width: 1100px;
+      margin: 0 auto;
       height: 100%;
-      padding: 1.2rem 1rem;
+      padding: 1.2rem clamp(300px, 48vw, 640px) 1.2rem 1rem;
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
@@ -300,11 +298,6 @@
       .menu { justify-content: flex-start; gap: 0.3rem 0.75rem; }
       :root { --header-h: 96px; }
       main { padding-top: 1rem; }
-      .hero {
-        max-width: none;
-        grid-template-columns: 1fr;
-      }
-
       .hero-copy {
         padding: 1.2rem 1rem;
       }
