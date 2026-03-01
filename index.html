@@ -121,7 +121,7 @@
       position: absolute;
       top: 0;
       right: 0;
-      width: min(60vw, 760px);
+      width: min(56vw, 680px);
       height: 100%;
       transition: top 220ms ease, right 220ms ease, width 220ms ease, height 220ms ease, border-color 220ms ease, background-color 220ms ease;
     }
@@ -722,7 +722,7 @@
           summary: source.summary || "",
           evidence: source.evidence || null,
           keywords: source.keywords || [],
-          x: width * 0.58 + (Math.random() - 0.5) * 100,
+          x: width * 0.72 + (Math.random() - 0.5) * 100,
           y: height / 2 + (Math.random() - 0.5) * 60
         };
       });
@@ -747,7 +747,7 @@
       const simulation = d3.forceSimulation(nodes)
         .force("link", d3.forceLink(links).id(d => d.id).distance(160).strength(0.22))
         .force("charge", d3.forceManyBody().strength(-165))
-        .force("center", d3.forceCenter(width * 0.58, height / 2).strength(0.06))
+        .force("center", d3.forceCenter(width * 0.72, height / 2).strength(0.06))
         .force("collide", d3.forceCollide().radius(52).strength(0.85))
         .velocityDecay(0.42)
         .alphaMin(0.03);
@@ -852,7 +852,7 @@
         const w = heroEl.clientWidth;
         const h = heroEl.clientHeight;
         svg.attr("width", w).attr("height", h).attr("viewBox", `0 0 ${w} ${h}`);
-        simulation.force("center", d3.forceCenter(w * 0.58, h / 2).strength(0.06));
+        simulation.force("center", d3.forceCenter(w * 0.72, h / 2).strength(0.06));
         simulation.alpha(0.24).restart();
       }
 
