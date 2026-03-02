@@ -310,12 +310,13 @@
         padding: 1.2rem 1rem;
       }
       #hero-viz.hero-viz-following {
-        position: absolute;
-        inset: 0;
-        width: auto;
-        height: auto;
-        border: none;
-        border-radius: 0;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: min(72vw, 340px);
+        height: min(36vh, 240px);
+        border: 1px solid transparent;
+        border-radius: 10px;
         background: transparent;
         box-shadow: none;
       }
@@ -761,7 +762,7 @@
         targetY: Number.parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--header-h")) + 12,
         pointerInsideViz: false,
         isDraggingNode: false,
-        orbitRadius: 118
+        orbitRadius: 46
       };
 
       const zoomLayer = svg.append("g");
@@ -930,8 +931,8 @@
       }
 
       function runFollowAnimation() {
-        const easing = 0.045;
-        const maxStep = 4.2;
+        const easing = 0.04;
+        const maxStep = 3.8;
         const deltaX = followState.targetX - followState.currentX;
         const deltaY = followState.targetY - followState.currentY;
 
@@ -985,7 +986,7 @@
       window.addEventListener("mousemove", handlePointerTracking, { passive: true });
 
       function updateFollowState() {
-        const shouldFollow = window.innerWidth > 840;
+        const shouldFollow = true;
         const isFollowing = heroEl.classList.contains("hero-viz-following");
         if (shouldFollow === isFollowing) return;
         heroEl.classList.toggle("hero-viz-following", shouldFollow);
