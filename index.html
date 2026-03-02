@@ -760,7 +760,8 @@
         targetX: 12,
         targetY: Number.parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--header-h")) + 12,
         pointerInsideViz: false,
-        isDraggingNode: false
+        isDraggingNode: false,
+        orbitRadius: 92
       };
 
       const zoomLayer = svg.append("g");
@@ -898,15 +899,29 @@
         }
 
         const margin = 12;
-        const offsetX = 26;
-        const offsetY = 18;
         const rect = heroEl.getBoundingClientRect();
         const halfWidth = rect.width / 2;
         const halfHeight = rect.height / 2;
         const minY = Number.parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--header-h")) + margin;
 
-        const desiredX = followState.pointerX + offsetX - halfWidth;
-        const desiredY = followState.pointerY + offsetY - halfHeight;
+        const currentCenterX = followState.currentX + halfWidth;
+        const currentCenterY = followState.currentY + halfHeight;
+        let dirX = currentCenterX - followState.pointerX;
+        let dirY = currentCenterY - followState.pointerY;
+        const dirLength = Math.hypot(dirX, dirY);
+
+        if (dirLength < 1) {
+          dirX = 1;
+          dirY = -0.2;
+        } else {
+          dirX /= dirLength;
+          dirY /= dirLength;
+        }
+
+        const desiredCenterX = followState.pointerX + (dirX * followState.orbitRadius);
+        const desiredCenterY = followState.pointerY + (dirY * followState.orbitRadius);
+        const desiredX = desiredCenterX - halfWidth;
+        const desiredY = desiredCenterY - halfHeight;
 
         followState.targetX = clamp(desiredX, margin, window.innerWidth - rect.width - margin);
         followState.targetY = clamp(desiredY, minY, window.innerHeight - rect.height - margin);
@@ -915,12 +930,18 @@
       }
 
       function runFollowAnimation() {
-        const easing = 0.14;
+        const easing = 0.075;
+        const maxStep = 9;
         const deltaX = followState.targetX - followState.currentX;
         const deltaY = followState.targetY - followState.currentY;
 
-        followState.currentX += deltaX * easing;
-        followState.currentY += deltaY * easing;
+        const nextStepX = deltaX * easing;
+        const nextStepY = deltaY * easing;
+        const stepLength = Math.hypot(nextStepX, nextStepY);
+        const stepScale = stepLength > maxStep ? maxStep / stepLength : 1;
+
+        followState.currentX += nextStepX * stepScale;
+        followState.currentY += nextStepY * stepScale;
         heroEl.style.setProperty("--follow-x", `${followState.currentX}px`);
         heroEl.style.setProperty("--follow-y", `${followState.currentY}px`);
 
