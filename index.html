@@ -761,7 +761,7 @@
         targetY: Number.parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--header-h")) + 12,
         pointerInsideViz: false,
         isDraggingNode: false,
-        orbitRadius: 92
+        orbitRadius: 118
       };
 
       const zoomLayer = svg.append("g");
@@ -892,7 +892,7 @@
         const isFollowing = heroEl.classList.contains("hero-viz-following");
         if (!isFollowing) return;
 
-        if (followState.pointerInsideViz || followState.isDraggingNode) {
+        if (followState.isDraggingNode) {
           followState.targetX = followState.currentX;
           followState.targetY = followState.currentY;
           return;
@@ -930,8 +930,8 @@
       }
 
       function runFollowAnimation() {
-        const easing = 0.075;
-        const maxStep = 9;
+        const easing = 0.045;
+        const maxStep = 4.2;
         const deltaX = followState.targetX - followState.currentX;
         const deltaY = followState.targetY - followState.currentY;
 
@@ -985,7 +985,7 @@
       window.addEventListener("mousemove", handlePointerTracking, { passive: true });
 
       function updateFollowState() {
-        const shouldFollow = window.innerWidth > 840 && window.scrollY > Math.max(heroEl.offsetHeight - 100, 140);
+        const shouldFollow = window.innerWidth > 840;
         const isFollowing = heroEl.classList.contains("hero-viz-following");
         if (shouldFollow === isFollowing) return;
         heroEl.classList.toggle("hero-viz-following", shouldFollow);
@@ -1001,7 +1001,6 @@
         updateFollowState();
         resizeSimulation();
       });
-      window.addEventListener("scroll", updateFollowState, { passive: true });
       updateFollowState();
     }
 
