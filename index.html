@@ -808,6 +808,7 @@
 
       const drag = d3.drag()
         .on("start", (event, d) => {
+          followState.isDraggingNode = true;
           if (!event.active) simulation.alphaTarget(0.14).restart();
           d.fx = d.x;
           d.fy = d.y;
@@ -817,9 +818,11 @@
           d.fy = event.y;
         })
         .on("end", (event, d) => {
+          followState.isDraggingNode = false;
           if (!event.active) simulation.alphaTarget(0.04);
           d.fx = null;
           d.fy = null;
+          updateFollowTarget();
         });
 
       nodeEl.call(drag)
