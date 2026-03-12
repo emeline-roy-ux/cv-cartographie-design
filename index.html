@@ -1,1027 +1,279 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Emeline ROY — CV cartographique</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&family=Sora:wght@500;600;700&display=swap" rel="stylesheet">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Emeline Roy · Portfolio académique</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&family=Syne:wght@500;700;800&display=swap" rel="stylesheet" />
   <style>
     :root {
-      color-scheme: dark;
-      --bg: #07090f;
-      --ink: rgba(246, 249, 255, 0.95);
-      --muted: rgba(230, 237, 250, 0.72);
-      --line: rgba(230, 237, 250, 0.22);
-      --line-strong: rgba(230, 237, 250, 0.45);
-      --accent: #8bc6ff;
-      --header-h: 66px;
-      --font-heading: "Space Grotesk", "Sora", sans-serif;
-      --font-body: "Inter", system-ui, -apple-system, sans-serif;
-      --hero-h: clamp(280px, 42vh, 420px);
+      --bg: #0a0a0a;
+      --panel: #121212;
+      --ink: #f5f5f5;
+      --muted: #b9b9b9;
+      --line: #252525;
+      --accent: #6ee7b7;
+      --accent-2: #7c83ff;
+      --max: 1120px;
+      --radius: 18px;
     }
-
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
     body {
       margin: 0;
-      background: var(--bg);
+      font-family: "Inter", system-ui, sans-serif;
       color: var(--ink);
-      font-family: var(--font-body);
-      line-height: 1.5;
-    }
-
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      z-index: -2;
-      background: url("assets/cmyk.jpg") center / cover no-repeat;
-      filter: saturate(1.06) contrast(1.06);
-      opacity: 0.56;
-      pointer-events: none;
-    }
-
-    body::after {
-      content: "";
-      position: fixed;
-      inset: 0;
-      z-index: -1;
       background:
-        linear-gradient(180deg, rgba(7,9,15,0.86) 0%, rgba(7,9,15,0.72) 28%, rgba(7,9,15,0.92) 100%),
-        radial-gradient(900px 480px at 75% 10%, rgba(129, 101, 255, 0.14), transparent 56%);
-      pointer-events: none;
+        radial-gradient(1200px 600px at 0% 0%, rgba(124, 131, 255, 0.12), transparent 55%),
+        radial-gradient(800px 600px at 100% 15%, rgba(110, 231, 183, 0.12), transparent 65%),
+        var(--bg);
     }
-
-    .top-nav {
+    .layout {
+      display: grid;
+      grid-template-columns: 230px minmax(0, 1fr);
+      min-height: 100vh;
+    }
+    .sidebar {
       position: sticky;
       top: 0;
-      z-index: 20;
-      min-height: var(--header-h);
-      backdrop-filter: blur(9px);
-      -webkit-backdrop-filter: blur(9px);
-      background: rgba(7, 9, 15, 0.48);
-      border-bottom: 1px solid var(--line);
+      height: 100vh;
+      padding: 2.2rem 1.2rem;
+      border-right: 1px solid var(--line);
+      background: rgba(10, 10, 10, 0.86);
+      backdrop-filter: blur(10px);
     }
-
-    .nav-inner {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 0.65rem 1rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-    }
-
     .brand {
-      font-family: var(--font-heading);
-      font-size: 0.98rem;
-      letter-spacing: 0.01em;
-      color: var(--ink);
-      text-decoration: none;
-      white-space: nowrap;
+      margin: 0 0 2rem;
+      font-family: "Syne", sans-serif;
+      font-size: 1.28rem;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
     }
-
-    .menu {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: flex-end;
-      gap: 0.35rem 1rem;
-    }
-
+    .brand span { color: var(--accent); }
+    .menu { display: grid; gap: 0.8rem; }
     .menu a {
       text-decoration: none;
       color: var(--muted);
-      font-size: 0.92rem;
-      border-bottom: 1px solid transparent;
-      padding: 0.22rem 0;
-      transition: color 160ms ease, border-color 160ms ease;
+      font-size: 0.94rem;
+      transition: color .2s ease, transform .2s ease;
     }
-    .menu a:hover,
-    .menu a.active { color: var(--ink); border-color: var(--line-strong); }
-    .menu a:focus-visible {
-      outline: 2px solid var(--accent);
-      outline-offset: 3px;
-      border-radius: 3px;
-    }
-
+    .menu a:hover { color: var(--ink); transform: translateX(4px); }
+    .content { padding: 2.2rem 1.2rem 4rem; }
+    .container { max-width: var(--max); margin: 0 auto; }
     .hero {
-      position: relative;
-      height: var(--hero-h);
-      border-bottom: 1px solid var(--line);
-      overflow: hidden;
-      max-width: 1100px;
-      margin: 0 auto;
       display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(300px, min(52vw, 620px));
-      align-items: stretch;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 1rem;
+      margin-bottom: 1rem;
     }
-
-    #hero-viz {
-      position: relative;
-      justify-self: end;
-      width: 100%;
-      height: 100%;
-      transition: top 220ms ease, right 220ms ease, width 220ms ease, height 220ms ease, border-color 220ms ease, background-color 220ms ease;
+    .card {
+      background: linear-gradient(170deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01));
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 1.2rem;
     }
-
-    #hero-viz.hero-viz-following {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: min(40vw, 460px);
-      height: min(44vh, 340px);
-      z-index: 25;
-      transform: translate3d(var(--follow-x, 12px), var(--follow-y, calc(var(--header-h) + 12px)), 0);
-      transition: width 220ms ease, height 220ms ease, border-color 220ms ease, background-color 220ms ease;
-      border: 1px solid transparent;
-      border-radius: 12px;
-      background: transparent;
-      backdrop-filter: none;
-      -webkit-backdrop-filter: none;
-      box-shadow: none;
-    }
-
-    .hero-copy {
-      position: relative;
-      z-index: 2;
-      height: 100%;
-      padding: 1.2rem 1rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      pointer-events: none;
-    }
-
-    .hero-copy h1 {
+    .intro h1 {
       margin: 0;
-      font-family: var(--font-heading);
-      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-family: "Syne", sans-serif;
+      font-size: clamp(2rem, 6vw, 4.2rem);
+      line-height: 0.95;
+      letter-spacing: -0.04em;
+    }
+    .intro h1 em {
+      font-style: normal;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .intro p { color: var(--muted); max-width: 60ch; }
+    .tags { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .7rem; }
+    .tag { border: 1px solid #313131; border-radius: 999px; padding: .22rem .6rem; font-size: .78rem; color: #d5d5d5; }
+    .portrait img {
+      width: 100%;
+      border-radius: 14px;
+      aspect-ratio: 4/5;
+      object-fit: cover;
+      border: 1px solid #3a3a3a;
+    }
+    section { margin-top: 1rem; }
+    section h2 {
+      margin: 0 0 .3rem;
+      font-family: "Syne", sans-serif;
+      font-size: clamp(1.3rem, 2.2vw, 2rem);
       letter-spacing: -0.02em;
     }
+    .section-sub { color: var(--muted); margin: 0 0 1rem; }
+    .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: .85rem; }
+    .block { grid-column: span 6; }
+    .block h3 { margin: 0 0 .55rem; font-size: 1rem; }
+    .item { padding: .55rem 0; border-top: 1px dashed #2e2e2e; }
+    .item:first-child { border-top: 0; }
+    .item p { margin: 0; color: #dbdbdb; }
+    .item small { display: block; color: var(--muted); margin-top: .2rem; }
+    .pub-list { columns: 2; column-gap: 1rem; }
+    .pub { break-inside: avoid; border-top: 1px dashed #2d2d2d; padding: .6rem 0; }
+    .pub a { color: var(--accent); text-decoration: none; }
+    footer { color: #959595; margin-top: 1.4rem; font-size: .84rem; }
 
-    .hero-copy p {
-      margin: 0.3rem 0 0;
-      max-width: 62ch;
-      color: var(--muted);
-      font-size: 0.95rem;
-    }
-
-    .tooltip {
-      position: absolute;
-      z-index: 5;
-      pointer-events: none;
-      min-width: 190px;
-      max-width: 280px;
-      padding: 0.55rem 0.7rem;
-      border: 1px solid var(--line-strong);
-      background: rgba(7, 9, 15, 0.74);
-      backdrop-filter: blur(8px);
-      border-radius: 8px;
-      font-size: 0.82rem;
-      color: var(--ink);
-      opacity: 0;
-      transform: translateY(6px);
-      transition: opacity 120ms ease, transform 120ms ease;
-    }
-    .tooltip.visible { opacity: 1; transform: translateY(0); }
-    .tooltip strong { font-family: var(--font-heading); display: block; margin-bottom: 0.2rem; }
-
-    .node-static-label {
-      fill: rgba(246, 249, 255, 0.92);
-      font-size: 11px;
-      font-family: var(--font-body);
-      letter-spacing: 0.02em;
-      pointer-events: none;
-    }
-
-    main {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 1.6rem 1rem 3rem;
-    }
-
-    .content-section {
-      scroll-margin-top: calc(var(--header-h) + 20px);
-      padding: 1rem 0 1.4rem;
-      border-bottom: 1px solid var(--line);
-    }
-
-    .content-section h2 {
-      margin: 0;
-      font-family: var(--font-heading);
-      font-size: clamp(1.15rem, 1.4vw, 1.4rem);
-      letter-spacing: -0.01em;
-    }
-
-    .section-summary {
-      margin: 0.4rem 0 1rem;
-      color: var(--muted);
-      max-width: 75ch;
-      font-size: 0.93rem;
-    }
-
-    .tree-list {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-      display: grid;
-      gap: 0.9rem;
-    }
-
-    .publication-group { margin-top: 1rem; }
-    .publication-group h3 {
-      margin: 0 0 0.6rem;
-      font-family: var(--font-heading);
-      font-size: 0.9rem;
-      letter-spacing: 0.04em;
-      color: var(--muted);
-    }
-
-    .tree-item {
-      padding: 0.45rem 0;
-      border-top: 1px solid rgba(255,255,255,0.08);
-    }
-
-    .tree-item h3 {
-      margin: 0;
-      font-size: 0.98rem;
-      font-weight: 600;
-      letter-spacing: -0.01em;
-    }
-
-    .meta-line { margin: 0.25rem 0 0; color: var(--muted); font-size: 0.84rem; }
-    .keywords { margin: 0.25rem 0 0; display: flex; flex-wrap: wrap; gap: 0.35rem; }
-    .keywords span { font-size: 0.75rem; border: 1px solid rgba(255,255,255,0.19); border-radius: 999px; padding: 0.15rem 0.5rem; color: var(--muted); }
-    .evidence-link {
-      display: inline-block;
-      margin-top: 0.35rem;
-      font-size: 0.82rem;
-      color: var(--ink);
-      text-decoration: none;
-      border-bottom: 1px solid rgba(255,255,255,0.36);
-    }
-
-    .sublist { list-style: none; margin: 0.55rem 0 0.1rem; padding: 0 0 0 0.75rem; border-left: 1px solid rgba(255,255,255,0.16); }
-    .sublist li { margin: 0.36rem 0; font-size: 0.88rem; color: var(--muted); }
-
-    .site-footer {
-      border-top: 1px solid var(--line);
-      background: rgba(7, 9, 15, 0.5);
-    }
-
-    .site-footer-inner {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 1rem;
-      color: var(--muted);
-      font-size: 0.85rem;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem 1rem;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .site-footer a {
-      color: var(--ink);
-      text-decoration: none;
-      border-bottom: 1px solid rgba(255,255,255,0.3);
-    }
-
-    .site-footer a:hover { border-color: rgba(255,255,255,0.65); }
-
-    @media (max-width: 840px) {
-      .nav-inner { flex-direction: column; align-items: flex-start; }
-      .menu { justify-content: flex-start; gap: 0.3rem 0.75rem; }
-      :root { --header-h: 96px; }
-      main { padding-top: 1rem; }
-      .hero {
-        max-width: none;
-        grid-template-columns: 1fr;
-      }
-
-      .hero-copy {
-        padding: 1.2rem 1rem;
-      }
-      #hero-viz.hero-viz-following {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: min(72vw, 340px);
-        height: min(36vh, 240px);
-        border: 1px solid transparent;
-        border-radius: 10px;
-        background: transparent;
-        box-shadow: none;
-      }
+    @media (max-width: 980px) {
+      .layout { grid-template-columns: 1fr; }
+      .sidebar { position: static; height: auto; border-right: 0; border-bottom: 1px solid var(--line); }
+      .hero { grid-template-columns: 1fr; }
+      .block { grid-column: span 12; }
+      .pub-list { columns: 1; }
     }
   </style>
 </head>
 <body>
-  <header class="top-nav">
-    <div class="nav-inner">
-      <a class="brand" href="#top">Emeline ROY · Enseignante-chercheuse</a>
-      <nav aria-label="Navigation principale">
-        <ul class="menu" id="menu"></ul>
+  <div class="layout">
+    <aside class="sidebar">
+      <h2 class="brand">Emeline <span>Roy</span></h2>
+      <nav class="menu">
+        <a href="#a-propos">À propos</a>
+        <a href="#profil">Profil</a>
+        <a href="#recherche">Recherche</a>
+        <a href="#enseignements">Enseignements</a>
+        <a href="#publications">Publications</a>
       </nav>
-    </div>
-  </header>
+    </aside>
 
-  <section class="hero" id="top" aria-label="Constellation de navigation">
-    <div id="hero-viz"></div>
-    <div class="hero-copy">
-      <h1>CV cartographique</h1>
-    </div>
-    <div class="tooltip" id="node-tooltip" role="status" aria-live="polite"></div>
-  </section>
+    <main class="content">
+      <div class="container">
+        <section id="a-propos" class="hero">
+          <article class="card intro">
+            <h1>Portfolio<br />académique <em>vivant</em></h1>
+            <p>
+              MCF à l’INSPÉ d’Aix-Marseille Université, je développe des travaux sur la didactique du design,
+              les pratiques de conception et les pédagogies transformatives.
+            </p>
+            <div id="root-tags" class="tags"></div>
+          </article>
+          <article class="card portrait">
+            <img src="assets/visuels/curj_2024.jpg" alt="Portrait Emeline Roy" />
+          </article>
+        </section>
 
-  <main id="content"></main>
+        <section id="profil" class="card">
+          <h2>Profil</h2>
+          <p class="section-sub">Parcours, statut, laboratoires et expériences professionnelles.</p>
+          <div class="grid" id="profil-grid"></div>
+        </section>
 
-  <footer class="site-footer" aria-label="Informations open source">
-    <div class="site-footer-inner">
-      <span>Ce projet est open source.</span>
-      <span>Code source : <a href="https://github.com/" target="_blank" rel="noopener noreferrer">GitHub</a></span>
-    </div>
-  </footer>
+        <section id="recherche" class="card">
+          <h2>Recherche</h2>
+          <p class="section-sub">Axes de recherche, vie scientifique et activités collectives.</p>
+          <div class="grid" id="recherche-grid"></div>
+        </section>
 
-  <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+        <section id="enseignements" class="card">
+          <h2>Enseignements</h2>
+          <p class="section-sub">Cours, publics et formats pédagogiques.</p>
+          <div class="grid" id="enseignements-grid"></div>
+        </section>
+
+        <section id="publications" class="card">
+          <h2>Dernières publications</h2>
+          <p class="section-sub">Sélection automatique depuis l’arborescence du CV.</p>
+          <div id="publication-list" class="pub-list"></div>
+        </section>
+
+        <footer>
+          Site refondu au format portfolio · Données alimentées par <code>data.json</code>.
+        </footer>
+      </div>
+    </main>
+  </div>
+
   <script>
-    const SECTION_CONFIG = [
-      { id: "publications", title: "Publications" },
-      { id: "vie_scientifique", title: "Vie scientifique" },
-      { id: "responsabilites_institutionnelles", title: "Responsabilités" },
-      { id: "enseignements", title: "Enseignements" },
-      { id: "linkedin", title: "LinkedIn", href: "https://www.linkedin.com/in/emeline-roy-141a7728/" }
-    ];
+    const byId = (id) => document.getElementById(id);
 
-    const HERO_NODES = SECTION_CONFIG.filter(s => !s.href).map(s => s.id);
+    function nodeText(node) {
+      const years = [node.yearStart, node.yearEnd].filter(Boolean);
+      const yearPart = years.length ? ` (${years.join("–")})` : "";
+      return `${node.label || "Entrée"}${yearPart}`;
+    }
 
-    const menuEl = document.getElementById("menu");
-    const contentEl = document.getElementById("content");
-    const heroEl = document.getElementById("hero-viz");
-    const tooltipEl = document.getElementById("node-tooltip");
+    function createItem(node) {
+      const wrap = document.createElement("article");
+      wrap.className = "item";
+      const p = document.createElement("p");
+      p.textContent = nodeText(node);
+      wrap.appendChild(p);
+      const meta = [];
+      if (Array.isArray(node.keywords) && node.keywords.length) meta.push(node.keywords.join(" · "));
+      if (node.evidence) {
+        const link = document.createElement("a");
+        link.href = node.evidence;
+        link.target = "_blank";
+        link.rel = "noreferrer";
+        link.textContent = "Voir la source";
+        const small = document.createElement("small");
+        small.appendChild(link);
+        wrap.appendChild(small);
+      }
+      if (meta.length) {
+        const small = document.createElement("small");
+        small.textContent = meta.join(" — ");
+        wrap.appendChild(small);
+      }
+      return wrap;
+    }
 
-    const nodeById = new Map();
-    const childrenByParent = new Map();
-
-    function sanitizeData(nodes) {
-      nodes.forEach(node => {
-        nodeById.set(node.id, node);
-        const parent = node.parent || null;
-        if (!childrenByParent.has(parent)) childrenByParent.set(parent, []);
-        childrenByParent.get(parent).push(node);
+    function renderBranch(rootId, targetId, nodes) {
+      const container = byId(targetId);
+      const rootChildren = nodes.filter((n) => n.parent === rootId && n.type === "branch");
+      rootChildren.forEach((branch) => {
+        const block = document.createElement("section");
+        block.className = "block";
+        const title = document.createElement("h3");
+        title.textContent = branch.label;
+        block.appendChild(title);
+        const descendants = nodes.filter((n) => n.parent === branch.id);
+        descendants.forEach((item) => block.appendChild(createItem(item)));
+        container.appendChild(block);
       });
     }
 
-    function getChildren(id) {
-      return (childrenByParent.get(id) || []).slice();
-    }
-
-    function getDescendants(id) {
-      const descendants = [];
-      const stack = [...getChildren(id)];
-      while (stack.length) {
-        const current = stack.shift();
-        descendants.push(current);
-        stack.push(...getChildren(current.id));
-      }
-      return descendants;
-    }
-
-    function nodeYears(node) {
-      if (node.year) return String(node.year);
-      if (node.yearStart && node.yearEnd) return `${node.yearStart}–${node.yearEnd}`;
-      if (node.yearStart) return `Depuis ${node.yearStart}`;
-      return "";
-    }
-
-    function microPreview(node) {
-      const years = nodeYears(node);
-      const kws = (node.keywords || []).slice(0, 3).join(" · ");
-      return [years, kws].filter(Boolean).join(" — ") || "Aperçu de la section";
-    }
-
-
-    function safeSlug(value) {
-      return String(value || "")
-        .toLowerCase()
-        .normalize("NFD")
-        .replace(/[̀-ͯ]/g, "")
-        .replace(/[^a-z0-9]+/g, "-")
-        .replace(/(^-|-$)/g, "") || "publication";
-    }
-
-    function mergeHalPublications(nodes, halPublications) {
-      if (!Array.isArray(nodes) || !Array.isArray(halPublications) || !halPublications.length) return;
-
-      const publicationsNode = nodes.find(node => node.id === "publications");
-      if (!publicationsNode) return;
-
-      const descendantsToRemove = new Set();
-      const queue = ["publications"];
-
-      while (queue.length) {
-        const current = queue.shift();
-        nodes.forEach(node => {
-          if (node.parent === current) {
-            descendantsToRemove.add(node.id);
-            queue.push(node.id);
-          }
-        });
-      }
-
-      const filteredNodes = nodes.filter(node => !descendantsToRemove.has(node.id));
-      nodes.length = 0;
-      filteredNodes.forEach(node => nodes.push(node));
-
-      const mappedPublications = halPublications
-        .filter(pub => pub && typeof pub.title === "string" && pub.title.trim())
-        .map((pub, index) => {
-          const stableIdPart = pub.id ? safeSlug(pub.id) : `${safeSlug(pub.title)}-${index + 1}`;
-          return {
-            id: `hal_pub_${stableIdPart}`,
-            parent: "publications",
-            label: pub.title.trim(),
-            year: pub.year || null,
-            summary: [pub.source, pub.authorsLabel].filter(Boolean).join(" · "),
-            evidence: pub.url || null,
-            keywords: ["HAL", pub.category || "ART"]
-          };
-        });
-
-      mappedPublications.forEach(pub => nodes.push(pub));
-    }
-
-    function formatHalAuthors(authors) {
-      if (!Array.isArray(authors) || !authors.length) return "";
-      return authors.join(", ");
-    }
-
-    function classifyHalType(docType, halId) {
-      const normalizedDocType = String(docType || "").toLowerCase();
-      const normalizedHalId = String(halId || "").toUpperCase();
-
-      if (normalizedDocType.includes("poster") || normalizedHalId.startsWith("POSTER")) return "POSTER";
-      if (normalizedDocType.includes("comm") || normalizedDocType.includes("conf") || normalizedHalId.startsWith("COMM")) return "COMM";
-      if (normalizedDocType.includes("book") || normalizedDocType.includes("chapter") || normalizedHalId.startsWith("COUV")) return "COUV";
-      return "ART";
-    }
-
-    function normalizeHalDoc(doc, index) {
-      const title = Array.isArray(doc?.title_s) && doc.title_s.length
-        ? doc.title_s[0]
-        : (typeof doc?.label_s === "string" ? doc.label_s : null);
-
-      const source = [doc?.journalTitle_s, doc?.conferenceTitle_s, doc?.bookTitle_s]
-        .filter(Boolean)
-        .map(value => String(value).trim())
-        .find(Boolean) || null;
-
-      const url = Array.isArray(doc?.files_s) && doc.files_s.length
-        ? doc.files_s[0]
-        : (doc?.uri_s || null);
-
-      const authors = Array.isArray(doc?.authFullName_s)
-        ? doc.authFullName_s.filter(Boolean).map(name => String(name).trim())
-        : [];
-
-      return {
-        id: doc?.docid || doc?.halId_s || `hal-${index + 1}`,
-        halId: doc?.halId_s || null,
-        year: doc?.producedDateY_i || doc?.publicationDateY_i || null,
-        title,
-        source,
-        docType: doc?.docType_s || null,
-        authors,
-        authorsLabel: formatHalAuthors(authors),
-        category: classifyHalType(doc?.docType_s, doc?.halId_s),
-        url
-      };
-    }
-
-    async function fetchHalPublications() {
-      const params = new URLSearchParams({
-        q: "authIdHal_s:emeline-cusenier",
-        rows: "200",
-        sort: "producedDateY_i desc",
-        wt: "json",
-        fl: "docid,halId_s,title_s,label_s,uri_s,files_s,docType_s,producedDateY_i,publicationDateY_i,journalTitle_s,conferenceTitle_s,bookTitle_s,authFullName_s"
-      });
-
-      try {
-        const halUrl = `https://api.archives-ouvertes.fr/search/?${params.toString()}`;
-        const response = await fetch(halUrl);
-        if (!response.ok) throw new Error(`HAL API HTTP ${response.status}`);
-
-        const payload = await response.json();
-        const docs = payload?.response?.docs;
-        if (!Array.isArray(docs)) throw new Error("HAL payload invalide");
-
-        return docs
-          .map(normalizeHalDoc)
-          .filter(pub => pub && typeof pub.title === "string" && pub.title.trim());
-      } catch (error) {
-        console.warn("HAL API inaccessible, fallback sur hal-publications.json", error);
-        return fetch("hal-publications.json")
-          .then(res => (res.ok ? res.json() : []))
-          .catch(() => []);
-      }
-    }
-
-    function renderMenu() {
-      menuEl.innerHTML = "";
-      SECTION_CONFIG.forEach(item => {
-        const li = document.createElement("li");
-        const a = document.createElement("a");
-        a.textContent = item.title;
-        if (item.href) {
-          a.href = item.href;
-          if (item.href.startsWith("http")) {
-            a.target = "_blank";
-            a.rel = "noopener noreferrer";
-          }
+    function renderPublications(nodes) {
+      const publicationRoot = nodes.find((n) => n.id === "publications");
+      const target = byId("publication-list");
+      if (!publicationRoot) return;
+      const branches = nodes.filter((n) => n.parent === publicationRoot.id);
+      const selected = branches.flatMap((b) => (Array.isArray(b.bibliography) ? b.bibliography : [])).slice(0, 12);
+      selected.forEach((entry) => {
+        const div = document.createElement("article");
+        div.className = "pub";
+        if (entry.url) {
+          div.innerHTML = `${entry.text} <a href="${entry.url}" target="_blank" rel="noreferrer">↗</a>`;
         } else {
-          a.href = `#${item.id}`;
-          a.dataset.section = item.id;
+          div.textContent = entry.text;
         }
-        li.appendChild(a);
-        menuEl.appendChild(li);
+        target.appendChild(div);
       });
     }
 
-    function renderSections() {
-      const fragment = document.createDocumentFragment();
-      HERO_NODES.forEach(sectionId => {
-        const sectionNode = nodeById.get(sectionId);
-        if (!sectionNode) return;
-
-        const section = document.createElement("section");
-        section.className = "content-section";
-        section.id = sectionId;
-
-        const h2 = document.createElement("h2");
-        h2.textContent = sectionNode.label;
-        section.appendChild(h2);
-
-        const summary = document.createElement("p");
-        summary.className = "section-summary";
-        summary.textContent = sectionNode.summary || `Entrées générées automatiquement depuis l'arborescence data.json (${sectionNode.id}).`;
-        section.appendChild(summary);
-
-        const list = document.createElement("ul");
-        list.className = "tree-list";
-
-        const sectionChildren = getChildren(sectionId);
-        const publicationGroups = ["ART", "COUV", "COMM", "POSTER"];
-        const groupedPublicationChildren = sectionId === "publications"
-          ? publicationGroups.flatMap(group => sectionChildren.filter(child => (child.keywords || []).includes(group)))
-          : sectionChildren;
-
-        const childrenToRender = sectionId === "publications" ? groupedPublicationChildren : sectionChildren;
-
-        if (sectionId === "publications") {
-          publicationGroups.forEach(group => {
-            const groupChildren = sectionChildren.filter(child => (child.keywords || []).includes(group));
-            if (!groupChildren.length) return;
-
-            const groupWrap = document.createElement("div");
-            groupWrap.className = "publication-group";
-
-            const groupTitle = document.createElement("h3");
-            groupTitle.textContent = group;
-            groupWrap.appendChild(groupTitle);
-
-            const groupList = document.createElement("ul");
-            groupList.className = "tree-list";
-
-            groupChildren.forEach(child => {
-              const item = buildTreeItem(child);
-              groupList.appendChild(item);
-            });
-
-            groupWrap.appendChild(groupList);
-            section.appendChild(groupWrap);
-          });
-        }
-
-        childrenToRender.forEach(child => {
-          if (sectionId === "publications") return;
-          const item = buildTreeItem(child);
-          list.appendChild(item);
-        });
-
-        function buildTreeItem(child) {
-          const item = document.createElement("li");
-          item.className = "tree-item";
-
-          const title = document.createElement("h3");
-          title.textContent = child.label;
-          item.appendChild(title);
-
-          const meta = document.createElement("p");
-          meta.className = "meta-line";
-          meta.textContent = [nodeYears(child), child.summary || ""].filter(Boolean).join(" · ");
-          if (meta.textContent) item.appendChild(meta);
-
-          if ((child.keywords || []).length) {
-            const tags = document.createElement("div");
-            tags.className = "keywords";
-            child.keywords.forEach(kw => {
-              const chip = document.createElement("span");
-              chip.textContent = kw;
-              tags.appendChild(chip);
-            });
-            item.appendChild(tags);
-          }
-
-          if (child.evidence) {
-            const evidence = document.createElement("a");
-            evidence.className = "evidence-link";
-            evidence.href = child.evidence;
-            evidence.target = "_blank";
-            evidence.rel = "noopener noreferrer";
-            evidence.textContent = "Lien";
-            item.appendChild(evidence);
-          }
-
-          const nestedChildren = getDescendants(child.id);
-          if (nestedChildren.length) {
-            const sublist = document.createElement("ul");
-            sublist.className = "sublist";
-            nestedChildren.forEach(desc => {
-              const subItem = document.createElement("li");
-              const parts = [desc.label, nodeYears(desc)].filter(Boolean);
-              subItem.textContent = parts.join(" — ");
-              if (desc.bibliography && Array.isArray(desc.bibliography)) {
-                const small = document.createElement("small");
-                small.textContent = ` (${desc.bibliography.length} références)`;
-                subItem.appendChild(small);
-              }
-              sublist.appendChild(subItem);
-            });
-            item.appendChild(sublist);
-          }
-
-          if (Array.isArray(child.bibliography) && child.bibliography.length) {
-            const bibList = document.createElement("ul");
-            bibList.className = "sublist";
-            child.bibliography.slice(0, 6).forEach(ref => {
-              const li = document.createElement("li");
-              li.textContent = ref.text;
-              if (ref.url) {
-                const link = document.createElement("a");
-                link.href = ref.url;
-                link.target = "_blank";
-                link.rel = "noopener noreferrer";
-                link.className = "evidence-link";
-                link.style.marginLeft = "0.45rem";
-                link.textContent = "Lien";
-                li.appendChild(link);
-              }
-              bibList.appendChild(li);
-            });
-            item.appendChild(bibList);
-          }
-
-          return item;
-        }
-
-        if (sectionId !== "publications") section.appendChild(list);
-        fragment.appendChild(section);
+    async function boot() {
+      const data = await fetch("data.json").then((r) => r.json());
+      const nodes = Array.isArray(data.nodes) ? data.nodes : [];
+      const cv = nodes.find((n) => n.id === "cv");
+      const rootTags = byId("root-tags");
+      (cv?.keywords || []).forEach((k) => {
+        const tag = document.createElement("span");
+        tag.className = "tag";
+        tag.textContent = k;
+        rootTags.appendChild(tag);
       });
-      contentEl.innerHTML = "";
-      contentEl.appendChild(fragment);
+
+      renderBranch("profil", "profil-grid", nodes);
+      renderBranch("recherche", "recherche-grid", nodes);
+      renderBranch("enseignement", "enseignements-grid", nodes);
+      renderPublications(nodes);
     }
 
-    function setActiveMenu(sectionId) {
-      document.querySelectorAll(".menu a[data-section]").forEach(link => {
-        link.classList.toggle("active", link.dataset.section === sectionId);
-      });
-    }
-
-    function enableScrollSpy() {
-      const observer = new IntersectionObserver(entries => {
-        const visible = entries
-          .filter(entry => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-        if (visible) setActiveMenu(visible.target.id);
-      }, {
-        threshold: [0.25, 0.5, 0.75],
-        rootMargin: "-15% 0px -45% 0px"
-      });
-
-      HERO_NODES.forEach(id => {
-        const section = document.getElementById(id);
-        if (section) observer.observe(section);
-      });
-    }
-
-    function initConstellation() {
-      const width = heroEl.clientWidth;
-      const height = heroEl.clientHeight;
-
-      const nodes = HERO_NODES.map(id => {
-        const source = nodeById.get(id) || { id, label: id.replaceAll("_", " "), keywords: [] };
-        return {
-          id,
-          label: source.label,
-          summary: source.summary || "",
-          evidence: source.evidence || null,
-          keywords: source.keywords || [],
-          x: width * 0.52 + (Math.random() - 0.5) * 100,
-          y: height / 2 + (Math.random() - 0.5) * 60
-        };
-      });
-
-      const links = [
-        { source: nodes[0].id, target: nodes[1].id },
-        { source: nodes[1].id, target: nodes[2].id },
-        { source: nodes[2].id, target: nodes[3].id },
-        { source: nodes[3].id, target: nodes[0].id },
-        { source: nodes[0].id, target: nodes[2].id }
-      ];
-
-      const svg = d3.select("#hero-viz").append("svg")
-        .attr("width", width)
-        .attr("height", height)
-        .attr("viewBox", `0 0 ${width} ${height}`);
-
-      const followState = {
-        rafId: null,
-        pointerX: window.innerWidth * 0.68,
-        pointerY: Math.max(height * 0.5, Number.parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--header-h")) + 24),
-        currentX: 12,
-        currentY: Number.parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--header-h")) + 12,
-        targetX: 12,
-        targetY: Number.parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--header-h")) + 12,
-        pointerInsideViz: false,
-        isDraggingNode: false,
-        orbitRadius: 46
-      };
-
-      const zoomLayer = svg.append("g");
-      const linkLayer = zoomLayer.append("g");
-      const nodeLayer = zoomLayer.append("g");
-
-      const simulation = d3.forceSimulation(nodes)
-        .force("link", d3.forceLink(links).id(d => d.id).distance(160).strength(0.22))
-        .force("charge", d3.forceManyBody().strength(-165))
-        .force("center", d3.forceCenter(width * 0.52, height / 2).strength(0.06))
-        .force("collide", d3.forceCollide().radius(52).strength(0.85))
-        .velocityDecay(0.42)
-        .alphaMin(0.03);
-
-      const linksEl = linkLayer.selectAll("line")
-        .data(links)
-        .join("line")
-        .attr("stroke", "rgba(220, 233, 255, 0.34)")
-        .attr("stroke-width", 1.2);
-
-      const nodeEl = nodeLayer.selectAll("g")
-        .data(nodes)
-        .join("g")
-        .style("cursor", "pointer");
-
-      nodeEl.append("circle")
-        .attr("r", 20)
-        .attr("fill", "rgba(9, 12, 21, 0.9)")
-        .attr("stroke", "rgba(229, 238, 255, 0.8)")
-        .attr("stroke-width", 1.35);
-
-      nodeEl.append("text")
-        .attr("class", "node-static-label")
-        .attr("x", 28)
-        .attr("y", 4)
-        .text(d => d.label || d.id.replaceAll("_", " "));
-
-      simulation.on("tick", () => {
-        linksEl
-          .attr("x1", d => d.source.x)
-          .attr("y1", d => d.source.y)
-          .attr("x2", d => d.target.x)
-          .attr("y2", d => d.target.y);
-
-        nodeEl.attr("transform", d => `translate(${d.x},${d.y})`);
-      });
-
-      const drag = d3.drag()
-        .on("start", (event, d) => {
-          followState.isDraggingNode = true;
-          if (!event.active) simulation.alphaTarget(0.14).restart();
-          d.fx = d.x;
-          d.fy = d.y;
-        })
-        .on("drag", (event, d) => {
-          d.fx = event.x;
-          d.fy = event.y;
-        })
-        .on("end", (event, d) => {
-          followState.isDraggingNode = false;
-          if (!event.active) simulation.alphaTarget(0.04);
-          d.fx = null;
-          d.fy = null;
-          updateFollowTarget();
-        });
-
-      nodeEl.call(drag)
-        .on("mouseover", function(event, d) {
-          d3.select(this).select("circle")
-            .transition().duration(120)
-            .attr("stroke", "#8bc6ff")
-            .attr("stroke-width", 2.1)
-            .attr("r", 22);
-
-          tooltipEl.innerHTML = `<strong>${d.label}</strong>${microPreview(nodeById.get(d.id) || d)}`;
-          tooltipEl.style.left = `${Math.min(event.pageX + 10, window.innerWidth - 260)}px`;
-          tooltipEl.style.top = `${event.pageY + 10}px`;
-          tooltipEl.classList.add("visible");
-        })
-        .on("mousemove", (event) => {
-          tooltipEl.style.left = `${Math.min(event.pageX + 10, window.innerWidth - 260)}px`;
-          tooltipEl.style.top = `${event.pageY + 10}px`;
-        })
-        .on("mouseout", function() {
-          d3.select(this).select("circle")
-            .transition().duration(120)
-            .attr("stroke", "rgba(229, 238, 255, 0.8)")
-            .attr("stroke-width", 1.35)
-            .attr("r", 20);
-          tooltipEl.classList.remove("visible");
-        })
-        .on("click", (_, d) => {
-          const target = document.getElementById(d.id);
-          if (target) {
-            target.scrollIntoView({ behavior: "smooth", block: "start" });
-            setActiveMenu(d.id);
-          }
-        })
-        .on("dblclick", (_, d) => {
-          if (d.evidence) {
-            window.open(d.evidence, "_blank", "noopener,noreferrer");
-          }
-        });
-
-      const zoom = d3.zoom()
-        .scaleExtent([0.85, 1.6])
-        .translateExtent([[0, 0], [width, height]])
-        .on("zoom", (event) => {
-          zoomLayer.attr("transform", event.transform);
-        });
-
-      svg.call(zoom);
-
-      function resizeSimulation() {
-        const w = heroEl.clientWidth;
-        const h = heroEl.clientHeight;
-        svg.attr("width", w).attr("height", h).attr("viewBox", `0 0 ${w} ${h}`);
-        simulation.force("center", d3.forceCenter(w * 0.52, h / 2).strength(0.06));
-        simulation.alpha(0.24).restart();
-        updateFollowTarget();
-      }
-
-      function clamp(value, min, max) {
-        return Math.max(min, Math.min(max, value));
-      }
-
-      function updateFollowTarget() {
-        const isFollowing = heroEl.classList.contains("hero-viz-following");
-        if (!isFollowing) return;
-
-        if (followState.isDraggingNode) {
-          followState.targetX = followState.currentX;
-          followState.targetY = followState.currentY;
-          return;
-        }
-
-        const margin = 12;
-        const rect = heroEl.getBoundingClientRect();
-        const halfWidth = rect.width / 2;
-        const halfHeight = rect.height / 2;
-        const minY = Number.parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--header-h")) + margin;
-
-        const currentCenterX = followState.currentX + halfWidth;
-        const currentCenterY = followState.currentY + halfHeight;
-        let dirX = currentCenterX - followState.pointerX;
-        let dirY = currentCenterY - followState.pointerY;
-        const dirLength = Math.hypot(dirX, dirY);
-
-        if (dirLength < 1) {
-          dirX = 1;
-          dirY = -0.2;
-        } else {
-          dirX /= dirLength;
-          dirY /= dirLength;
-        }
-
-        const desiredCenterX = followState.pointerX + (dirX * followState.orbitRadius);
-        const desiredCenterY = followState.pointerY + (dirY * followState.orbitRadius);
-        const desiredX = desiredCenterX - halfWidth;
-        const desiredY = desiredCenterY - halfHeight;
-
-        followState.targetX = clamp(desiredX, margin, window.innerWidth - rect.width - margin);
-        followState.targetY = clamp(desiredY, minY, window.innerHeight - rect.height - margin);
-
-        if (!followState.rafId) runFollowAnimation();
-      }
-
-      function runFollowAnimation() {
-        const easing = 0.04;
-        const maxStep = 3.8;
-        const deltaX = followState.targetX - followState.currentX;
-        const deltaY = followState.targetY - followState.currentY;
-
-        const nextStepX = deltaX * easing;
-        const nextStepY = deltaY * easing;
-        const stepLength = Math.hypot(nextStepX, nextStepY);
-        const stepScale = stepLength > maxStep ? maxStep / stepLength : 1;
-
-        followState.currentX += nextStepX * stepScale;
-        followState.currentY += nextStepY * stepScale;
-        heroEl.style.setProperty("--follow-x", `${followState.currentX}px`);
-        heroEl.style.setProperty("--follow-y", `${followState.currentY}px`);
-
-        if (Math.abs(deltaX) < 0.5 && Math.abs(deltaY) < 0.5) {
-          followState.currentX = followState.targetX;
-          followState.currentY = followState.targetY;
-          heroEl.style.setProperty("--follow-x", `${followState.currentX}px`);
-          heroEl.style.setProperty("--follow-y", `${followState.currentY}px`);
-          followState.rafId = null;
-          return;
-        }
-
-        followState.rafId = requestAnimationFrame(runFollowAnimation);
-      }
-
-      function syncPointerProximity(pointerX, pointerY) {
-        const rect = heroEl.getBoundingClientRect();
-        const capturePadding = 28;
-        const withinX = pointerX >= rect.left - capturePadding && pointerX <= rect.right + capturePadding;
-        const withinY = pointerY >= rect.top - capturePadding && pointerY <= rect.bottom + capturePadding;
-        followState.pointerInsideViz = withinX && withinY;
-      }
-
-      heroEl.addEventListener("pointerenter", () => {
-        followState.pointerInsideViz = true;
-      });
-
-      heroEl.addEventListener("pointerleave", (event) => {
-        syncPointerProximity(event.clientX, event.clientY);
-        updateFollowTarget();
-      });
-
-      function handlePointerTracking(event) {
-        followState.pointerX = event.clientX;
-        followState.pointerY = event.clientY;
-        syncPointerProximity(event.clientX, event.clientY);
-        updateFollowTarget();
-      }
-
-      window.addEventListener("pointermove", handlePointerTracking, { passive: true });
-      window.addEventListener("mousemove", handlePointerTracking, { passive: true });
-
-      function updateFollowState() {
-        const shouldFollow = true;
-        const isFollowing = heroEl.classList.contains("hero-viz-following");
-        if (shouldFollow === isFollowing) return;
-        heroEl.classList.toggle("hero-viz-following", shouldFollow);
-        if (!shouldFollow && followState.rafId) {
-          cancelAnimationFrame(followState.rafId);
-          followState.rafId = null;
-        }
-        updateFollowTarget();
-        resizeSimulation();
-      }
-
-      window.addEventListener("resize", () => {
-        updateFollowState();
-        resizeSimulation();
-      });
-      updateFollowState();
-    }
-
-    async function init() {
-      const data = await fetch("data.json").then(res => res.json());
-      const halPublications = await fetchHalPublications();
-
-      mergeHalPublications(data.nodes || [], halPublications);
-      sanitizeData(data.nodes || []);
-      renderMenu();
-      renderSections();
-      enableScrollSpy();
-      setActiveMenu(HERO_NODES[0]);
-      initConstellation();
-    }
-
-    init().catch(err => {
-      console.error(err);
-      contentEl.innerHTML = "<p>Erreur de chargement des données.</p>";
-    });
+    boot();
   </script>
 </body>
 </html>
