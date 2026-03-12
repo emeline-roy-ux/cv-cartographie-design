@@ -5,11 +5,12 @@
       "type": "root",
       "label": "CV — territoire de recherche",
       "yearStart": 2015,
-      "yearEnd": 2026,
+      "yearEnd": 2027,
       "keywords": [
-        "design",
+        "didactique du design",
         "sciences de l’éducation",
-        "numérique"
+        "CNU 70 & CNU 18",
+        "innovation pédagogique"
       ],
       "evidence": null
     },
@@ -23,12 +24,6 @@
       "id": "recherche",
       "type": "branch",
       "label": "Recherche",
-      "parent": "cv"
-    },
-    {
-      "id": "enseignement",
-      "type": "branch",
-      "label": "Enseignements",
       "parent": "cv"
     },
     {
@@ -58,14 +53,14 @@
     {
       "id": "mcf",
       "type": "leaf",
-      "label": "MCF — AMU / INSPÉ (70e) — qualifiée 18e",
+      "label": "Maîtresse de conférences (sciences de l’éducation) — AMU INSPÉ",
       "parent": "statut",
       "yearStart": 2024,
-      "yearEnd": 2026,
+      "yearEnd": 2027,
       "keywords": [
         "MCF",
-        "70e",
-        "18e"
+        "didactique du design",
+        "AMU"
       ],
       "evidence": "https://adef.univ-amu.fr/fr/annuaire/roy-emeline"
     },
@@ -110,52 +105,28 @@
       "parent": "recherche",
       "bibliography": [
         {
-          "text": "Récapitulatif des productions et des activités scientifiques"
+          "text": "ACL revues à comité de lecture : 18 (+5 en reviewing)"
         },
         {
-          "text": "Publications"
+          "text": "COS/ch — chapitres d’ouvrages scientifiques : 11"
         },
         {
-          "text": "Publiés ou acceptés"
+          "text": "C-ACTI — communications avec actes : 2"
         },
         {
-          "text": "ACL - Articles dans des revues internationales ou nationales à comité de lecture"
+          "text": "C-COM — communications orales sans actes : 18"
         },
         {
-          "text": "CNU 70 : 15"
+          "text": "Autres communications (séminaires) : 11"
         },
         {
-          "text": "CNU 18 : 3"
+          "text": "Programmes de recherche / appels à projet : 4"
         },
         {
-          "text": "ACTI - Actes de colloques internationaux : 2"
+          "text": "Co-organisations de colloques et journées : 12"
         },
         {
-          "text": "COS/ch - Chapitres d’ouvrages scientifiques : 4"
-        },
-        {
-          "text": "Communications scientifiques"
-        },
-        {
-          "text": "C-ACTI - Communications avec actes dans un colloque international : 2"
-        },
-        {
-          "text": "C-COM - Communications orales sans actes lors de colloques ou journées d’études : 15"
-        },
-        {
-          "text": "Autres communications : séminaires : 10"
-        },
-        {
-          "text": "Autres activités scientifiques"
-        },
-        {
-          "text": "Implication dans des programmes de recherche ou appels à projet : 4"
-        },
-        {
-          "text": "Coorganisations de colloques internationaux et de journées d’études : 5"
-        },
-        {
-          "text": "Codirection d’ouvrage scientifique : 3"
+          "text": "Codirections d’ouvrage scientifique : 4 (+1 en cours)"
         }
       ],
       "summary": "Production scientifique, publications et communications recensées à partir de l’arborescence du CV."
@@ -170,9 +141,12 @@
     {
       "id": "acl_70",
       "type": "branch",
-      "label": "Articles ACL (70e)",
+      "label": "Publications revues éducation (CNU 70)",
       "parent": "publications",
       "bibliography": [
+        {
+          "text": "Hache, C., Roy, É., Vervoort, S., Brun, X., Giacopazzi, C., Gouaich, K., Sainte-Rose, G., Signoret, M., Tarafa, D., Vidal, A. et Tortochot, E. (accepté). Une autre manière de penser le rôle des autoconfrontations dans un collectif d’enseignants isolés. Revue des sciences de l'éducation."
+        },
         {
           "text": "Benelkadi, P.-A. et Roy, É. (2025). L’évolution de la place du langage graphique dans les séquences d’arts plastiques de cycle 4 : une analyse des prescriptions de pratiques numériques de 2010 à 2023. Recherches en didactiques."
         },
@@ -181,31 +155,16 @@
           "url": "https://doi.org/10.3917/cape.602.0036"
         },
         {
-          "text": "Roy, É., Pasquier, A., Rosso, N. et Rezzi, N. (2025). Influence du dispositif des Cordées de la réussite sur des élèves de 3ᵉ de collège REP : Une analyse des perceptions et des effets sur le développement personnel et l'orientation. La Nouvelle Revue - Éducation et Société Inclusives, 103(2)."
-        },
-        {
-          "text": "Roy, É. et Rowe, A. (2025). The Designer as Mediator: Expanding the Roles in Social Design and Project Facilitation. Art, Design and Communication in Higher Education, online first.",
-          "url": "https://doi.org/10.1386/adch_00116_1"
+          "text": "Roy, É., Pasquier, A., Rosso, N. et Rezzi, N. (2025). Influence du dispositif des Cordées de la réussite sur des élèves de 3ᵉ de collège REP : Une analyse des perceptions et des effets sur le développement personnel et l'orientation. La Nouvelle Revue - Éducation et Société Inclusives, 103(2), 152-170.",
+          "url": "https://doi.org/10.3917/nresi.103.0152"
         },
         {
           "text": "Balleydier, N. et Roy, É. (2025). L’erreur en arts appliqués et cultures artistiques, valorisation et dépassement par la démarche de projet en lycée professionnel. Didactique, 6(1), 93-114.",
           "url": "https://doi.org/10.37571/2025.0104"
         },
         {
-          "text": "Moineau, C. et Roy, É. (2025). Pratiques de design en alternance : mise en regard d’activités formatives. Phronesis, Hors série, Volume 14(HS1), 80-97.",
-          "url": "https://shs.cairn.info/revue-phronesis-2025-hs1-page-80?lang=fr"
-        },
-        {
-          "text": "Roy, É., Moineau, C. et Tortochot, É. (2024). Innover socialement par le design et développer des compétences transformatives au lycée professionnel. Nouveaux cahiers de la recherche en éducation, 26(1), 10–34.",
-          "url": "https://doi.org/10.7202/1113231ar"
-        },
-        {
           "text": "Roy, É., Thébault-Royet, L., Dalmon, J., Farsy, S. et Moineau, C. (2024). Gestes des professeurs de design lors d'activités de réflexion collective en STD2A. Journal de recherche en éducations artistiques, 3, 62-77.",
           "url": "https://doi.org/10.26034/vd.jrea.2024.5076"
-        },
-        {
-          "text": "Roy, É. et McLain, M. (2024). The disciplinary matrix of applied arts and artistic cultures. The Curriculum journal, 36(1), 15-35.",
-          "url": "https://doi.org/10.1002/curj.251"
         },
         {
           "text": "Moineau, C., Farsy, S., Tortochot, É. et Roy, É. (2023). Le rapport à l’évaluation dans trois situations d’« éducation à » la conception. Travail et Apprentissages, 26, 160-186.",
@@ -232,16 +191,32 @@
     {
       "id": "acl_18",
       "type": "branch",
-      "label": "Articles ACL (18e)",
+      "label": "Publications revues design (CNU 18)",
       "parent": "publications",
       "bibliography": [
         {
-          "text": "Roy, E., Moineau, C., Mattei, L et Tortochot, E. (2025). La matrice disciplinaire de l'enseignement du design un miroir de l'évolution des pratiques de design. Design, Arts, Média, 11.",
+          "text": "Roy, E., Moineau, C., Mattei, L. et Tortochot, É. (2025). La matrice disciplinaire de l'enseignement du design un miroir de l'évolution des pratiques de design. Design, Arts, Média, 11.",
           "url": "https://journal.dampress.org/issues/les-matrices-disciplinaires-du-design/design-scolaire-et-matrice-disciplinaire-normaliser-stabiliser-reinterpreter"
+        },
+        {
+          "text": "Roy, É. et Rowe, A. (2025). The Designer as Mediator: Expanding the Roles in Social Design and Project Facilitation. Art, Design and Communication in Higher Education, online first.",
+          "url": "https://doi.org/10.1386/adch_00116_1"
         },
         {
           "text": "Roy, É. (2025). L’influence des références aux industries culturelles et créatives sur la créativité des élèves en arts appliqués, une étude de cas en lycée professionnel. Revue Designer l’enseignement, Enseigner le Design, 2, 13-27.",
           "url": "https://doi.org/10.71585/deed.i2.15"
+        },
+        {
+          "text": "Moineau, C. et Roy, É. (2025). Pratiques de design en alternance : mise en regard d’activités formatives. Phronesis, Hors série, Volume 14(HS1), 80-97.",
+          "url": "https://shs.cairn.info/revue-phronesis-2025-hs1-page-80?lang=fr"
+        },
+        {
+          "text": "Roy, É., Moineau, C. et Tortochot, É. (2024). Innover socialement par le design et développer des compétences transformatives au lycée professionnel. Nouveaux cahiers de la recherche en éducation, 26(1), 10–34.",
+          "url": "https://doi.org/10.7202/1113231ar"
+        },
+        {
+          "text": "Roy, É. et McLain, M. (2024). The disciplinary matrix of applied arts and artistic cultures. The Curriculum journal, 36(1), 15-35.",
+          "url": "https://doi.org/10.1002/curj.251"
         },
         {
           "text": "Moineau, C., Roy, É. et Tortochot, É. (2022). Design social et enseignement secondaire en France : l’émergence d’un design pédagogique ? Sciences du Design, 15, 109-125.",
@@ -252,7 +227,7 @@
     {
       "id": "chapitres",
       "type": "branch",
-      "label": "Chapitres",
+      "label": "Sélection de 10 chapitres d’ouvrages scientifiques (COS)",
       "parent": "publications",
       "bibliography": [
         {
@@ -363,14 +338,14 @@
       "type": "branch",
       "label": "Enseignements",
       "parent": "cv",
-      "summary": "Les enseignements s’articulent autour de deux thématiques principales : (1) la recherche en design ; (2) enseigner et apprendre le design et les métiers d’art."
+      "summary": "3.2 Cours magistraux et travaux dirigés : les enseignements post-bac s’articulent autour de deux thématiques principales — (1) la recherche en design ; (2) l’enseignement et l’apprentissage du design et des métiers d’art."
     },
     {
       "id": "responsabilites_institutionnelles",
       "type": "branch",
       "label": "Responsabilités institutionnelles",
       "parent": "cv",
-      "summary": "Fonctions institutionnelles et responsabilités académiques liées aux missions d’enseignement et de recherche."
+      "summary": "Responsabilités administratives, coordination de formations et animation scientifique (GIS Arts & Éducation, DSAA, MEEF)."
     },
     {
       "id": "resp_statut",
@@ -418,11 +393,17 @@
       "type": "branch",
       "parent": "enseignements",
       "label": "1) Recherche en design",
-      "summary": "Cours centrés sur la recherche en design, les méthodes de projet et la structuration de connaissances situées.",
+      "summary": "3.2.1 Le design : UE et ECUE centrés sur la culture design, les techniques d’atelier, la conception de séquences, l’interdisciplinarité et l’articulation recherche-formation-terrain.",
       "keywords": [
-        "recherche en design",
-        "méthodologie",
-        "épistémologie"
+        "culture design",
+        "analyse des pratiques",
+        "interdisciplinarité",
+        "humanités et design",
+        "gestes professionnels",
+        "pédagogie du projet",
+        "recherche-action",
+        "environnements d’apprentissage",
+        "transitions écologiques"
       ]
     },
     {
@@ -430,7 +411,7 @@
       "type": "leaf",
       "parent": "enseignements",
       "label": "Master 1 & 2 MEEF Design et métiers d’art — Le design",
-      "summary": "Ressources théoriques, techniques et culturelles ; transposition didactique ; techniques d’atelier ; conception de situations d’enseignement-apprentissage ; interdisciplinarité ; analyse des pratiques et articulation formation–recherche.",
+      "summary": "Master 1 & 2 MEEF Design et métiers d’art : construction d’une culture disciplinaire (théories, références, culture matérielle), appropriation des langages de conception, immersion atelier/fablab, pédagogie de projet, et conception de séquences intégrant numérique, écologie, inclusion et interdisciplinarité. L’UE développe une analyse réflexive des gestes professionnels et de l’articulation recherche-formation-terrain.",
       "keywords": [
         "didactique du design",
         "formation des enseignant·es",
@@ -444,50 +425,63 @@
       "type": "leaf",
       "parent": "enseignements",
       "label": "Master 1 Design (DSAA) — UE Mémoire de recherche professionnelle",
-      "summary": "Élaboration du mémoire professionnel : problématique située, cadre théorique, méthodologies en arts appliqués, veille scientifique et environnements numériques (bases de données, IA génératives).",
+      "summary": "UE Mémoire de recherche professionnelle : élaboration d’un état des lieux critique, formulation d’une problématique située, cadrage théorique (humanités, sciences sociales, culture design), et méthodologies en arts appliqués (veille, analyse de références, enquêtes qualitatives, expérimentation par le projet). Développement d’une pensée critique et de connaissances situées par la conception.",
       "keywords": [
         "recherche en design",
         "problématisation",
+        "épistémologie des arts appliqués",
+        "macro-projet",
         "écriture scientifique",
+        "humanités du design",
         "numérique critique"
-      ]
+      ],
+      "evidence": "https://www.notion.so/S-minaire-6-La-recherche-en-des"
     },
     {
       "id": "ens_dsaa_m1_prospective",
       "type": "leaf",
       "parent": "enseignements",
       "label": "Master 1 Design (DSAA) — UE Prospectives, pratiques et médiations",
-      "summary": "Espace d’expérimentation prospective articulant conception, réflexion critique et médiation ; scénarios intégrant transitions écologiques, mutations socio-techniques et créativités artificielles.",
+      "summary": "UE Prospectives, pratiques et médiations : introduction aux méthodologies de recherche en design par l’enquête de terrain (observation, entretiens, collecte de matériaux situés, analyse qualitative). Développement d’outils de codage, catégorisation et cartographie pour produire diagnostics et préconisations situées, avec attention portée à la médiation, à la narration et à la responsabilité de restitution.",
       "keywords": [
-        "prospective en design",
-        "médiation de projet",
-        "cultures numériques",
-        "innovation"
-      ]
+        "méthodologies de recherche en design",
+        "enquête de terrain",
+        "analyse qualitative",
+        "médiation",
+        "cartographie",
+        "design situé"
+      ],
+      "evidence": "https://www.notion.so"
     },
     {
       "id": "ens_lp_textile_mode",
       "type": "leaf",
       "parent": "enseignements",
       "label": "Licence professionnelle design textile et mode",
-      "summary": "Initiation aux fondements de la recherche en design appliquée au textile et à la mode : problématique, veille créative, expérimentations matières, analyse d’usages et formalisation des démarches.",
+      "summary": "Initiation à la recherche en design appliquée au textile et à la mode : problématique située, veille créative, analyse de références, documentation du processus de conception, enquêtes design (observation, usages, tests matières, scénarisation) et formalisation écrite/visuelle d’une posture réflexive pour le projet long.",
       "keywords": [
+        "recherche en design",
+        "méthodologie de projet",
         "textile et mode",
         "expérimentation matérielle",
         "veille créative",
-        "innovation"
-      ]
+        "culture visuelle",
+        "design vestimentaire"
+      ],
+      "evidence": "Cours-Initiation a la recherche-lprodesign.pdf"
     },
     {
       "id": "ens_l3_design",
       "type": "leaf",
       "parent": "enseignements",
       "label": "Licence 3 Design",
-      "summary": "Co-enseignement sur l’enseignement du design, la pédagogie de projet et l’analyse de prescription ; sensibilisation à l’épistémologie du design et à ses principes didactiques.",
+      "summary": "Co-enseignement en épistémologie et didactique du design : pédagogie de projet, analyse de prescription et fondamentaux théoriques du design comme discipline. Étude des principes didactiques propres au design et aux arts appliqués, dans la continuité du site créé pendant la période COVID.",
       "evidence": "https://sites.google.com/view/didactique-du-design/accueil",
       "keywords": [
         "épistémologie du design",
+        "projet de design",
         "didactique du design",
+        "pédagogie du design",
         "designer-pédagogue"
       ]
     },
@@ -496,32 +490,37 @@
       "type": "leaf",
       "parent": "enseignements",
       "label": "BTS Esthétique — Design de communication",
-      "summary": "Conception de visuels pour la promotion de produits cosmétiques : communication visuelle, merchandising, branding, outils numériques et identité de marque.",
+      "summary": "Design de communication appliqué à l’esthétique-cosmétique : conception de visuels de promotion, communication visuelle, merchandising et branding. Acquisition de compétences de création-conception avec outils numériques et compréhension de l’identité de marque.",
       "keywords": [
         "image publicitaire",
         "médias numériques",
         "graphisme",
-        "expérience utilisateur"
-      ]
+        "expérience utilisateur",
+        "identité de marque"
+      ],
+      "evidence": "https://www.notion.so"
     },
     {
       "id": "ens_bachelor_event",
       "type": "leaf",
       "parent": "enseignements",
       "label": "Bachelor événementiel — Histoire de la mode et merchandising",
-      "summary": "Professionnalisation autour de l’histoire de la mode et de la vitrine : investigation in situ à l’Odysséum et réalisation de vitrines en interaction avec des professionnel·les du prêt-à-porter.",
+      "summary": "Cours de professionnalisation en bachelor événementiel : histoire de la mode (depuis le XIXe siècle), merchandising de vitrine, investigation in situ à l’Odysseum (Montpellier) et réalisation de vitrines en interaction avec des professionnel·les du prêt-à-porter.",
       "keywords": [
         "histoire de la mode",
-        "merchandising",
+        "stylisme",
+        "haute couture",
+        "projet de design",
         "démarche de création"
-      ]
+      ],
+      "evidence": "Cours Merch-vitrine EFCDE 2019"
     },
     {
       "id": "ens_theme_apprendre_design",
       "type": "branch",
       "parent": "enseignements",
       "label": "2) Enseigner et apprendre le design et les métiers d’art",
-      "summary": "Approches didactiques et pédagogiques centrées sur les apprentissages, l’inclusion, la posture professionnelle et la recherche sur les pratiques.",
+      "summary": "3.2.2 Enseigner et apprendre le design et les métiers d’art : approches didactiques centrées sur l’inclusion, la posture professionnelle, la coopération éducative et l’analyse des pratiques.",
       "keywords": [
         "pédagogie du projet",
         "inclusion",
@@ -533,11 +532,15 @@
       "type": "leaf",
       "parent": "enseignements",
       "label": "Master 1 & 2 MEEF Design et métiers d’art — Élèves, inclusion et engagement",
-      "summary": "Analyse des apprentissages en design et adaptation des démarches de projet à la diversité des profils ; engagement créatif, coopération et éducations transversales en atelier.",
+      "summary": "Analyse des apprentissages en design et adaptation des démarches de projet à la diversité des profils. Mobilisation de l’expérimentation et de la culture matérielle pour renforcer engagement créatif, coopération, inclusion, égalité et éducations transversales en atelier.",
       "keywords": [
+        "didactique du design",
+        "pédagogie du projet",
         "inclusion en atelier",
         "engagement créatif",
-        "culture matérielle"
+        "représentations des élèves",
+        "culture matérielle",
+        "éducations transversales"
       ]
     },
     {
@@ -545,21 +548,28 @@
       "type": "leaf",
       "parent": "enseignements",
       "label": "Master 1 & 2 MEEF Design et métiers d’art — Posture professionnelle et coopération éducative",
-      "summary": "Construction d’une posture enseignante en design articulant responsabilité, sécurité des pratiques techniques, éthique du projet, coopération éducative et culture numérique.",
+      "summary": "Construction d’une posture d’enseignant·e en design articulant responsabilité, sécurité des pratiques techniques, éthique du projet et coopération éducative. Intégration des cadres juridiques, de la communication pédagogique (exposition, médiation, portfolio) et des enjeux numériques de diffusion des images.",
       "keywords": [
-        "identité professionnelle",
+        "identité professionnelle en design",
         "éthique du projet",
+        "valeurs de la République",
         "sécurité en atelier",
-        "culture numérique"
-      ]
+        "communication pédagogique",
+        "culture numérique en design"
+      ],
+      "evidence": "Situations de cours en design relevant des valeurs de la republique.pptx"
     },
     {
       "id": "ens_meef_analyse_pratiques",
       "type": "leaf",
       "parent": "enseignements",
       "label": "Master 1 & 2 MEEF Design et métiers d’art — Analyse des pratiques et recherche en didactique du design",
-      "summary": "Analyse des situations d’enseignement en atelier, fablab et salle de projet ; initiation aux méthodes de recherche en éducation et à la documentation réflexive des pratiques.",
+      "summary": "Développement de l’analyse des situations d’enseignement du design (atelier, fablab, salle de projet), initiation aux méthodes de recherche en éducation appliquées à la didactique du design, et documentation réflexive pour transformer les pratiques.",
       "keywords": [
+        "didactique du design",
+        "analyse de gestes professionnels",
+        "recherche en éducation artistique",
+        "atelier",
         "design-based research",
         "réflexivité",
         "documentation de projet"
@@ -570,7 +580,7 @@
       "type": "branch",
       "parent": "enseignements",
       "label": "Autres cours : innovation pédagogique, recherche et humanités",
-      "summary": "Enseignements en innovation pédagogique et méthodologies de recherche, du supérieur aux formations sociales.",
+      "summary": "3.2.3 Autres cours : innovation pédagogique, recherche et humanités — modules en ingénierie pédagogique, méthodologies de recherche et réflexivité du supérieur aux formations sociales.",
       "keywords": [
         "innovation pédagogique",
         "recherche",
@@ -582,11 +592,16 @@
       "type": "leaf",
       "parent": "enseignements",
       "label": "Doctorant·es chargé·es d’enseignement (AMU) — CIPE Innovation pédagogique : méthodes, outils numériques et IA",
-      "summary": "Formation aux fondamentaux de l’ingénierie pédagogique : objectifs d’apprentissage, méthodes actives, évaluation, Moodle, hybridation et intégration raisonnée de l’IA.",
+      "summary": "Module CIPE pour doctorant·es chargé·es d’enseignement : objectifs d’apprentissage, structuration de séance, méthodes actives, évaluation, hybridation et usages raisonnées de l’IA. Approche professionnalisante avec expérimentation de dispositifs numériques et analyse éthique/juridique/pédagogique.",
       "keywords": [
+        "innovation pédagogique",
+        "ingénierie pédagogique",
         "enseignement supérieur",
         "Moodle",
-        "IA",
+        "intelligence artificielle",
+        "scénarisation pédagogique",
+        "évaluation",
+        "hybridation",
         "éthique du numérique"
       ]
     },
@@ -595,23 +610,408 @@
       "type": "leaf",
       "parent": "enseignements",
       "label": "Master 1 & 2 Métiers de la recherche et de l’expertise en éducation",
-      "summary": "Processus scientifique, théories et activités en sciences de l’éducation : concepts didactiques, gestes professoraux, épistémologie pratique et conception de dispositifs éducatifs.",
+      "summary": "UE de processus scientifique et réflexivité pluridisciplinaire : mobilisation des concepts et méthodologies en sciences de l’éducation pour décrire, analyser et concevoir des dispositifs de recherche adaptés aux contextes éducatifs (gestes professoraux, épistémologie pratique, réflexivité).",
       "keywords": [
         "sciences de l’éducation",
-        "didactique comparée",
-        "dispositifs éducatifs"
-      ]
+        "concepts didactiques",
+        "dispositifs éducatifs",
+        "reflexivité"
+      ],
+      "evidence": "UE 32 Réflexivité pluridisciplinaire"
     },
     {
       "id": "ens_dsts",
       "type": "leaf",
       "parent": "enseignements",
       "label": "Diplôme supérieur de travail social — Initiation à la recherche",
-      "summary": "Première approche de la recherche : documentation, modélisation, méthodes qualitatives et quantitatives, identification des données et outils de traitement de texte pour documents longs.",
+      "summary": "Initiation à la recherche en diplôme supérieur de travail social : recherche documentaire, outils de modélisation, sensibilisation aux méthodes qualitatives et quantitatives, identification des données et traitement de texte pour documents longs.",
       "keywords": [
         "initiation à la recherche",
         "méthodologies",
-        "normes rédactionnelles"
+        "normes rédactionnelles",
+        "dispositif de recherche"
+      ]
+    },
+    {
+      "id": "contact",
+      "type": "leaf",
+      "label": "Contact professionnel",
+      "parent": "profil",
+      "keywords": [
+        "emeline.roy@univ-amu.fr",
+        "Bouillargues"
+      ],
+      "evidence": "mailto:emeline.roy@univ-amu.fr"
+    },
+    {
+      "id": "situation_actuelle",
+      "type": "leaf",
+      "label": "Situation actuelle : MCF en didactique du design et des arts appliqués",
+      "parent": "statut",
+      "yearStart": 2024,
+      "keywords": [
+        "master MEEF",
+        "master DSAA",
+        "BTS"
+      ],
+      "summary": "Depuis septembre 2024 : Maîtresse de conférences en sciences de l’éducation à Aix-Marseille Université (INSPÉ de Marseille)."
+    },
+    {
+      "id": "cnu_qualif",
+      "type": "leaf",
+      "label": "Qualifications CNU 70e (2023) et 18e (2024)",
+      "parent": "formation",
+      "yearStart": 2023,
+      "yearEnd": 2024,
+      "keywords": [
+        "qualification MCF",
+        "CNU 70",
+        "CNU 18"
+      ]
+    },
+    {
+      "id": "doctorat",
+      "type": "leaf",
+      "label": "Doctorat en sciences de l’éducation — AMU",
+      "parent": "formation",
+      "yearStart": 2018,
+      "yearEnd": 2022,
+      "evidence": "https://theses.fr/2022AIXM0071"
+    },
+    {
+      "id": "master_recherche",
+      "type": "leaf",
+      "label": "Master recherche en sciences de l’éducation — AMU",
+      "parent": "formation",
+      "yearStart": 2017,
+      "yearEnd": 2018
+    },
+    {
+      "id": "exp_sup",
+      "type": "leaf",
+      "label": "Expériences pédagogiques dans le supérieur (AMU, UNîmes, ESDM)",
+      "parent": "experiences",
+      "yearStart": 2019,
+      "yearEnd": 2027,
+      "keywords": [
+        "ATER",
+        "MCF",
+        "chargée de cours"
+      ]
+    },
+    {
+      "id": "exp_second_degre",
+      "type": "leaf",
+      "label": "Voie professionnelle : lycée pro, GRETA, CMA, Compagnons du devoir",
+      "parent": "experiences",
+      "yearStart": 2015,
+      "yearEnd": 2024,
+      "keywords": [
+        "arts appliqués",
+        "stylisme",
+        "chef-d’œuvre"
+      ]
+    },
+    {
+      "id": "exp_design",
+      "type": "leaf",
+      "label": "Expériences en design : communication visuelle, édition numérique",
+      "parent": "experiences",
+      "yearStart": 2007,
+      "yearEnd": 2027,
+      "keywords": [
+        "Vogica",
+        "La Noisette",
+        "GIS Arts & Éducation"
+      ]
+    },
+    {
+      "id": "formation_recherche",
+      "type": "branch",
+      "label": "Formation à la recherche",
+      "parent": "recherche"
+    },
+    {
+      "id": "positionnement_scientifique",
+      "type": "branch",
+      "label": "Positionnement scientifique",
+      "parent": "recherche"
+    },
+    {
+      "id": "projets_recherche",
+      "type": "branch",
+      "label": "Projets de recherche en cours",
+      "parent": "recherche"
+    },
+    {
+      "id": "master_recherche_memoire",
+      "type": "leaf",
+      "label": "Mémoire de master : activité de création-conception en arts appliqués",
+      "parent": "formation_recherche",
+      "year": 2018
+    },
+    {
+      "id": "these_2022",
+      "type": "leaf",
+      "label": "Thèse (2022) : L’activité de création-conception dans l’enseignement des arts appliqués",
+      "parent": "formation_recherche",
+      "evidence": "https://theses.fr/2022AIXM0071"
+    },
+    {
+      "id": "axe1",
+      "type": "leaf",
+      "label": "Axe 1 — Didactique de l’activité de création-conception",
+      "parent": "positionnement_scientifique"
+    },
+    {
+      "id": "axe2",
+      "type": "leaf",
+      "label": "Axe 2 — Médiations, dispositifs et cultures numériques en formation design",
+      "parent": "positionnement_scientifique"
+    },
+    {
+      "id": "axe3",
+      "type": "leaf",
+      "label": "Axe 3 — Vulnérabilités éducatives, inclusion et design social",
+      "parent": "positionnement_scientifique"
+    },
+    {
+      "id": "axe4",
+      "type": "leaf",
+      "label": "Axe 4 — Prescriptions institutionnelles et matrice disciplinaire du design",
+      "parent": "positionnement_scientifique"
+    },
+    {
+      "id": "arcane",
+      "type": "leaf",
+      "label": "Projet ARCANE — anxiété et activité de création-conception",
+      "parent": "projets_recherche"
+    },
+    {
+      "id": "ampiric_corps",
+      "type": "leaf",
+      "label": "Programme AMPIRIC CORPS — corps, émotions et apprentissages",
+      "parent": "projets_recherche"
+    },
+    {
+      "id": "lypcap",
+      "type": "leaf",
+      "label": "Projet LyP&CAP / CAPTURE — réengagement en CAP",
+      "parent": "projets_recherche"
+    },
+    {
+      "id": "dt_typology",
+      "type": "leaf",
+      "label": "International D&T Curriculum Typology Project",
+      "parent": "projets_recherche"
+    },
+    {
+      "id": "diagram",
+      "type": "leaf",
+      "label": "Projet DIAGRAM — activité de conception en examen",
+      "parent": "projets_recherche"
+    },
+    {
+      "id": "extra_cap",
+      "type": "leaf",
+      "label": "Projet EXTRA-CAP — exergaming et apprentissage des mathématiques",
+      "parent": "projets_recherche"
+    },
+    {
+      "id": "resp_gis",
+      "type": "leaf",
+      "label": "Directrice adjointe du GIS Arts & Éducation (depuis 2025)",
+      "parent": "responsabilites_institutionnelles",
+      "yearStart": 2025
+    },
+    {
+      "id": "resp_dsaa",
+      "type": "leaf",
+      "label": "Coordinatrice AMU du Master-DSAA (depuis 2025)",
+      "parent": "responsabilites_institutionnelles",
+      "yearStart": 2025
+    },
+    {
+      "id": "resp_lycee_pro",
+      "type": "leaf",
+      "label": "Coresponsable du parcours « Enseigner au lycée professionnel » (2024–2026)",
+      "parent": "responsabilites_institutionnelles",
+      "yearStart": 2024,
+      "yearEnd": 2026
+    },
+    {
+      "id": "resp_tutorat",
+      "type": "leaf",
+      "label": "Responsable du tutorat MEEF Design & métiers d’art (depuis 2022)",
+      "parent": "responsabilites_institutionnelles",
+      "yearStart": 2022
+    },
+    {
+      "id": "directions_ouvrages",
+      "type": "branch",
+      "label": "Directions d’ouvrages et numéros de revue (DO)",
+      "parent": "publications",
+      "bibliography": [
+        {
+          "text": "Roy, É., Roth, R., Broisat, B. et Tortochot, E. (2026-2027). Méthodologies de recherche en arts et éducation à l’ère numérique. Hybrid (appel à article)."
+        },
+        {
+          "text": "Roy, É., Claverie, I. et Papon, L. (2026). Regards pluriels sur les enseignements artistiques. Delatour."
+        },
+        {
+          "text": "Roy, É., Claverie, I. et Papon, L. (2026). Contexte et enjeux de l'ouvrage. Dans Regards pluriels sur les enseignements artistiques. Delatour."
+        },
+        {
+          "text": "Roy, É., Rezzi, N., Brissaud, J. et Rosso, N. (2024). Les enseignements artistiques pour advenir au monde (vol. 2). Nouveaux cahiers de la recherche en éducation, 26(3)."
+        },
+        {
+          "text": "Roy, É. (2024). Les enseignements artistiques pour advenir au monde (vol. 2). Nouveaux cahiers de la recherche en éducation, 26(3), 1–6.",
+          "url": "https://doi.org/10.7202/1116388ar"
+        },
+        {
+          "text": "Roy, É., Rezzi, N., Brissaud, J. et Rosso, N. (2024). Les enseignements artistiques pour advenir au monde (vol. 1). Nouveaux cahiers de la recherche en éducation, 26(1).",
+          "url": "https://www.erudit.org/fr/revues/ncre/2024-v26-n1-ncre09525/"
+        },
+        {
+          "text": "Roy, É. et Rosso, N. (2024). Introduction : Les enseignements artistiques pour advenir au monde. Nouveaux cahiers de la recherche en éducation, 26(1), 1-9.",
+          "url": "https://doi.org/10.7202/1113230ar"
+        },
+        {
+          "text": "Tortochot, É., Moineau, C. et Roy, É. (2023). Enseigner le design : un geste créatif et une activité formative. Delatour.",
+          "url": "https://www.editions-delatour.com/fr/beaux-arts/4835-l-enseignement-du-design-9782752104779.html"
+        },
+        {
+          "text": "Roy, É. et Papon, L. (2022). Créer pour éduquer en faveur de la persévérance. Delatour.",
+          "url": "https://www.editions-delatour.com/fr/pedagogie-musicale/4679-creer-pour-eduquer-en-faveur-de-la-perseverance-9782752104434.html"
+        }
+      ]
+    },
+    {
+      "id": "conferences_invitees",
+      "type": "branch",
+      "label": "Conférences invitées",
+      "parent": "publications",
+      "bibliography": [
+        {
+          "text": "Roy, É. (2026, septembre). Le mémoire en design comme objet réflexif et pédagogique [communication]. Saison 5 des webinaires DN MADe de Bourgogne et Franche-Comté, Besançon, France."
+        },
+        {
+          "text": "Roy, É. (2025, décembre). Le mémoire en design comme objet réflexif et pédagogique : entre prescription institutionnelle et pratique située [communication]. Séance du laboratoire PROJEKT - Nîmes Université, Nîmes, France."
+        },
+        {
+          "text": "Roy, É. (2024, novembre). La créativité dans l'enseignement du design en formation professionnelle [communication]. Séance du laboratoire CREAT - Haute école pédagogique du canton de Vaud, Lausanne, Suisse.",
+          "url": "https://doi.org/10.13140/RG.2.2.24396.42880"
+        },
+        {
+          "text": "Roy, É. (2024, juin). Les compétences psychosociales et les compétences transformatives pour advenir au monde [communication]. 11ᵉ édition des rencontres sur l’action artistique et culturelle dans l’enseignement supérieur, Paris, France."
+        },
+        {
+          "text": "Roy, É. et Moineau, C. (2024, juin). Développement durable et design, quels enseignements ? [communication]. Journée d'étude du GCAF « Regards pluriels sur les enseignements artistiques », Marseille, France."
+        },
+        {
+          "text": "Hache, C., Tortochot, É., Gouaich, K., Michel, F., Roy, É., Baugnies, M., Brunias, A. et Olympio, N. (2023, novembre). LyP&Cap : Recherche collaborative sur l’enseignement de l’anglais en CAP au lycée professionnel [communication]. Journées de restitution Ampiric, Marseille, France."
+        },
+        {
+          "text": "Roy, É. et Moineau, C. (2022, juin). Le rapport aux autres en master Design et Innovation Société [communication]. Journées du GCAF : Altérité et interculturalité au service des apprentissages, Aix-en-Provence, France.",
+          "url": "https://amupod.univ-amu.fr/"
+        },
+        {
+          "text": "Roy, É. (2020, décembre). Analyse de stratégies d'enseignement en arts appliqués : une proposition méthodologique [communication]. Séminaire doctoral PROJEKT, Nîmes, France."
+        }
+      ]
+    },
+    {
+      "id": "communications_actes",
+      "type": "branch",
+      "label": "Communications avec actes",
+      "parent": "publications",
+      "bibliography": [
+        {
+          "text": "Moineau, C. et Roy, É. (juin 2024). L’objet mémoire, l’objet dans le mémoire et l’objet du mémoire. Les cas de deux formations au design en France [communication avec actes]. Biennale de l'enseignement du design, Fribourg, Suisse."
+        },
+        {
+          "text": "Roy, É. et Moineau, C. (2025, juin). Apports des pratiques de design social à la formation des enseignants en design. La captation vidéo pour analyser l’activité dans une situation de simulation [communication]. 7ᵉ colloque international de l’association RPDP, Toulouse, France.",
+          "url": "https://rpdp2025.sciencesconf.org/data/pages/Actes_Colloque_RPDP_2025.pdf"
+        },
+        {
+          "text": "Moineau, C., Roy, É. et Tortochot, É. (2022, juin). Didactique professionnelle et didactiques des disciplines : Filiations, ruptures et dépassements [communication]. Colloque RDPD, Genève, Suisse.",
+          "url": "https://institut-agro-dijon.hal.science/hal-04022529/document"
+        }
+      ]
+    },
+    {
+      "id": "communications_affiches",
+      "type": "branch",
+      "label": "Communications par affiche",
+      "parent": "publications",
+      "bibliography": [
+        {
+          "text": "Roy, É. (2024, juin). Créativité et conception dans l'éducation professionnelle : vers une approche inclusive [affiche]. 3ᵉ colloque international sur l'empathie en éducation, Aix-en-Provence, France.",
+          "url": "https://doi.org/10.13140/RG.2.2.20618.89282"
+        },
+        {
+          "text": "Roy, É. (2020, mai). Transposition interne des contenus en Arts Appliqués : Situations didactiques et a-didactiques [affiche]. 6ᵉ Printemps de la Recherche en Éducation, Paris, France.",
+          "url": "https://hal.archives-ouvertes.fr/hal-03768437/"
+        },
+        {
+          "text": "Cusenier, É. et Colson, P. (2019, octobre). Quels postures et gestes professionnels de l'enseignant d'arts appliqués [affiche]. 3ᵉ Rencontre scientifique de SFERE-Provence, Aix-en-Provence, France.",
+          "url": "https://hal.archives-ouvertes.fr/hal-02318567"
+        },
+        {
+          "text": "Cusenier, É. (2019, juin). La chaise, un artefact à exploiter pour une approche transversale de l'enseignement des arts appliqués [affiche]. Colloque Créer pour éduquer : Une éducation démocratique par les arts, Aix-en-Provence, France.",
+          "url": "https://hal.archives-ouvertes.fr/hal-02129112"
+        }
+      ]
+    },
+    {
+      "id": "communications_sans_actes",
+      "type": "branch",
+      "label": "Sélection de communications sans actes",
+      "parent": "publications",
+      "bibliography": [
+        {
+          "text": "Roy, É. (juin 2025). Pour une approche inclusive de la créativité dans l'éducation professionnelle [communication]. 3ᵉ colloque international sur l'empathie en éducation, Aix-en-Provence, France.",
+          "url": "https://doi.org/10.13140/RG.2.2.20618.89282"
+        },
+        {
+          "text": "Tortochot, É., Roy, É. et Moineau, C. (2023, novembre). La matrice disciplinaire des arts appliqués et cultures artistiques [communication]. Journée d’étude Les matrices disciplinaires du design, Toulouse, France."
+        },
+        {
+          "text": "Mirault, J., Cerisier, C., Roy, É., Moineau, C. et Tortochot, É. (2023, octobre). Designing by sketching and writing: case study of preservice teachers preparing a competitive recruitment exam [communication]. Colloque international en hommage à Jacques Ginestié, Marseille, France."
+        },
+        {
+          "text": "Roy, É. et Moineau, C. (2023, septembre). L’enseignement de design social pour le développement de compétences transformatives ? [communication]. Biennale de l’éducation, Paris, France."
+        },
+        {
+          "text": "Tortochot, É., Roy, É. et Moineau, C. (2023, juin). Le corps médiateur dans un cours de design en lycée professionnel en France [communication]. Journée d’étude La place du corps dans l’éducation à la création artistique, Lausanne, Suisse.",
+          "url": "https://amu.hal.science/hal-04120018/document"
+        },
+        {
+          "text": "Tortochot, É., Farsy, S., Roy, É. et Moineau, C. (2021, décembre). Le rapport des élèves à l’évaluation dans quatre situations d’enseignement des arts appliqués [communication]. Journée évaluation dans la formation et dans les éducations à, Marseille, France.",
+          "url": "https://hal.archives-ouvertes.fr/hal-03522863/"
+        },
+        {
+          "text": "Roy, É. et Moineau, C. (2021, septembre). Gestures and Behaviours of the Design Teacher [communication]. ECER 2021, Genève, Suisse."
+        },
+        {
+          "text": "Roy, É. et Moineau, C. (2021, avril). Gestes et postures de l’enseignant d’arts appliqués de lycée professionnel [communication]. 8ᵉ Colloque international en éducation, Montréal, Canada.",
+          "url": "https://hal.archives-ouvertes.fr/hal-03214443"
+        },
+        {
+          "text": "Roy, É. (2021, mars). Les arts appliqués en lycée professionnel : une créativité pour les autres [communication]. La créativité dans le champ de l'enseignement et de la médiation, Nice, France.",
+          "url": "https://hal.archives-ouvertes.fr/hal-03206259/"
+        }
+      ]
+    },
+    {
+      "id": "autres_communications",
+      "type": "branch",
+      "label": "Autres communications",
+      "parent": "publications",
+      "bibliography": [
+        {
+          "text": "Présentation de mes recherches dans 12 séminaires ADEF-GCAF, ADEF-Axe 1 et GIS Arts & Éducation."
+        }
       ]
     }
   ]
