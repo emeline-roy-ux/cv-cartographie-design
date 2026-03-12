@@ -141,9 +141,12 @@
     {
       "id": "acl_70",
       "type": "branch",
-      "label": "Articles ACL (70e)",
+      "label": "Publications revues éducation (CNU 70)",
       "parent": "publications",
       "bibliography": [
+        {
+          "text": "Hache, C., Roy, É., Vervoort, S., Brun, X., Giacopazzi, C., Gouaich, K., Sainte-Rose, G., Signoret, M., Tarafa, D., Vidal, A. et Tortochot, E. (accepté). Une autre manière de penser le rôle des autoconfrontations dans un collectif d’enseignants isolés. Revue des sciences de l'éducation."
+        },
         {
           "text": "Benelkadi, P.-A. et Roy, É. (2025). L’évolution de la place du langage graphique dans les séquences d’arts plastiques de cycle 4 : une analyse des prescriptions de pratiques numériques de 2010 à 2023. Recherches en didactiques."
         },
@@ -152,31 +155,16 @@
           "url": "https://doi.org/10.3917/cape.602.0036"
         },
         {
-          "text": "Roy, É., Pasquier, A., Rosso, N. et Rezzi, N. (2025). Influence du dispositif des Cordées de la réussite sur des élèves de 3ᵉ de collège REP : Une analyse des perceptions et des effets sur le développement personnel et l'orientation. La Nouvelle Revue - Éducation et Société Inclusives, 103(2)."
-        },
-        {
-          "text": "Roy, É. et Rowe, A. (2025). The Designer as Mediator: Expanding the Roles in Social Design and Project Facilitation. Art, Design and Communication in Higher Education, online first.",
-          "url": "https://doi.org/10.1386/adch_00116_1"
+          "text": "Roy, É., Pasquier, A., Rosso, N. et Rezzi, N. (2025). Influence du dispositif des Cordées de la réussite sur des élèves de 3ᵉ de collège REP : Une analyse des perceptions et des effets sur le développement personnel et l'orientation. La Nouvelle Revue - Éducation et Société Inclusives, 103(2), 152-170.",
+          "url": "https://doi.org/10.3917/nresi.103.0152"
         },
         {
           "text": "Balleydier, N. et Roy, É. (2025). L’erreur en arts appliqués et cultures artistiques, valorisation et dépassement par la démarche de projet en lycée professionnel. Didactique, 6(1), 93-114.",
           "url": "https://doi.org/10.37571/2025.0104"
         },
         {
-          "text": "Moineau, C. et Roy, É. (2025). Pratiques de design en alternance : mise en regard d’activités formatives. Phronesis, Hors série, Volume 14(HS1), 80-97.",
-          "url": "https://shs.cairn.info/revue-phronesis-2025-hs1-page-80?lang=fr"
-        },
-        {
-          "text": "Roy, É., Moineau, C. et Tortochot, É. (2024). Innover socialement par le design et développer des compétences transformatives au lycée professionnel. Nouveaux cahiers de la recherche en éducation, 26(1), 10–34.",
-          "url": "https://doi.org/10.7202/1113231ar"
-        },
-        {
           "text": "Roy, É., Thébault-Royet, L., Dalmon, J., Farsy, S. et Moineau, C. (2024). Gestes des professeurs de design lors d'activités de réflexion collective en STD2A. Journal de recherche en éducations artistiques, 3, 62-77.",
           "url": "https://doi.org/10.26034/vd.jrea.2024.5076"
-        },
-        {
-          "text": "Roy, É. et McLain, M. (2024). The disciplinary matrix of applied arts and artistic cultures. The Curriculum journal, 36(1), 15-35.",
-          "url": "https://doi.org/10.1002/curj.251"
         },
         {
           "text": "Moineau, C., Farsy, S., Tortochot, É. et Roy, É. (2023). Le rapport à l’évaluation dans trois situations d’« éducation à » la conception. Travail et Apprentissages, 26, 160-186.",
@@ -203,16 +191,32 @@
     {
       "id": "acl_18",
       "type": "branch",
-      "label": "Articles ACL (18e)",
+      "label": "Publications revues design (CNU 18)",
       "parent": "publications",
       "bibliography": [
         {
-          "text": "Roy, E., Moineau, C., Mattei, L et Tortochot, E. (2025). La matrice disciplinaire de l'enseignement du design un miroir de l'évolution des pratiques de design. Design, Arts, Média, 11.",
+          "text": "Roy, E., Moineau, C., Mattei, L. et Tortochot, É. (2025). La matrice disciplinaire de l'enseignement du design un miroir de l'évolution des pratiques de design. Design, Arts, Média, 11.",
           "url": "https://journal.dampress.org/issues/les-matrices-disciplinaires-du-design/design-scolaire-et-matrice-disciplinaire-normaliser-stabiliser-reinterpreter"
+        },
+        {
+          "text": "Roy, É. et Rowe, A. (2025). The Designer as Mediator: Expanding the Roles in Social Design and Project Facilitation. Art, Design and Communication in Higher Education, online first.",
+          "url": "https://doi.org/10.1386/adch_00116_1"
         },
         {
           "text": "Roy, É. (2025). L’influence des références aux industries culturelles et créatives sur la créativité des élèves en arts appliqués, une étude de cas en lycée professionnel. Revue Designer l’enseignement, Enseigner le Design, 2, 13-27.",
           "url": "https://doi.org/10.71585/deed.i2.15"
+        },
+        {
+          "text": "Moineau, C. et Roy, É. (2025). Pratiques de design en alternance : mise en regard d’activités formatives. Phronesis, Hors série, Volume 14(HS1), 80-97.",
+          "url": "https://shs.cairn.info/revue-phronesis-2025-hs1-page-80?lang=fr"
+        },
+        {
+          "text": "Roy, É., Moineau, C. et Tortochot, É. (2024). Innover socialement par le design et développer des compétences transformatives au lycée professionnel. Nouveaux cahiers de la recherche en éducation, 26(1), 10–34.",
+          "url": "https://doi.org/10.7202/1113231ar"
+        },
+        {
+          "text": "Roy, É. et McLain, M. (2024). The disciplinary matrix of applied arts and artistic cultures. The Curriculum journal, 36(1), 15-35.",
+          "url": "https://doi.org/10.1002/curj.251"
         },
         {
           "text": "Moineau, C., Roy, É. et Tortochot, É. (2022). Design social et enseignement secondaire en France : l’émergence d’un design pédagogique ? Sciences du Design, 15, 109-125.",
@@ -223,7 +227,7 @@
     {
       "id": "chapitres",
       "type": "branch",
-      "label": "Chapitres",
+      "label": "Sélection de 10 chapitres d’ouvrages scientifiques (COS)",
       "parent": "publications",
       "bibliography": [
         {
@@ -798,6 +802,174 @@
       "label": "Responsable du tutorat MEEF Design & métiers d’art (depuis 2022)",
       "parent": "responsabilites_institutionnelles",
       "yearStart": 2022
+    },
+    {
+      "id": "directions_ouvrages",
+      "type": "branch",
+      "label": "Directions d’ouvrages et numéros de revue (DO)",
+      "parent": "publications",
+      "bibliography": [
+        {
+          "text": "Roy, É., Roth, R., Broisat, B. et Tortochot, E. (2026-2027). Méthodologies de recherche en arts et éducation à l’ère numérique. Hybrid (appel à article)."
+        },
+        {
+          "text": "Roy, É., Claverie, I. et Papon, L. (2026). Regards pluriels sur les enseignements artistiques. Delatour."
+        },
+        {
+          "text": "Roy, É., Claverie, I. et Papon, L. (2026). Contexte et enjeux de l'ouvrage. Dans Regards pluriels sur les enseignements artistiques. Delatour."
+        },
+        {
+          "text": "Roy, É., Rezzi, N., Brissaud, J. et Rosso, N. (2024). Les enseignements artistiques pour advenir au monde (vol. 2). Nouveaux cahiers de la recherche en éducation, 26(3)."
+        },
+        {
+          "text": "Roy, É. (2024). Les enseignements artistiques pour advenir au monde (vol. 2). Nouveaux cahiers de la recherche en éducation, 26(3), 1–6.",
+          "url": "https://doi.org/10.7202/1116388ar"
+        },
+        {
+          "text": "Roy, É., Rezzi, N., Brissaud, J. et Rosso, N. (2024). Les enseignements artistiques pour advenir au monde (vol. 1). Nouveaux cahiers de la recherche en éducation, 26(1).",
+          "url": "https://www.erudit.org/fr/revues/ncre/2024-v26-n1-ncre09525/"
+        },
+        {
+          "text": "Roy, É. et Rosso, N. (2024). Introduction : Les enseignements artistiques pour advenir au monde. Nouveaux cahiers de la recherche en éducation, 26(1), 1-9.",
+          "url": "https://doi.org/10.7202/1113230ar"
+        },
+        {
+          "text": "Tortochot, É., Moineau, C. et Roy, É. (2023). Enseigner le design : un geste créatif et une activité formative. Delatour.",
+          "url": "https://www.editions-delatour.com/fr/beaux-arts/4835-l-enseignement-du-design-9782752104779.html"
+        },
+        {
+          "text": "Roy, É. et Papon, L. (2022). Créer pour éduquer en faveur de la persévérance. Delatour.",
+          "url": "https://www.editions-delatour.com/fr/pedagogie-musicale/4679-creer-pour-eduquer-en-faveur-de-la-perseverance-9782752104434.html"
+        }
+      ]
+    },
+    {
+      "id": "conferences_invitees",
+      "type": "branch",
+      "label": "Conférences invitées",
+      "parent": "publications",
+      "bibliography": [
+        {
+          "text": "Roy, É. (2026, septembre). Le mémoire en design comme objet réflexif et pédagogique [communication]. Saison 5 des webinaires DN MADe de Bourgogne et Franche-Comté, Besançon, France."
+        },
+        {
+          "text": "Roy, É. (2025, décembre). Le mémoire en design comme objet réflexif et pédagogique : entre prescription institutionnelle et pratique située [communication]. Séance du laboratoire PROJEKT - Nîmes Université, Nîmes, France."
+        },
+        {
+          "text": "Roy, É. (2024, novembre). La créativité dans l'enseignement du design en formation professionnelle [communication]. Séance du laboratoire CREAT - Haute école pédagogique du canton de Vaud, Lausanne, Suisse.",
+          "url": "https://doi.org/10.13140/RG.2.2.24396.42880"
+        },
+        {
+          "text": "Roy, É. (2024, juin). Les compétences psychosociales et les compétences transformatives pour advenir au monde [communication]. 11ᵉ édition des rencontres sur l’action artistique et culturelle dans l’enseignement supérieur, Paris, France."
+        },
+        {
+          "text": "Roy, É. et Moineau, C. (2024, juin). Développement durable et design, quels enseignements ? [communication]. Journée d'étude du GCAF « Regards pluriels sur les enseignements artistiques », Marseille, France."
+        },
+        {
+          "text": "Hache, C., Tortochot, É., Gouaich, K., Michel, F., Roy, É., Baugnies, M., Brunias, A. et Olympio, N. (2023, novembre). LyP&Cap : Recherche collaborative sur l’enseignement de l’anglais en CAP au lycée professionnel [communication]. Journées de restitution Ampiric, Marseille, France."
+        },
+        {
+          "text": "Roy, É. et Moineau, C. (2022, juin). Le rapport aux autres en master Design et Innovation Société [communication]. Journées du GCAF : Altérité et interculturalité au service des apprentissages, Aix-en-Provence, France.",
+          "url": "https://amupod.univ-amu.fr/"
+        },
+        {
+          "text": "Roy, É. (2020, décembre). Analyse de stratégies d'enseignement en arts appliqués : une proposition méthodologique [communication]. Séminaire doctoral PROJEKT, Nîmes, France."
+        }
+      ]
+    },
+    {
+      "id": "communications_actes",
+      "type": "branch",
+      "label": "Communications avec actes",
+      "parent": "publications",
+      "bibliography": [
+        {
+          "text": "Moineau, C. et Roy, É. (juin 2024). L’objet mémoire, l’objet dans le mémoire et l’objet du mémoire. Les cas de deux formations au design en France [communication avec actes]. Biennale de l'enseignement du design, Fribourg, Suisse."
+        },
+        {
+          "text": "Roy, É. et Moineau, C. (2025, juin). Apports des pratiques de design social à la formation des enseignants en design. La captation vidéo pour analyser l’activité dans une situation de simulation [communication]. 7ᵉ colloque international de l’association RPDP, Toulouse, France.",
+          "url": "https://rpdp2025.sciencesconf.org/data/pages/Actes_Colloque_RPDP_2025.pdf"
+        },
+        {
+          "text": "Moineau, C., Roy, É. et Tortochot, É. (2022, juin). Didactique professionnelle et didactiques des disciplines : Filiations, ruptures et dépassements [communication]. Colloque RDPD, Genève, Suisse.",
+          "url": "https://institut-agro-dijon.hal.science/hal-04022529/document"
+        }
+      ]
+    },
+    {
+      "id": "communications_affiches",
+      "type": "branch",
+      "label": "Communications par affiche",
+      "parent": "publications",
+      "bibliography": [
+        {
+          "text": "Roy, É. (2024, juin). Créativité et conception dans l'éducation professionnelle : vers une approche inclusive [affiche]. 3ᵉ colloque international sur l'empathie en éducation, Aix-en-Provence, France.",
+          "url": "https://doi.org/10.13140/RG.2.2.20618.89282"
+        },
+        {
+          "text": "Roy, É. (2020, mai). Transposition interne des contenus en Arts Appliqués : Situations didactiques et a-didactiques [affiche]. 6ᵉ Printemps de la Recherche en Éducation, Paris, France.",
+          "url": "https://hal.archives-ouvertes.fr/hal-03768437/"
+        },
+        {
+          "text": "Cusenier, É. et Colson, P. (2019, octobre). Quels postures et gestes professionnels de l'enseignant d'arts appliqués [affiche]. 3ᵉ Rencontre scientifique de SFERE-Provence, Aix-en-Provence, France.",
+          "url": "https://hal.archives-ouvertes.fr/hal-02318567"
+        },
+        {
+          "text": "Cusenier, É. (2019, juin). La chaise, un artefact à exploiter pour une approche transversale de l'enseignement des arts appliqués [affiche]. Colloque Créer pour éduquer : Une éducation démocratique par les arts, Aix-en-Provence, France.",
+          "url": "https://hal.archives-ouvertes.fr/hal-02129112"
+        }
+      ]
+    },
+    {
+      "id": "communications_sans_actes",
+      "type": "branch",
+      "label": "Sélection de communications sans actes",
+      "parent": "publications",
+      "bibliography": [
+        {
+          "text": "Roy, É. (juin 2025). Pour une approche inclusive de la créativité dans l'éducation professionnelle [communication]. 3ᵉ colloque international sur l'empathie en éducation, Aix-en-Provence, France.",
+          "url": "https://doi.org/10.13140/RG.2.2.20618.89282"
+        },
+        {
+          "text": "Tortochot, É., Roy, É. et Moineau, C. (2023, novembre). La matrice disciplinaire des arts appliqués et cultures artistiques [communication]. Journée d’étude Les matrices disciplinaires du design, Toulouse, France."
+        },
+        {
+          "text": "Mirault, J., Cerisier, C., Roy, É., Moineau, C. et Tortochot, É. (2023, octobre). Designing by sketching and writing: case study of preservice teachers preparing a competitive recruitment exam [communication]. Colloque international en hommage à Jacques Ginestié, Marseille, France."
+        },
+        {
+          "text": "Roy, É. et Moineau, C. (2023, septembre). L’enseignement de design social pour le développement de compétences transformatives ? [communication]. Biennale de l’éducation, Paris, France."
+        },
+        {
+          "text": "Tortochot, É., Roy, É. et Moineau, C. (2023, juin). Le corps médiateur dans un cours de design en lycée professionnel en France [communication]. Journée d’étude La place du corps dans l’éducation à la création artistique, Lausanne, Suisse.",
+          "url": "https://amu.hal.science/hal-04120018/document"
+        },
+        {
+          "text": "Tortochot, É., Farsy, S., Roy, É. et Moineau, C. (2021, décembre). Le rapport des élèves à l’évaluation dans quatre situations d’enseignement des arts appliqués [communication]. Journée évaluation dans la formation et dans les éducations à, Marseille, France.",
+          "url": "https://hal.archives-ouvertes.fr/hal-03522863/"
+        },
+        {
+          "text": "Roy, É. et Moineau, C. (2021, septembre). Gestures and Behaviours of the Design Teacher [communication]. ECER 2021, Genève, Suisse."
+        },
+        {
+          "text": "Roy, É. et Moineau, C. (2021, avril). Gestes et postures de l’enseignant d’arts appliqués de lycée professionnel [communication]. 8ᵉ Colloque international en éducation, Montréal, Canada.",
+          "url": "https://hal.archives-ouvertes.fr/hal-03214443"
+        },
+        {
+          "text": "Roy, É. (2021, mars). Les arts appliqués en lycée professionnel : une créativité pour les autres [communication]. La créativité dans le champ de l'enseignement et de la médiation, Nice, France.",
+          "url": "https://hal.archives-ouvertes.fr/hal-03206259/"
+        }
+      ]
+    },
+    {
+      "id": "autres_communications",
+      "type": "branch",
+      "label": "Autres communications",
+      "parent": "publications",
+      "bibliography": [
+        {
+          "text": "Présentation de mes recherches dans 12 séminaires ADEF-GCAF, ADEF-Axe 1 et GIS Arts & Éducation."
+        }
+      ]
     }
   ]
 }
