@@ -6,131 +6,226 @@
   <title>Emeline Roy · Portfolio académique</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&family=Syne:wght@500;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg: #0a0a0a;
-      --panel: #121212;
-      --ink: #f5f5f5;
-      --muted: #b9b9b9;
-      --line: #252525;
-      --accent: #6ee7b7;
-      --accent-2: #7c83ff;
-      --max: 1120px;
-      --radius: 18px;
+      --bg: #f8f3e8;
+      --ink: #101010;
+      --muted: #505050;
+      --panel: #fffdf7;
+      --line: #141414;
+      --accent: #ffd447;
+      --accent-2: #7a63ff;
+      --max: 1080px;
+      --radius: 22px;
+      --shadow: 7px 7px 0 #111;
     }
+
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
     body {
       margin: 0;
-      font-family: "Inter", system-ui, sans-serif;
+      font-family: "Space Grotesk", system-ui, sans-serif;
       color: var(--ink);
       background:
-        radial-gradient(1200px 600px at 0% 0%, rgba(124, 131, 255, 0.12), transparent 55%),
-        radial-gradient(800px 600px at 100% 15%, rgba(110, 231, 183, 0.12), transparent 65%),
+        radial-gradient(circle at 10% 0, rgba(122, 99, 255, .18), transparent 45%),
+        radial-gradient(circle at 100% 20%, rgba(255, 212, 71, .3), transparent 40%),
         var(--bg);
     }
-    .layout {
-      display: grid;
-      grid-template-columns: 230px minmax(0, 1fr);
-      min-height: 100vh;
+
+    .container {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 1rem 1rem 3rem;
     }
-    .sidebar {
+
+    .topbar {
       position: sticky;
       top: 0;
-      height: 100vh;
-      padding: 2.2rem 1.2rem;
-      border-right: 1px solid var(--line);
-      background: rgba(10, 10, 10, 0.86);
-      backdrop-filter: blur(10px);
-    }
-    .brand {
-      margin: 0 0 2rem;
-      font-family: "Syne", sans-serif;
-      font-size: 1.28rem;
-      line-height: 1.1;
-      letter-spacing: -0.02em;
-    }
-    .brand span { color: var(--accent); }
-    .menu { display: grid; gap: 0.8rem; }
-    .menu a {
-      text-decoration: none;
-      color: var(--muted);
-      font-size: 0.94rem;
-      transition: color .2s ease, transform .2s ease;
-    }
-    .menu a:hover { color: var(--ink); transform: translateX(4px); }
-    .content { padding: 2.2rem 1.2rem 4rem; }
-    .container { max-width: var(--max); margin: 0 auto; }
-    .hero {
-      display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
+      z-index: 10;
+      margin: .8rem 0 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
       gap: 1rem;
-      margin-bottom: 1rem;
+      padding: .8rem 1rem;
+      background: rgba(255, 253, 247, .95);
+      border: 2px solid var(--line);
+      border-radius: 999px;
+      backdrop-filter: blur(3px);
     }
+
+    .brand {
+      font-weight: 700;
+      letter-spacing: -.02em;
+    }
+
+    .brand span {
+      display: inline-block;
+      padding: .12rem .55rem;
+      border: 2px solid var(--line);
+      border-radius: 999px;
+      background: var(--accent);
+      margin-left: .3rem;
+    }
+
+    .menu { display: flex; flex-wrap: wrap; gap: .6rem; }
+    .menu a {
+      font-family: "IBM Plex Mono", monospace;
+      text-decoration: none;
+      color: var(--ink);
+      border: 2px solid transparent;
+      border-radius: 999px;
+      padding: .2rem .55rem;
+    }
+    .menu a:hover { border-color: var(--line); }
+
+    .hero {
+      margin-top: .5rem;
+      display: grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 1rem;
+      align-items: stretch;
+    }
+
     .card {
-      background: linear-gradient(170deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01));
-      border: 1px solid var(--line);
+      border: 3px solid var(--line);
       border-radius: var(--radius);
+      background: var(--panel);
       padding: 1.2rem;
+      box-shadow: var(--shadow);
     }
+
     .intro h1 {
       margin: 0;
-      font-family: "Syne", sans-serif;
-      font-size: clamp(2rem, 6vw, 4.2rem);
-      line-height: 0.95;
-      letter-spacing: -0.04em;
+      font-size: clamp(2.2rem, 6vw, 4.8rem);
+      line-height: .94;
+      letter-spacing: -.05em;
     }
+
     .intro h1 em {
+      display: inline-block;
       font-style: normal;
-      background: linear-gradient(90deg, var(--accent), var(--accent-2));
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
+      transform: rotate(-2deg);
+      background: var(--accent);
+      border: 3px solid var(--line);
+      border-radius: .45rem;
+      padding: 0 .25rem;
     }
-    .intro p { color: var(--muted); max-width: 60ch; }
-    .tags { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .7rem; }
-    .tag { border: 1px solid #313131; border-radius: 999px; padding: .22rem .6rem; font-size: .78rem; color: #d5d5d5; }
+
+    .intro p { color: var(--muted); max-width: 55ch; }
+
+    .portrait {
+      padding: .7rem;
+      background: linear-gradient(145deg, #fff9db, #fffef9);
+    }
+
     .portrait img {
       width: 100%;
-      border-radius: 14px;
+      height: 100%;
       aspect-ratio: 4/5;
       object-fit: cover;
-      border: 1px solid #3a3a3a;
+      border: 3px solid var(--line);
+      border-radius: calc(var(--radius) - 8px);
     }
-    section { margin-top: 1rem; }
-    section h2 {
-      margin: 0 0 .3rem;
-      font-family: "Syne", sans-serif;
-      font-size: clamp(1.3rem, 2.2vw, 2rem);
-      letter-spacing: -0.02em;
-    }
-    .section-sub { color: var(--muted); margin: 0 0 1rem; }
-    .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: .85rem; }
-    .block { grid-column: span 6; }
-    .block h3 { margin: 0 0 .55rem; font-size: 1rem; }
-    .item { padding: .55rem 0; border-top: 1px dashed #2e2e2e; }
-    .item:first-child { border-top: 0; }
-    .item p { margin: 0; color: #dbdbdb; }
-    .item small { display: block; color: var(--muted); margin-top: .2rem; }
-    .pub-list { columns: 2; column-gap: 1rem; }
-    .pub { break-inside: avoid; border-top: 1px dashed #2d2d2d; padding: .6rem 0; }
-    .pub a { color: var(--accent); text-decoration: none; }
-    footer { color: #959595; margin-top: 1.4rem; font-size: .84rem; }
 
-    @media (max-width: 980px) {
-      .layout { grid-template-columns: 1fr; }
-      .sidebar { position: static; height: auto; border-right: 0; border-bottom: 1px solid var(--line); }
+    .tags { display: flex; flex-wrap: wrap; gap: .45rem; margin-top: .8rem; }
+    .tag {
+      border: 2px solid var(--line);
+      background: #fff;
+      border-radius: 999px;
+      font-size: .78rem;
+      padding: .23rem .7rem;
+      font-family: "IBM Plex Mono", monospace;
+    }
+
+    .grid {
+      margin-top: 1.1rem;
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 1rem;
+    }
+
+    section.card { margin-top: 1rem; }
+    section h2 {
+      margin: 0;
+      font-size: clamp(1.3rem, 2.2vw, 2rem);
+      letter-spacing: -.03em;
+    }
+
+    .section-sub {
+      margin: .35rem 0 .9rem;
+      color: var(--muted);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: .88rem;
+    }
+
+    .block {
+      grid-column: span 6;
+      border: 2px dashed #212121;
+      border-radius: 14px;
+      padding: .85rem;
+      background: #fffcf0;
+    }
+
+    .block h3 {
+      margin: 0 0 .6rem;
+      font-size: 1rem;
+      display: inline-block;
+      border-bottom: 2px solid var(--line);
+    }
+
+    .item {
+      border-top: 1px solid #353535;
+      padding: .52rem 0;
+    }
+
+    .item:first-of-type { border-top: 0; padding-top: 0; }
+    .item p { margin: 0; }
+
+    .item small {
+      display: block;
+      color: var(--muted);
+      margin-top: .15rem;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: .75rem;
+    }
+
+    .item a, .pub a { color: #3f35d5; }
+
+    .pub-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: .75rem;
+    }
+
+    .pub {
+      border: 2px solid var(--line);
+      border-radius: 12px;
+      padding: .7rem;
+      background: #fff;
+      font-size: .94rem;
+    }
+
+    footer {
+      margin-top: 1.3rem;
+      font-family: "IBM Plex Mono", monospace;
+      color: var(--muted);
+      font-size: .78rem;
+    }
+
+    @media (max-width: 900px) {
       .hero { grid-template-columns: 1fr; }
       .block { grid-column: span 12; }
-      .pub-list { columns: 1; }
+      .pub-list { grid-template-columns: 1fr; }
+      .topbar { border-radius: 18px; }
     }
   </style>
 </head>
 <body>
-  <div class="layout">
-    <aside class="sidebar">
-      <h2 class="brand">Emeline <span>Roy</span></h2>
+  <div class="container">
+    <header class="topbar">
+      <div class="brand">Emeline <span>Roy</span></div>
       <nav class="menu">
         <a href="#a-propos">À propos</a>
         <a href="#profil">Profil</a>
@@ -138,53 +233,49 @@
         <a href="#enseignements">Enseignements</a>
         <a href="#publications">Publications</a>
       </nav>
-    </aside>
+    </header>
 
-    <main class="content">
-      <div class="container">
-        <section id="a-propos" class="hero">
-          <article class="card intro">
-            <h1>Portfolio<br />académique <em>vivant</em></h1>
-            <p>
-              MCF à l’INSPÉ d’Aix-Marseille Université, je développe des travaux sur la didactique du design,
-              les pratiques de conception et les pédagogies transformatives.
-            </p>
-            <div id="root-tags" class="tags"></div>
-          </article>
-          <article class="card portrait">
-            <img src="assets/visuels/curj_2024.jpg" alt="Portrait Emeline Roy" />
-          </article>
-        </section>
+    <section id="a-propos" class="hero">
+      <article class="card intro">
+        <h1>Portfolio<br />académique <em>vivant</em></h1>
+        <p>
+          MCF à l’INSPÉ d’Aix-Marseille Université, je développe des travaux sur la didactique du design,
+          les pratiques de conception et les pédagogies transformatives.
+        </p>
+        <div id="root-tags" class="tags"></div>
+      </article>
+      <article class="card portrait">
+        <img src="assets/visuels/curj_2024.jpg" alt="Portrait Emeline Roy" />
+      </article>
+    </section>
 
-        <section id="profil" class="card">
-          <h2>Profil</h2>
-          <p class="section-sub">Parcours, statut, laboratoires et expériences professionnelles.</p>
-          <div class="grid" id="profil-grid"></div>
-        </section>
+    <section id="profil" class="card">
+      <h2>Profil</h2>
+      <p class="section-sub">Parcours, statut, laboratoires et expériences professionnelles.</p>
+      <div class="grid" id="profil-grid"></div>
+    </section>
 
-        <section id="recherche" class="card">
-          <h2>Recherche</h2>
-          <p class="section-sub">Axes de recherche, vie scientifique et activités collectives.</p>
-          <div class="grid" id="recherche-grid"></div>
-        </section>
+    <section id="recherche" class="card">
+      <h2>Recherche</h2>
+      <p class="section-sub">Axes de recherche, vie scientifique et activités collectives.</p>
+      <div class="grid" id="recherche-grid"></div>
+    </section>
 
-        <section id="enseignements" class="card">
-          <h2>Enseignements</h2>
-          <p class="section-sub">Cours, publics et formats pédagogiques.</p>
-          <div class="grid" id="enseignements-grid"></div>
-        </section>
+    <section id="enseignements" class="card">
+      <h2>Enseignements</h2>
+      <p class="section-sub">Cours, publics et formats pédagogiques.</p>
+      <div class="grid" id="enseignements-grid"></div>
+    </section>
 
-        <section id="publications" class="card">
-          <h2>Dernières publications</h2>
-          <p class="section-sub">Sélection automatique depuis l’arborescence du CV.</p>
-          <div id="publication-list" class="pub-list"></div>
-        </section>
+    <section id="publications" class="card">
+      <h2>Dernières publications</h2>
+      <p class="section-sub">Sélection automatique depuis l’arborescence du CV.</p>
+      <div id="publication-list" class="pub-list"></div>
+    </section>
 
-        <footer>
-          Site refondu au format portfolio · Données alimentées par <code>data.json</code>.
-        </footer>
-      </div>
-    </main>
+    <footer>
+      Site refondu au format portfolio · Données alimentées par <code>data.json</code>.
+    </footer>
   </div>
 
   <script>
