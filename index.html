@@ -6,7 +6,7 @@
   <title>Emeline Roy · Portfolio académique</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
   <style>
     :root {
       --bg: #f4f6f8;
@@ -29,6 +29,7 @@
       font-family: "Inter", system-ui, sans-serif;
       line-height: 1.45;
     }
+
     .container { max-width: var(--max); margin: 0 auto; padding: 1rem 1rem 3rem; }
 
     .topbar {
@@ -46,8 +47,12 @@
       background: rgba(255,255,255,.93);
       backdrop-filter: blur(4px);
     }
-    .brand { font-family: "Source Serif 4", serif; font-size: 1.1rem; }
-    .brand span { color: var(--accent); font-weight: 700; }
+    .brand {
+      font-family: "Space Grotesk", system-ui, sans-serif;
+      font-size: 1.08rem;
+      font-weight: 700;
+    }
+    .brand span { color: var(--accent); }
     .menu { display: flex; flex-wrap: wrap; gap: .45rem; }
     .menu a {
       text-decoration: none;
@@ -59,77 +64,112 @@
     }
     .menu a:hover { color: var(--ink); border-color: var(--line); background: #fff; }
 
-    .home {
-      min-height: 84vh;
-      display: grid;
-      grid-template-columns: 1.2fr .8fr;
-      gap: 1rem;
-      align-items: stretch;
-      margin-bottom: 1rem;
-    }
-
     .card {
       border: 1px solid var(--line);
       border-radius: var(--radius);
       background: var(--paper);
       padding: 1.1rem;
     }
-    .intro {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
+
+    .home {
+      min-height: 74vh;
+      display: grid;
+      align-content: center;
+      margin-bottom: 1rem;
       background: linear-gradient(165deg, #ffffff 0%, #f7faff 100%);
     }
-    .home-kicker { font-family: "IBM Plex Mono", monospace; color: var(--muted); font-size: .86rem; }
-    .intro h1 {
-      margin: .3rem 0 0;
-      font-family: "Source Serif 4", serif;
-      font-size: clamp(2.2rem, 6vw, 4.2rem);
-      line-height: 1.02;
-      letter-spacing: -.01em;
+    .home-kicker { font-family: "IBM Plex Mono", monospace; color: var(--muted); font-size: .85rem; }
+    .home h1 {
+      margin: .4rem 0 0;
+      font-family: "Space Grotesk", system-ui, sans-serif;
+      font-size: clamp(2.6rem, 8vw, 5rem);
+      line-height: .98;
+      letter-spacing: -.02em;
     }
     .typed-line {
       margin-top: .8rem;
       font-family: "IBM Plex Mono", monospace;
-      font-size: clamp(1.35rem, 5vw, 2.65rem);
+      font-size: clamp(1.2rem, 4.2vw, 2.2rem);
       color: var(--accent);
-      min-height: 1.7em;
+      min-height: 1.65em;
       font-weight: 500;
     }
     .typed-cursor { display: inline-block; animation: blink .9s steps(1) infinite; margin-left: 3px; }
     @keyframes blink { 50% { opacity: 0; } }
 
-    .intro p { margin-top: .9rem; max-width: 64ch; color: var(--muted); }
-    .contact { margin-top: .9rem; display: grid; gap: .2rem; font-family: "IBM Plex Mono", monospace; font-size: .77rem; color: #3f4f64; }
-    .contact a { color: var(--accent); }
-    .tags { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: .8rem; }
-    .tag {
+    .home-cats {
+      margin-top: 1rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: .5rem;
+    }
+    .home-cats a {
       border: 1px solid var(--line);
       border-radius: 999px;
-      padding: .2rem .58rem;
-      font-size: .74rem;
+      padding: .26rem .68rem;
+      font-size: .82rem;
+      text-decoration: none;
       color: #33475f;
       background: #fbfcfd;
     }
 
-    .portrait {
+    .social-icons {
+      margin-top: 1rem;
       display: flex;
+      flex-wrap: wrap;
+      gap: .55rem;
+    }
+    .social-icons a {
+      width: 38px;
+      height: 38px;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      display: inline-flex;
       align-items: center;
       justify-content: center;
-      background: linear-gradient(180deg, #fbfdff 0%, #f1f5fb 100%);
+      color: var(--accent);
+      background: #fff;
     }
-    .portrait img {
-      width: 100%;
-      max-width: 340px;
-      aspect-ratio: 4 / 5;
-      object-fit: cover;
-      border-radius: 12px;
-      border: 1px solid var(--line);
+    .social-icons a:hover {
+      border-color: #b8c8de;
+      transform: translateY(-1px);
+    }
+    .social-icons svg {
+      width: 18px;
+      height: 18px;
+      fill: currentColor;
+      stroke: currentColor;
+      stroke-width: 1.8;
     }
 
     section.card { margin-top: 1rem; }
-    section h2 { margin: 0; font-family: "Source Serif 4", serif; font-size: clamp(1.3rem, 2.2vw, 2rem); }
+    section h2 {
+      margin: 0;
+      font-family: "Space Grotesk", system-ui, sans-serif;
+      font-size: clamp(1.3rem, 2.2vw, 2rem);
+    }
     .section-sub { margin: .3rem 0 .95rem; color: var(--muted); font-size: .92rem; }
+
+    .profil-head {
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 1rem;
+      align-items: center;
+      margin-bottom: .8rem;
+    }
+    .profil-photo {
+      margin: 0;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      overflow: hidden;
+      background: #f5f8fd;
+    }
+    .profil-photo img {
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      object-fit: cover;
+      display: block;
+    }
 
     .accordion-stack { display: grid; gap: .7rem; }
     .accordion {
@@ -176,6 +216,15 @@
     .item small { display: block; margin-top: .2rem; color: var(--muted); }
     .item a { color: var(--accent); }
     .subitem { border-top: 1px dashed var(--line); margin-top: .6rem; padding-top: .6rem; }
+    .tags { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: .8rem; }
+    .tag {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: .2rem .58rem;
+      font-size: .74rem;
+      color: #33475f;
+      background: #fbfcfd;
+    }
 
     .hal-box {
       border: 1px solid var(--line);
@@ -184,14 +233,15 @@
       padding: .8rem;
       margin-bottom: .8rem;
     }
-    .hal-box h3 { margin: 0 0 .5rem; font-size: 1rem; }
+    .hal-box h3 { margin: 0 0 .5rem; font-size: 1rem; font-family: "Space Grotesk", system-ui, sans-serif; }
     .hal-list { margin: 0; padding-left: 1rem; display: grid; gap: .35rem; }
 
     footer { margin-top: 1.4rem; color: #607186; font-size: .78rem; font-family: "IBM Plex Mono", monospace; }
 
     @media (max-width: 920px) {
       .topbar { border-radius: 16px; }
-      .home { grid-template-columns: 1fr; min-height: auto; }
+      .profil-head { grid-template-columns: 1fr; }
+      .profil-photo { max-width: 220px; }
     }
   </style>
 </head>
@@ -209,30 +259,49 @@
       </nav>
     </header>
 
-    <section id="home" class="home">
-      <article class="card intro">
-        <span class="home-kicker">Portfolio académique · Sciences de l'éducation & Design</span>
-        <h1>Émeline Roy</h1>
-        <div class="typed-line">I'm <span id="typed-role"></span><span class="typed-cursor">|</span></div>
-        <p>
-          Enseignante-chercheuse (CNU 70 & CNU 18), Maîtresse de conférences à l’INSPÉ d’Aix-Marseille Université,
-          avec une pratique du design pensée comme levier pédagogique, scientifique et institutionnel.
-        </p>
-        <div class="contact">
-          <span>Membre permanent UR 4671 ADEF · Membre associée UPR PROJEKT</span>
-          <span>Directrice adjointe du GIS Arts & Éducation</span>
-          <a href="mailto:emeline.roy@univ-amu.fr">emeline.roy@univ-amu.fr</a>
-        </div>
-        <div id="root-tags" class="tags"></div>
-      </article>
-      <article class="card portrait">
-        <img id="portrait-photo" src="assets/visuels/emeline-roy.png" alt="Portrait Emeline Roy" />
-      </article>
+    <section id="home" class="card home">
+      <span class="home-kicker">Portfolio académique · Sciences de l'éducation & Design</span>
+      <h1>Émeline Roy</h1>
+      <div class="typed-line">I'm <span id="typed-role"></span><span class="typed-cursor">|</span></div>
+
+      <div class="home-cats">
+        <a href="#profil">Profil</a>
+        <a href="#recherche">Recherche</a>
+        <a href="#enseignements">Enseignements</a>
+        <a href="#responsabilites">Responsabilités</a>
+        <a href="#publications">Publications</a>
+      </div>
+
+      <div class="social-icons" aria-label="Liens externes">
+        <a href="https://www.linkedin.com/in/emeline-roy-141a7728" target="_blank" rel="noreferrer" title="LinkedIn" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="2" fill="none"></rect><line x1="8" y1="10" x2="8" y2="16"></line><circle cx="8" cy="7.5" r="0.8"></circle><path d="M12 16v-3.2c0-1.1.8-2 1.9-2s1.9.9 1.9 2V16"></path></svg>
+        </a>
+        <a href="https://github.com/emeline-roy" target="_blank" rel="noreferrer" title="GitHub" aria-label="GitHub">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.2 19.2c-3.8 1.2-3.8-1.8-5.3-2.2"></path><path d="M14.8 19.2v-3c0-.9.1-1.5-.4-2.1 1.8-.2 3.7-.9 3.7-4.2 0-.9-.3-1.6-.9-2.2.1-.2.4-1.1-.1-2.2 0 0-.8-.2-2.3.9a7.8 7.8 0 0 0-4 0c-1.5-1.1-2.3-.9-2.3-.9-.5 1.1-.2 2-.1 2.2-.6.6-.9 1.3-.9 2.2 0 3.3 1.9 4 3.7 4.2-.5.6-.5 1.1-.5 2.1v3"></path><path d="M12 22C6.5 22 2 17.5 2 12S6.5 2 12 2s10 4.5 10 10-4.5 10-10 10z" fill="none"></path></svg>
+        </a>
+        <a href="https://orcid.org/0000-0001-8747-2171" target="_blank" rel="noreferrer" title="ORCID" aria-label="ORCID">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="none"></circle><circle cx="9" cy="8" r="1"></circle><line x1="9" y1="11" x2="9" y2="16"></line><path d="M12 16v-5h2.1a2.5 2.5 0 1 1 0 5H12z"></path></svg>
+        </a>
+        <a href="https://www.researchgate.net/profile/Emeline-Roy-2" target="_blank" rel="noreferrer" title="ResearchGate" aria-label="ResearchGate">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 17V7h4.2a3 3 0 0 1 0 6H5"></path><path d="M9.2 13 13 17"></path><path d="M14 17v-6h5v6"></path></svg>
+        </a>
+        <a href="https://cv.hal.science/emeline-cusenier" target="_blank" rel="noreferrer" title="CV HAL" aria-label="CV HAL">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2" fill="none"></rect><line x1="8" y1="8" x2="16" y2="8"></line><line x1="8" y1="12" x2="16" y2="12"></line><line x1="8" y1="16" x2="13" y2="16"></line></svg>
+        </a>
+        <a href="https://scholar.google.fr/citations?user=jBvCCkoAAAAJ&hl=fr" target="_blank" rel="noreferrer" title="Google Scholar" aria-label="Google Scholar">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 10 12 5l8 5-8 5-8-5z"></path><path d="M7 12v3c0 1.7 2.2 3 5 3s5-1.3 5-3v-3"></path></svg>
+        </a>
+      </div>
     </section>
 
     <section id="profil" class="card">
       <h2>Profil</h2>
       <p class="section-sub">Parcours, statut, laboratoires et expériences professionnelles.</p>
+      <div class="profil-head">
+        <figure class="profil-photo">
+          <img id="portrait-photo" src="assets/visuels/emeline-roy.png" alt="Portrait Emeline Roy" />
+        </figure>
+      </div>
       <div id="profil-list" class="accordion-stack"></div>
     </section>
 
@@ -437,17 +506,6 @@
       try {
         const encoded = await fetch("assets/visuels/emeline-roy.base64.txt").then((r) => r.text());
         if (encoded?.trim()) img.src = `data:image/png;base64,${encoded.trim()}`;
-      } catch (_) {}
-    }
-
-
-
-    async function bootPortrait() {
-      const img = byId("portrait-photo");
-      if (!img) return;
-      try {
-        const encoded = await fetch("assets/visuels/emeline-roy.base64.txt").then((r) => r.text());
-        if (encoded?.trim()) img.src = `data:image/png;base64,${encoded.trim()}`;
       } catch (_) {
         // fallback conservé sur l'image locale par défaut
       }
@@ -456,14 +514,6 @@
     async function boot() {
       const data = await fetch("data.json").then((r) => r.json());
       const nodes = Array.isArray(data.nodes) ? data.nodes : [];
-      const rootTags = byId("root-tags");
-      const cv = nodes.find((n) => n.id === "cv");
-      (cv?.keywords || []).forEach((k) => {
-        const tag = document.createElement("span");
-        tag.className = "tag";
-        tag.textContent = k;
-        rootTags.appendChild(tag);
-      });
 
       const halPublications = await fetch("hal-publications.json")
         .then((res) => (res.ok ? res.json() : []))
