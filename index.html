@@ -31,6 +31,7 @@
     }
 
     .container { max-width: var(--max); margin: 0 auto; padding: 1rem 1rem 3rem; }
+    .hidden { display: none; }
 
     .topbar {
       position: sticky;
@@ -151,6 +152,7 @@
       stroke: currentColor;
       stroke-width: 1.8;
     }
+    .orbit strong { font-size: .95rem; }
 
     section.card { margin-top: 1rem; }
     section h2 {
@@ -256,12 +258,36 @@
   </style>
 </head>
 <body>
-  <div class="container">
+  <section id="landing" class="landing">
+    <article class="landing-card">
+      <span class="home-kicker">Portfolio académique · Sciences de l'éducation & Design</span>
+      <h1>Émeline Roy</h1>
+      <div class="typed-line">I'm <span id="typed-role"></span><span class="typed-cursor">|</span></div>
+
+      <div class="landing-cats">
+        <a href="#profil">Profil</a>
+        <a href="#recherche">Recherche</a>
+        <a href="#enseignements">Enseignements</a>
+        <a href="#responsabilites">Responsabilités</a>
+        <a href="#publications">Publications</a>
+      </div>
+
+      <div id="landing-tags" class="tags"></div>
+
+      <div class="socials">
+        <a href="https://www.linkedin.com/in/emeline-roy-141a7728" target="_blank" rel="noreferrer">LinkedIn</a>
+        <a href="https://github.com/emeline-roy" target="_blank" rel="noreferrer">GitHub</a>
+      </div>
+
+      <button id="open-site" class="enter-btn" type="button">Ouvrir la page complète</button>
+    </article>
+  </section>
+
+  <div id="main-site" class="container hidden">
     <header class="topbar">
       <div class="brand">Emeline <span>Roy</span></div>
       <span id="build-badge" class="build-badge"></span>
       <nav class="menu">
-        <a href="#home">Home</a>
         <a href="#profil">Profil</a>
         <a href="#recherche">Recherche</a>
         <a href="#enseignements">Enseignements</a>
@@ -534,7 +560,7 @@
         .catch(() => []);
 
       bootTypewriter();
-      await bootPortrait();
+      setupLandingButton();
       renderSimpleBranches("profil", "profil-list", nodes);
       renderSimpleBranches("recherche", "recherche-list", nodes);
       renderEnseignements(nodes);
