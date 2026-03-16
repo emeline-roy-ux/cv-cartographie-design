@@ -82,6 +82,62 @@
       padding: 1.1rem;
     }
 
+    .landing {
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 1rem;
+      background: radial-gradient(circle at top right, #eef4ff 0%, #f4f6f8 42%, #ecf0f6 100%);
+    }
+    .landing-card {
+      width: min(880px, 100%);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      background: rgba(255,255,255,.94);
+      backdrop-filter: blur(6px);
+      box-shadow: 0 10px 30px rgba(32, 74, 136, .08);
+      padding: 1.4rem;
+    }
+    .landing-card h1 {
+      margin: .4rem 0 0;
+      font-family: "Space Grotesk", system-ui, sans-serif;
+      font-size: clamp(2.2rem, 7vw, 4.2rem);
+      line-height: .98;
+      letter-spacing: -.02em;
+    }
+    .landing-cats {
+      margin-top: 1rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: .5rem;
+    }
+    .landing-cats a {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: .26rem .68rem;
+      font-size: .82rem;
+      text-decoration: none;
+      color: #33475f;
+      background: #fbfcfd;
+    }
+    .socials {
+      margin-top: 1rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: .55rem;
+    }
+    .enter-btn {
+      margin-top: 1rem;
+      border: 1px solid #173868;
+      border-radius: 999px;
+      background: #204a88;
+      color: #fff;
+      padding: .52rem .95rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .enter-btn:hover { background: #173868; }
+
     .home {
       min-height: 74vh;
       display: grid;
@@ -148,9 +204,11 @@
     .social-icons svg {
       width: 18px;
       height: 18px;
-      fill: currentColor;
+      fill: none;
       stroke: currentColor;
-      stroke-width: 1.8;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
     }
     .orbit strong { font-size: .95rem; }
 
@@ -262,7 +320,7 @@
     <article class="landing-card">
       <span class="home-kicker">Portfolio académique · Sciences de l'éducation & Design</span>
       <h1>Émeline Roy</h1>
-      <div class="typed-line">I'm <span id="typed-role"></span><span class="typed-cursor">|</span></div>
+      <div class="typed-line">I'm <span data-typed-role></span><span class="typed-cursor">|</span></div>
 
       <div class="landing-cats">
         <a href="#profil">Profil</a>
@@ -274,9 +332,13 @@
 
       <div id="landing-tags" class="tags"></div>
 
-      <div class="socials">
-        <a href="https://www.linkedin.com/in/emeline-roy-141a7728" target="_blank" rel="noreferrer">LinkedIn</a>
-        <a href="https://github.com/emeline-roy" target="_blank" rel="noreferrer">GitHub</a>
+      <div class="social-icons socials" aria-label="Liens externes">
+        <a href="https://www.linkedin.com/in/emeline-roy-141a7728" target="_blank" rel="noreferrer" title="LinkedIn" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="2"></rect><line x1="8" y1="10" x2="8" y2="16"></line><circle cx="8" cy="7.5" r="0.8" fill="currentColor" stroke="none"></circle><path d="M12 16v-3.2c0-1.1.8-2 1.9-2s1.9.9 1.9 2V16"></path></svg>
+        </a>
+        <a href="https://github.com/emeline-roy" target="_blank" rel="noreferrer" title="GitHub" aria-label="GitHub">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.2 19.2c-3.8 1.2-3.8-1.8-5.3-2.2"></path><path d="M14.8 19.2v-3c0-.9.1-1.5-.4-2.1 1.8-.2 3.7-.9 3.7-4.2 0-.9-.3-1.6-.9-2.2.1-.2.4-1.1-.1-2.2 0 0-.8-.2-2.3.9a7.8 7.8 0 0 0-4 0c-1.5-1.1-2.3-.9-2.3-.9-.5 1.1-.2 2-.1 2.2-.6.6-.9 1.3-.9 2.2 0 3.3 1.9 4 3.7 4.2-.5.6-.5 1.1-.5 2.1v3"></path><path d="M12 22C6.5 22 2 17.5 2 12S6.5 2 12 2s10 4.5 10 10-4.5 10-10 10z"></path></svg>
+        </a>
       </div>
 
       <button id="open-site" class="enter-btn" type="button">Ouvrir la page complète</button>
@@ -299,7 +361,7 @@
     <section id="home" class="card home">
       <span class="home-kicker">Portfolio académique · Sciences de l'éducation & Design</span>
       <h1>Émeline Roy</h1>
-      <div class="typed-line">I'm <span id="typed-role"></span><span class="typed-cursor">|</span></div>
+      <div class="typed-line">I'm <span data-typed-role></span><span class="typed-cursor">|</span></div>
 
       <div class="home-cats">
         <a href="#profil">Profil</a>
@@ -374,19 +436,22 @@
 
   <script>
     const byId = (id) => document.getElementById(id);
-    const BUILD_VERSION = "2026-03-15-02";
+    const BUILD_VERSION = new Date().toISOString().replace(/[:.]/g, "-");
 
     function bootTypewriter() {
       const roles = ["teacher", "researcher", "designer"];
-      const target = byId("typed-role");
-      if (!target) return;
+      const targets = Array.from(document.querySelectorAll("[data-typed-role]"));
+      if (!targets.length) return;
       let roleIndex = 0;
       let charIndex = 0;
       let deleting = false;
       function tick() {
         const current = roles[roleIndex];
         charIndex += deleting ? -1 : 1;
-        target.textContent = current.slice(0, charIndex);
+        const text = current.slice(0, charIndex);
+        targets.forEach((target) => {
+          target.textContent = text;
+        });
         if (!deleting && charIndex === current.length) {
           deleting = true;
           setTimeout(tick, 1100);
@@ -399,6 +464,25 @@
         setTimeout(tick, deleting ? 55 : 95);
       }
       tick();
+    }
+
+    function setupLandingButton() {
+      const button = byId("open-site");
+      const landing = byId("landing");
+      const main = byId("main-site");
+      const tags = byId("landing-tags");
+
+      if (tags && !tags.childElementCount) {
+        tags.appendChild(createTags(["UX", "Design", "Recherche", "Pédagogie", "HAL"]));
+      }
+
+      if (!button || !landing || !main) return;
+
+      button.addEventListener("click", () => {
+        landing.classList.add("hidden");
+        main.classList.remove("hidden");
+        window.location.hash = "home";
+      });
     }
 
     function createTags(keywords = []) {
@@ -544,7 +628,7 @@
       if (badge) badge.textContent = `build ${BUILD_VERSION}`;
       if (!img) return;
       try {
-        const encoded = await fetch(`assets/visuels/emeline-roy.base64.txt?v=${BUILD_VERSION}`).then((r) => r.text());
+        const encoded = await fetch(`assets/visuels/emeline-roy.base64.txt?v=${BUILD_VERSION}`, { cache: "no-store" }).then((r) => r.text());
         if (encoded?.trim()) img.src = `data:image/png;base64,${encoded.trim()}`;
       } catch (_) {
         // fallback conservé sur l'image locale par défaut
@@ -552,10 +636,12 @@
     }
 
     async function boot() {
-      const data = await fetch(`data.json?v=${BUILD_VERSION}`).then((r) => r.json());
+      await bootPortrait();
+
+      const data = await fetch(`data.json?v=${BUILD_VERSION}`, { cache: "no-store" }).then((r) => r.json());
       const nodes = Array.isArray(data.nodes) ? data.nodes : [];
 
-      const halPublications = await fetch(`hal-publications.json?v=${BUILD_VERSION}`)
+      const halPublications = await fetch(`hal-publications.json?v=${BUILD_VERSION}`, { cache: "no-store" })
         .then((res) => (res.ok ? res.json() : []))
         .catch(() => []);
 
